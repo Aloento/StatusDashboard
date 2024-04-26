@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "provider": "unpkg",
+      "library": "@telekom/scale-components-neutral@next",
+      "destination": "wwwroot/lib/scale/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "bootstrap@5.1.0",
+      "destination": "wwwroot/lib/bootstrap/"
+    }
+  ]
+}
