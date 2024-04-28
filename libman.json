@@ -4,13 +4,8 @@
   "libraries": [
     {
       "provider": "unpkg",
-      "library": "@telekom/scale-components-neutral@next",
+      "library": "@telekom/scale-components@next",
       "destination": "wwwroot/lib/scale/"
-    },
-    {
-      "provider": "unpkg",
-      "library": "bootstrap@5.1.0",
-      "destination": "wwwroot/lib/bootstrap/"
     }
   ]
 }

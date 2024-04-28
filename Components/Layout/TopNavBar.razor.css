@@ -1,0 +1,7 @@
+﻿#TopNavBar {
+  background-color: var(--telekom-color-primary-standard)
+}
+
+#TopNavBar .Container {
+  max-width: 1636px
+}

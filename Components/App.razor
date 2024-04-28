@@ -1,18 +1,26 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <base href="/" />
-    <link rel="stylesheet" href="app.css" />
-    <link rel="stylesheet" href="StatusDashboard.styles.css" />
-    <HeadOutlet @rendermode="InteractiveServer" />
-</head>
+    <link href="app.output.css" rel="stylesheet" />
+    <link href="StatusDashboard.styles.css" rel="stylesheet" />
 
-<body>
+    <link
+      href="lib/scale/dist/scale-components/scale-components.css"
+      rel="stylesheet"
+    />
+    <script
+      src="lib/scale/dist/scale-components/scale-components.esm.js"
+      type="module"
+    ></script>
+
+    <HeadOutlet @rendermode="InteractiveServer" />
+  </head>
+
+  <body data-mode="light">
     <Routes @rendermode="InteractiveServer" />
     <script src="_framework/blazor.web.js"></script>
-</body>
-
+  </body>
 </html>
