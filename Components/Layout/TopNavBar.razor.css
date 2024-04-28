@@ -15,6 +15,7 @@ scale-button[variant='ghost'] {
   --color-ghost: var(--telekom-color-text-and-icon-white-standard);
   --color-ghost-hover: var(--telekom-color-text-and-icon-white-standard);
   --color-ghost-active: var(--telekom-color-text-and-icon-white-standard);
+  --color-focus: var(--telekom-color-text-and-icon-white-standard);
 }
 
 #TopNavBar,
