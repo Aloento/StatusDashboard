@@ -1,7 +1,26 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+<PageTitle>OTC Status Dashboard</PageTitle>
 
-<h1>Hello, world!</h1>
+<scale-notification
+  heading="All Systems Operational"
+  opened
+  variant="success" />
 
-Welcome to your new app.
+<section class="flex flex-col" id="RegionSelector">
+  <div class="flex items-center justify-between">
+    <label class="text-2xl font-semibold">OTC Current Status</label>
+    
+    <scale-tab-nav>
+
+      <scale-tab-header slot="tab">Germany</scale-tab-header>
+      <scale-tab-panel slot="panel" class="hidden" />
+
+      <scale-tab-header slot="tab">Netherlands</scale-tab-header>
+      <scale-tab-panel slot="panel" class="hidden" />
+
+    </scale-tab-nav>
+  </div>
+
+  <scale-divider class="p-0" />
+</section>

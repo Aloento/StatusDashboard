@@ -1,0 +1,4 @@
+﻿scale-telekom-footer[type='minimal'] {
+  --background-footer-minimal: var(--background-footer);
+  --telekom-color-text-and-icon-standard: var(--font-color);
+}

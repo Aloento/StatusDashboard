@@ -2,8 +2,12 @@
 
 <TopNavBar />
 
-<div class="absolute mt-16 flex min-h-full w-full flex-col justify-between" id="Container">
-  @Body
+<div class="absolute flex min-h-full w-full flex-col justify-between pt-16" id="Container">
+  <main class="mx-auto flex w-full max-w-screen-xl flex-col gap-y-8 px-3 pt-8">
+    @Body
+  </main>
+  
+  <PageFooter />
 </div>
 
 <div id="blazor-error-ui">
