@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using StatusDashboard.Components.Home
 
 <PageTitle>OTC Status Dashboard</PageTitle>
 
@@ -9,7 +10,7 @@
 
 <section class="flex flex-col" id="RegionSelector">
   <div class="flex items-center justify-between">
-    <label class="text-2xl font-semibold">OTC Current Status</label>
+    <label class="text-3xl font-medium text-slate-800">OTC Current Status</label>
 
     <scale-tab-nav>
 
@@ -25,14 +26,9 @@
   <scale-divider class="p-0" />
 </section>
 
-<section class="grid-cols-1 grid gap-4 md:grid-cols-3 sm:grid-cols-2">
-  <div class="flex h-32 items-center justify-center bg-blue-500 text-white">
-    对象1
-  </div>
-  <div class="flex h-32 items-center justify-center bg-red-500 text-white">
-    对象2
-  </div>
-  <div class="flex h-32 items-center justify-center bg-green-500 text-white">
-    对象3
-  </div>
+<section class="grid-cols-1 grid gap-x-7 gap-y-8 lg:grid-cols-3 md:grid-cols-2">
+  <StatusCard />
+  <StatusCard />
+  <StatusCard />
+  <StatusCard />
 </section>
