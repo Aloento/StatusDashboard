@@ -1,4 +1,8 @@
-﻿<header class="fixed left-0 top-0 z-50 h-16 w-full px-8 shadow-md" id="TopNavBar">
+﻿@{
+  const string docsLink = "https://docs.otc.t-systems.com/status-dashboard/index.html";
+}
+
+<header class="fixed left-0 top-0 z-50 h-16 w-full px-8 shadow-md" id="TopNavBar">
   <nav class="mx-auto flex h-full max-w-screen-2xl items-center justify-between">
     <div class="flex items-center gap-x-5">
       <scale-logo class="Logo" href="/" variant="white" />
@@ -9,11 +13,11 @@
     </div>
 
     <div class="hidden items-center gap-x-2 md:flex">
-      <scale-button variant="ghost">History</scale-button>
-      <scale-button variant="ghost">Availability</scale-button>
-      <scale-button variant="ghost">Docs</scale-button>
+      <scale-button href="History" variant="ghost">History</scale-button>
+      <scale-button href="Availability" variant="ghost">Availability</scale-button>
+      <scale-button href="@docsLink" target="_black" variant="ghost">Docs</scale-button>
 
-      <scale-button variant="ghost">New Incident</scale-button>
+      <scale-button href="Incident" variant="ghost">New Incident</scale-button>
       <scale-button variant="ghost">UserName</scale-button>
     </div>
 
@@ -23,17 +27,21 @@
       </scale-button>
 
       <scale-menu-flyout-list>
-        <scale-menu-flyout-item>History</scale-menu-flyout-item>
-        <scale-menu-flyout-item>Availability</scale-menu-flyout-item>
-        <scale-menu-flyout-item>Docs</scale-menu-flyout-item>
+        <a href="History">
+          <scale-menu-flyout-item>History</scale-menu-flyout-item>
+        </a>
+        <a href="Availability">
+          <scale-menu-flyout-item>Availability</scale-menu-flyout-item>
+        </a>
+        <a href="@docsLink">
+          <scale-menu-flyout-item>Docs</scale-menu-flyout-item>
+        </a>
 
-        <scale-menu-flyout-item>New Incident</scale-menu-flyout-item>
+        <a href="">
+          <scale-menu-flyout-item>New Incident</scale-menu-flyout-item>
+        </a>
         <scale-menu-flyout-item>UserName</scale-menu-flyout-item>
       </scale-menu-flyout-list>
     </scale-menu-flyout>
   </nav>
 </header>
-
-@code {
-
-}
