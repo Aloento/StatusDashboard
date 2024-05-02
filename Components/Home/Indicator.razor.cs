@@ -3,28 +3,15 @@
 using Microsoft.AspNetCore.Components;
 
 public partial class Indicator {
+    private const string scaleIcon = "scale-icon-";
+    private const string scaleColor = "var(--telekom-color-";
+    private const string func = "functional-";
+    private const string text = scaleColor + "text-and-icon-" + func;
+
     [Parameter] public StatusType Type { get; set; }
-
-    private string fillColor {
-        get {
-            const string pref = "var(--telekom-color-";
-            const string func = "functional-";
-            const string text = pref + "text-and-icon-" + func;
-
-            return this.Type switch {
-                StatusType.Maintenance => $"{text}informational)",
-                StatusType.MinorIssue => $"{pref}{func}warning-standard)",
-                StatusType.MajorIssue => $"{text}warning)",
-                StatusType.Outage => $"{text}danger)",
-                _ => $"{text}success)"
-            };
-        }
-    }
 
     private RenderFragment icon {
         get {
-            const string pref = "scale-icon-";
-
             var name = this.Type switch {
                 StatusType.Maintenance => "service-maintanance",
                 StatusType.MinorIssue => "action-minus-circle",
@@ -33,10 +20,18 @@ public partial class Indicator {
                 _ => "action-success"
             };
 
+            var fillColor = this.Type switch {
+                StatusType.Maintenance => $"{text}informational)",
+                StatusType.MinorIssue => $"{scaleColor}{func}warning-standard)",
+                StatusType.MajorIssue => $"{text}warning)",
+                StatusType.Outage => $"{text}danger)",
+                _ => $"{text}success)"
+            };
+
             return x => {
-                x.OpenElement(0, $"{pref}{name}");
+                x.OpenElement(0, $"{scaleIcon}{name}");
                 x.AddAttribute(1, "accessibility-title", Enum.GetName(this.Type));
-                x.AddAttribute(2, "fill", this.fillColor);
+                x.AddAttribute(2, "fill", fillColor);
                 x.CloseElement();
             };
         }

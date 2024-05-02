@@ -38,8 +38,14 @@
     <div class="Blink" />
     <label>Auto Refresh Enabled</label>
   </div>
-  
-  <div class="flex items-center gap-x-3">
-    123
+
+  <div class="flex items-center gap-x-6">
+    @foreach (var state in Enum.GetValues<StatusType>())
+    {
+      <div class="flex gap-x-2">
+        <Indicator Type="state" />
+        <label>@Enum.GetName(state)</label>
+      </div>
+    }
   </div>
 </section>
