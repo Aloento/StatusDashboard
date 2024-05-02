@@ -6,48 +6,14 @@
   <scale-divider />
 
   <ul class="px-3.5">
-    <li class="flex items-center py-2">
-      <Indicator Type="StatusType.Operational" />
+    <ServiceItem Name="Operational Service" Type="StatusType.Operational" />
 
-      <label class="ml-2 text-xl font-medium text-slate-700">
-        Operational Service
-      </label>
-    </li>
+    <ServiceItem Name="Maintenance Service" Type="StatusType.Maintenance" />
 
-    <li class="flex items-center py-2">
-      <Indicator Type="StatusType.Maintenance" />
+    <ServiceItem Name="MinorIssue Service" Type="StatusType.MinorIssue" />
 
-      <span class="ml-2 text-xl font-medium text-slate-700">
-        Maintenance Service
-      </span>
-    </li>
-    
-    <li class="flex items-center py-2">
-      <Indicator Type="StatusType.MinorIssue" />
+    <ServiceItem Name="MajorIssue Service" Type="StatusType.MajorIssue" />
 
-      <span class="ml-2 text-xl font-medium text-slate-700">
-        MinorIssue Service
-      </span>
-    </li>
-    
-    <li class="flex items-center py-2">
-      <Indicator Type="StatusType.MajorIssue" />
-
-      <span class="ml-2 text-xl font-medium text-slate-700">
-        MajorIssue Service
-      </span>
-    </li>
-    
-    <li class="flex items-center py-2">
-      <Indicator Type="StatusType.Outage" />
-
-      <span class="ml-2 text-xl font-medium text-slate-700">
-        Outage Service
-      </span>
-    </li>
+    <ServiceItem Name="Outage Service" Type="StatusType.Outage" />
   </ul>
 </div>
-
-@code {
-
-}
