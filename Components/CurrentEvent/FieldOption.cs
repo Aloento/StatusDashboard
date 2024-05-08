@@ -1,4 +1,4 @@
-﻿namespace StatusDashboard.Components.DataGrid;
+﻿namespace StatusDashboard.Components.CurrentEvent;
 
 using System.Text.Json.Serialization;
 
@@ -19,13 +19,13 @@ public record FieldOption {
     public ushort? MinWidth { get; set; }
 
     [JsonPropertyName("mobileTitle")]
-    public bool? MobileTitle { get; set; } = false;
+    public bool? MobileTitle { get; set; }
 
     [JsonPropertyName("resizable")]
-    public bool? Resizable { get; set; } = true;
+    public bool? Resizable { get; set; }
 
     [JsonPropertyName("sortable")]
-    public bool? Sortable { get; set; } = false;
+    public bool? Sortable { get; set; }
 
     /// <remarks>
     /// <see cref="DataGrid.SortBy"/>.

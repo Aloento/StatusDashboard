@@ -1,4 +1,4 @@
-﻿namespace StatusDashboard.Components.DataGrid;
+﻿namespace StatusDashboard.Components.CurrentEvent;
 
 public record FieldTypes {
     public string Actions => "actions";
