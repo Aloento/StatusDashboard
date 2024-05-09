@@ -1,0 +1,25 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ES6",
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+    "sourceMap": false,
+    "declaration": false,
+    "skipLibCheck": true,
+    "importHelpers": true,
+    "removeComments": true,
+    "noImplicitThis": true,
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "noImplicitOverride": true,
+    "moduleResolution": "Bundler",
+    "paths": {
+      "~/*": ["./*"] 
+    }
+  },
+  "include": ["Components"],
+  "exclude": ["node_modules", "wwwroot"]
+}

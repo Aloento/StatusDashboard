@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "postinstall": "node ./link.mjs"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
+  },
+  "dependencies": {
+    "@telekom/scale-components": "3.0.0-beta.151"
+  }
+}

@@ -1,10 +1,13 @@
 ﻿namespace StatusDashboard.Components.CurrentEvent;
 
+using System.Runtime.InteropServices.JavaScript;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Microsoft.JSInterop;
 
 public partial class DataGrid {
+    [JSImport("setFields", "DataGrid")]
+    private static partial void setFields(string fields);
+
     private readonly string fields = JsonSerializer.Serialize(
         new List<FieldOption> {
             new() { Type = "number", Label = "ID" },
@@ -15,8 +18,13 @@ public partial class DataGrid {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         });
 
+    protected override async Task OnInitializedAsync() {
+        await JSHost.ImportAsync("DataGrid", "DataGrid.razor.js");
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender) {
-        if (firstRender)
-            await this.jsRuntime.InvokeVoidAsync($"{nameof(CurrentEvent)}.setFields", this.fields);
+        if (firstRender) {
+            setFields(this.fields);
+        }
     }
 }
