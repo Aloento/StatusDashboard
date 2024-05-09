@@ -24,7 +24,9 @@ dataGrid.localization = {
   select: 'Select / Deselect All'
 };
 
-export function setFields(fields: string) {
-  console.debug(JSON.parse(fields));
-  dataGrid.fields = fields;
+export function setFields(fields: Uint8Array) {
+  const dec = new TextDecoder();
+  const str = JSON.parse(dec.decode(fields));
+  console.debug(str);
+  dataGrid.fields = str;
 }
