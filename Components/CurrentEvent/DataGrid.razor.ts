@@ -1,3 +1,5 @@
+import { Components } from "@telekom/scale-components";
+
 declare global {
   interface Window {
     CurrentEvent: HTMLScaleDataGridElement;
@@ -17,7 +19,15 @@ export function setFields(fields: Uint8Array) {
   dataGrid.fields = str;
 }
 
-export function setRows(rows: [number, string, string, object[]][]) {
+export function setRows(rows: [
+  number,
+  Components.ScaleTag[],
+  string,
+  string,
+  string,
+  string,
+  Components.ScaleButton[]
+][]) {
   console.debug(rows);
   dataGrid.rows = rows;
 }

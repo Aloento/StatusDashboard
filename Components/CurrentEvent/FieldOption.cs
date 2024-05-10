@@ -28,7 +28,7 @@ public record FieldOption {
     /// </remarks>
     public string? TextAlign { get; set; }
 
-    public byte? StretchWeight { get; set; }
+    public float? StretchWeight { get; set; }
 
     public bool? Visible { get; set; }
 

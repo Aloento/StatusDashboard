@@ -2,7 +2,6 @@
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Home;
 using Microsoft.JSInterop;
 
 public partial class DataGrid {
@@ -10,8 +9,11 @@ public partial class DataGrid {
         new List<FieldOption> {
             new() { Type = FieldTypes.Number, Label = "ID" },
             new() { Type = FieldTypes.Tags, Label = "Type" },
-            new() { Type = FieldTypes.Text, Label = "Name", Sortable = true },
-            new() { Type = FieldTypes.Date, Label = "Time", StretchWeight = 1 }
+            new() { Type = FieldTypes.Date, Label = "Started" },
+            new() { Type = FieldTypes.Text, Label = "Status" },
+            new() { Type = FieldTypes.Text, Label = "Region", Sortable = true },
+            new() { Type = FieldTypes.Text, Label = "Service", Sortable = true, StretchWeight = 0.70f },
+            new() { Type = FieldTypes.Actions, Label = "Detail" }
         }, new JsonSerializerOptions {
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
@@ -36,7 +38,16 @@ public partial class DataGrid {
                             color = "red"
                         }
                     },
-                    Enum.GetName(StatusType.Outage)!, DateTime.Now
+                    DateTime.Now.ToString("yyyy-MM-dd HH:mm 'UTC'"),
+                    "Analysing", "EU-DE", "Cloud Trace Service",
+                    new object[] {
+                        new {
+                            label = "↗",
+                            size = "small",
+                            variant = "secondary",
+                            href = "https://example.com"
+                        }
+                    }
                 },
                 new object[] {
                     2,
@@ -46,7 +57,15 @@ public partial class DataGrid {
                             color = "orange"
                         }
                     },
-                    Enum.GetName(StatusType.MajorIssue)!, DateTime.Now
+                    DateTime.Now.ToString("yyyy-MM-dd HH:mm 'UTC'"),
+                    "Fixing", "EU-NL", "Elastic Cloud Server",
+                    new object[] {
+                        new {
+                            label = "↗",
+                            variant = "secondary",
+                            href = "https://example.com"
+                        }
+                    }
                 },
                 new object[] {
                     3,
@@ -56,7 +75,15 @@ public partial class DataGrid {
                             color = "yellow"
                         }
                     },
-                    Enum.GetName(StatusType.MinorIssue)!, DateTime.Now
+                    DateTime.Now.ToString("yyyy-MM-dd HH:mm 'UTC'"),
+                    "Validating", "EU-DE", "Distributed Cache Service",
+                    new object[] {
+                        new {
+                            label = "↗",
+                            variant = "secondary",
+                            href = "https://example.com"
+                        }
+                    }
                 }
             };
 
