@@ -1,4 +1,5 @@
 ﻿namespace StatusDashboard.Components.CurrentEvent;
+
 public record FieldOption {
     /// <remarks>
     /// <see cref="FieldTypes"/>.

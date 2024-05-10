@@ -10,23 +10,14 @@ window.CurrentEvent = dataGrid;
 
 dataGrid.hideBorder = true;
 
-dataGrid.rows = [
-  [1, 'John', '12:30'],
-  [2, 'Mary', '2:12'],
-  [3, 'Patek', '16:01'],
-  [4, 'Heidi', '3:15'],
-  [5, 'Muhammad', '21:45'],
-];
-
-dataGrid.localization = {
-  sortBy: 'Sort By',
-  toggle: 'Toogle Visibility',
-  select: 'Select / Deselect All'
-};
-
 export function setFields(fields: Uint8Array) {
   const dec = new TextDecoder();
   const str = JSON.parse(dec.decode(fields));
   console.debug(str);
   dataGrid.fields = str;
+}
+
+export function setRows(rows: [number, string, string, object[]][]) {
+  console.debug(rows);
+  dataGrid.rows = rows;
 }

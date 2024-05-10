@@ -1,27 +1,27 @@
 ﻿namespace StatusDashboard.Components.CurrentEvent;
 
-public record FieldTypes {
-    public string Actions => "actions";
-    public string Checkbox => "checkbox";
-    public string Email => "email";
-    public string Date => "date";
-    public string Graph => "graph";
-    public string Html => "html";
-    public string Link => "link";
-    public string Number => "number";
-    public string Select => "select";
-    public string Tags => "tags";
-    public string Telephone => "telephone";
-    public string Text => "text";
+public static class FieldTypes {
+    public static string Actions => "actions";
+    public static string Checkbox => "checkbox";
+    public static string Email => "email";
+    public static string Date => "date";
+    public static string Graph => "graph";
+    public static string Html => "html";
+    public static string Link => "link";
+    public static string Number => "number";
+    public static string Select => "select";
+    public static string Tags => "tags";
+    public static string Telephone => "telephone";
+    public static string Text => "text";
 }
 
-public record SortBy {
-    public string Number => "number";
-    public string Text => "text";
+public static class SortBy {
+    public static string Number => "number";
+    public static string Text => "text";
 }
 
-public record TextAlign {
-    public string Left => "left";
-    public string Right => "right";
-    public string Center => "center";
+public static class TextAlign {
+    public static string Left => "left";
+    public static string Right => "right";
+    public static string Center => "center";
 }

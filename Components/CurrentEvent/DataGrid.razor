@@ -1,3 +1,11 @@
-﻿@inject IJSRuntime JS
+﻿@using StatusDashboard.Components.Home
+@inject IJSRuntime JS
 
 <scale-data-grid class="rounded-lg bg-white shadow-md" heading="Current Events" id="@nameof(CurrentEvent)" />
+
+@foreach (var i in Enum.GetValues<StatusType>())
+{
+  <template id="@Enum.GetName(i)">
+    <Indicator Type="@i" />
+  </template>
+}
