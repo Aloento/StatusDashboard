@@ -1,7 +1,6 @@
 import { Components } from "@telekom/scale-components";
 
-const dataGrid = document.querySelector<HTMLScaleDataGridElement>("#CurrentEvent")!;
-dataGrid.hideBorder = true;
+let dataGrid: HTMLScaleDataGridElement;
 
 const observer = new MutationObserver((mutationsList) => {
   mutationsList.forEach((mutation) => {
@@ -24,15 +23,23 @@ const observer = new MutationObserver((mutationsList) => {
   });
 });
 
-observer.observe(dataGrid.shadowRoot!, {
-  childList: true,
-  subtree: true,
-});
+function refresh() {
+  if (dataGrid)
+    observer.disconnect();
+
+  dataGrid = document.querySelector<HTMLScaleDataGridElement>("#CurrentEvent")!;
+  dataGrid.hideBorder = true;
+
+  observer.observe(dataGrid.shadowRoot!, {
+    childList: true,
+    subtree: true,
+  });
+}
 
 export function setFields(fields: Uint8Array) {
+  refresh();
   const dec = new TextDecoder();
   const str = JSON.parse(dec.decode(fields));
-  console.debug(str);
   dataGrid.fields = str;
 }
 
@@ -47,6 +54,5 @@ export function setRows(
     Components.ScaleButton[]
   ][]
 ) {
-  console.debug(rows);
   dataGrid.rows = rows;
 }
