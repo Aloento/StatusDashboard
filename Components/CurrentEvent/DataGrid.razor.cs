@@ -43,7 +43,6 @@ public partial class DataGrid {
                     new object[] {
                         new {
                             label = "↗",
-                            size = "small",
                             variant = "secondary",
                             href = "https://example.com"
                         }
