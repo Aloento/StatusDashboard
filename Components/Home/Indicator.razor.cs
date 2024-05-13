@@ -10,6 +10,8 @@ public partial class Indicator {
 
     [Parameter] public StatusType Type { get; set; }
 
+    [Parameter] public string? Class { get; set; }
+
     private RenderFragment icon {
         get {
             var name = this.Type switch {
@@ -32,6 +34,7 @@ public partial class Indicator {
                 x.OpenElement(0, $"{scaleIcon}{name}");
                 x.AddAttribute(1, "accessibility-title", Enum.GetName(this.Type));
                 x.AddAttribute(2, "fill", fillColor);
+                x.AddAttribute(3, "class", this.Class);
                 x.CloseElement();
             };
         }

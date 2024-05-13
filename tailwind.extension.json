@@ -1,6 +1,6 @@
 {
   "ConfigurationFile": "tailwind.config.js",
-  "InputCssFile": "wwwroot\\app.css",
+  "InputCssFile": "wwwroot\\tw.css",
   "OutputCssFile": null,
   "UseCli": false
 }

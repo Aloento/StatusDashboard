@@ -1,5 +1,5 @@
 wwwroot/lib/
-wwwroot/app.output.css
+wwwroot/tw.output.css
 pnpm-lock.yaml
 Components/**/*.js
 tsconfig.tsbuildinfo

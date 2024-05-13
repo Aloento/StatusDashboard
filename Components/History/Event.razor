@@ -1,0 +1,26 @@
+﻿@using System.Globalization
+@using StatusDashboard.Components.Home
+
+<div class="border-l-2 relative flex flex-col gap-y-2.5 border-slate-300 pb-10 pl-7 last:pb-0">
+  <a class="w-fit text-2xl font-medium hover:underline" href="/History/1">
+    CCE EU-DE Outage
+  </a>
+
+  <div class="flex gap-x-2.5">
+    <scale-tag color="green">Resolved</scale-tag>
+    <scale-tag>Cloud Container Service</scale-tag>
+  </div>
+
+  <label class="text-lg font-bold text-slate-500">
+    @(DateTime.UtcNow.ToString("dd MMM, HH:mm", new CultureInfo("en-US"))
+      + " - " +
+      DateTime.Now.ToString("dd MMM, HH:mm", new CultureInfo("en-US"))
+      + " UTC")
+  </label>
+
+  <Indicator Class="absolute -left-3.5 top-0.5 bg-slate-100" Type="StatusType.Outage" />
+</div>
+
+@code {
+
+}

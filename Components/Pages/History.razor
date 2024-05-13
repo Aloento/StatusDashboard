@@ -1,6 +1,13 @@
 ﻿@page "/history"
+@using StatusDashboard.Components.History
 
-<h3>History</h3>
+<section class="flex flex-col gap-y-2">
+  <h3 class="text-3xl font-medium text-slate-800">OTC Event Timeline</h3>
+  <scale-divider />
+</section>
+
+<EventSection />
+<EventSection />
 
 @code {
 
