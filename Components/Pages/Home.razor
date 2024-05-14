@@ -42,7 +42,7 @@
     <label>Auto Refresh Enabled</label>
   </div>
 
-  <div class="flex items-center gap-x-6">
+  <legend class="flex items-center gap-x-6">
     @foreach (var state in Enum.GetValues<StatusType>())
     {
       <div class="flex gap-x-2">
@@ -50,5 +50,5 @@
         <label>@Enum.GetName(state)</label>
       </div>
     }
-  </div>
+  </legend>
 </section>

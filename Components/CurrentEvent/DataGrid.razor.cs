@@ -44,7 +44,7 @@ public partial class DataGrid {
                     new {
                         label = "↗",
                         variant = "secondary",
-                        href = "https://example.com"
+                        href = "/Event/1"
                     }
                 }
             },
@@ -62,7 +62,7 @@ public partial class DataGrid {
                     new {
                         label = "↗",
                         variant = "secondary",
-                        href = "https://example.com"
+                        href = "/Event/1"
                     }
                 }
             },
@@ -80,7 +80,7 @@ public partial class DataGrid {
                     new {
                         label = "↗",
                         variant = "secondary",
-                        href = "https://example.com"
+                        href = "/Event/1"
                     }
                 }
             },
@@ -99,7 +99,7 @@ public partial class DataGrid {
                     new {
                         label = "↗",
                         variant = "secondary",
-                        href = "https://example.com"
+                        href = "/Event/1"
                     }
                 }
             }
