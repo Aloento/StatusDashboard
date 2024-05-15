@@ -8,7 +8,8 @@ public partial class Indicator {
     private const string func = "functional-";
     private const string text = scaleColor + "text-and-icon-" + func;
 
-    [Parameter] public StatusType Type { get; set; }
+    [Parameter, EditorRequired]
+    public StatusType Type { get; set; }
 
     [Parameter] public string? Class { get; set; }
 

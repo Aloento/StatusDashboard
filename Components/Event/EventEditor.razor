@@ -1,0 +1,22 @@
+﻿<scale-modal
+  heading="Today is your lucky day"
+  id="@nameof(EventEditor)"
+  opened="@opened"
+  size="small"
+>
+  <p>Hello. Welcome. What a pleasure it is to have you.</p>
+</scale-modal>
+
+<scale-button @onclick="OpenModal" size="small">
+  <scale-icon-action-edit accessibility-title="edit" />
+  Edit
+</scale-button>
+
+@code {
+  private string opened { get; set; } = "false";
+
+  private void OpenModal()
+  {
+    opened = "true";
+  }
+}
