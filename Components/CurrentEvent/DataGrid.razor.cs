@@ -107,4 +107,9 @@ public partial class DataGrid {
 
         await this.module!.InvokeVoidAsync("setRows", rows);
     }
+
+    public async ValueTask DisposeAsync() {
+        if (this.module is not null)
+            await this.module.DisposeAsync();
+    }
 }

@@ -1,4 +1,5 @@
-﻿<li class="flex items-center py-2">
+﻿@using StatusDashboard.Components.Event
+<li class="flex items-center py-2">
   <Indicator Type="@Type" />
 
   <label class="ml-2 text-xl font-medium text-slate-700">
@@ -7,7 +8,7 @@
 </li>
 
 @code {
-  [Parameter] public StatusType Type { get; set; }
+  [Parameter] [EditorRequired] public EventType Type { get; set; }
 
-  [Parameter] public string Name { get; set; }
+  [Parameter] [EditorRequired] public string? Name { get; set; }
 }

@@ -1,6 +1,7 @@
 ﻿namespace StatusDashboard.Components.Home;
 
 using Microsoft.AspNetCore.Components;
+using StatusDashboard.Components.Event;
 
 public partial class Indicator {
     private const string scaleIcon = "scale-icon-";
@@ -9,25 +10,25 @@ public partial class Indicator {
     private const string text = scaleColor + "text-and-icon-" + func;
 
     [Parameter, EditorRequired]
-    public StatusType Type { get; set; }
+    public EventType Type { get; set; }
 
     [Parameter] public string? Class { get; set; }
 
     private RenderFragment icon {
         get {
             var name = this.Type switch {
-                StatusType.Maintenance => "service-maintanance",
-                StatusType.MinorIssue => "action-minus-circle",
-                StatusType.MajorIssue => "alert-warning",
-                StatusType.Outage => "action-circle-close",
+                EventType.Maintenance => "service-maintanance",
+                EventType.MinorIssue => "action-minus-circle",
+                EventType.MajorIssue => "alert-warning",
+                EventType.Outage => "action-circle-close",
                 _ => "action-success"
             };
 
             var fillColor = this.Type switch {
-                StatusType.Maintenance => $"{text}informational)",
-                StatusType.MinorIssue => $"{scaleColor}{func}warning-standard)",
-                StatusType.MajorIssue => $"{text}warning)",
-                StatusType.Outage => $"{text}danger)",
+                EventType.Maintenance => $"{text}informational)",
+                EventType.MinorIssue => $"{scaleColor}{func}warning-standard)",
+                EventType.MajorIssue => $"{text}warning)",
+                EventType.Outage => $"{text}danger)",
                 _ => $"{text}success)"
             };
 

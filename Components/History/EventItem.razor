@@ -1,4 +1,5 @@
 ﻿@using System.Globalization
+@using StatusDashboard.Components.Event
 @using StatusDashboard.Components.Home
 
 <li class="border-l-2 relative flex flex-col gap-y-2.5 border-slate-300 pb-10 pl-7 last:pb-0">
@@ -18,7 +19,7 @@
       + " UTC")
   </label>
 
-    <Indicator Class="absolute -left-3.5 top-0.5 bg-zinc-100" Type="StatusType.Outage" />
+    <Indicator Class="absolute -left-3.5 top-0.5 bg-zinc-100" Type="EventType.Outage" />
 </li>
 
 @code {

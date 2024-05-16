@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using StatusDashboard.Components.Home
 @using StatusDashboard.Components.CurrentEvent
+@using StatusDashboard.Components.Event
 
 <PageTitle>OTC Status Dashboard</PageTitle>
 
@@ -43,7 +44,7 @@
   </div>
 
   <legend class="flex items-center gap-x-6">
-    @foreach (var state in Enum.GetValues<StatusType>())
+    @foreach (var state in Enum.GetValues<EventType>())
     {
       <div class="flex gap-x-2">
         <Indicator Type="state" />

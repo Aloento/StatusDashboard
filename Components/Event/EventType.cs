@@ -1,6 +1,6 @@
-﻿namespace StatusDashboard.Components.Home;
+﻿namespace StatusDashboard.Components.Event;
 
-public enum StatusType {
+public enum EventType {
     Operational,
     Maintenance,
     MinorIssue,
