@@ -26,7 +26,23 @@
       </InputSelect>
       <ValidationMessage For="@(() => model.Type)" />
     </div>
+    
+    <div>
+      <label>Status:</label>
+      <InputSelect id="status" @bind-Value="model.Status">
+        @foreach (var status in Enum.GetValues<EventStatus>())
+        {
+          <option value="@status">@status</option>
+        }
+      </InputSelect>
+      <ValidationMessage For="@(() => model.Status)" />
+    </div>
 
+    <div>
+      <label for="updateMsg">Update Message:</label>
+      <InputTextArea id="updateMsg" @bind-Value="model.UpdateMsg" />
+      <ValidationMessage For="@(() => model.UpdateMsg)" />
+    </div>
   </EditForm>
 </scale-modal>
 
