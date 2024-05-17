@@ -1,8 +1,12 @@
 ﻿namespace StatusDashboard.Components.Event;
 
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 public partial class EventEditor {
+    [SupplyParameterFromForm]
+    private EventForm model { get; set; } = new();
+
     private IJSObjectReference? module;
 
     private void openModal() {

@@ -4,9 +4,24 @@
 <scale-modal
   heading="Edit Event"
   id="@nameof(EventEditor)"
-  size="small"
->
-  <p>Hello. Welcome. What a pleasure it is to have you.</p>
+  size="small">
+  <EditForm Model="model">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    
+    <InputNumber class="hidden" @bind-Value="model.EventId" />
+
+    <div>
+      <label for="title">Title:</label>
+      <InputText @bind-Value="model.Title" id="title" />
+      <ValidationMessage For="@(() => model.Title)" />
+    </div>
+    
+    <div>
+      <label for></label>
+    </div>
+
+  </EditForm>
 </scale-modal>
 
 <scale-button @onclick="openModal" size="small">
