@@ -7,8 +7,7 @@
   size="small">
   <EditForm Model="model">
     <DataAnnotationsValidator />
-    <ValidationSummary />
-    
+
     <InputNumber class="hidden" @bind-Value="model.EventId" />
 
     <div>
@@ -18,7 +17,14 @@
     </div>
     
     <div>
-      <label for></label>
+      <label for="type">Type:</label>
+      <InputSelect id="type" @bind-Value="model.Type">
+        @foreach (var type in Enum.GetValues<EventType>())
+        {
+          <option value="@type">@type</option>
+        }
+      </InputSelect>
+      <ValidationMessage For="@(() => model.Type)" />
     </div>
 
   </EditForm>
