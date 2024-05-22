@@ -29,7 +29,7 @@
 
       <InputSelect
         @bind-Value="model.Type"
-        class="border-0 ring-1 w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6 sm:max-w-52 sm:text-sm"
+        class="border-0 ring-1 w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6 sm:max-w-60 sm:text-sm"
         id="type">
 
         @for (var i = 1; i < Enum.GetValues<EventType>().Length; i++)
@@ -41,22 +41,46 @@
     </div>
 
     <div class="flex flex-col gap-y-2">
-      <label>Status:</label>
+      <label>Status</label>
 
       <InputSelect
         @bind-Value="model.Status"
-        class="border-0 ring-1 w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6 sm:max-w-52 sm:text-sm"
+        class="border-0 ring-1 w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6 sm:max-w-60 sm:text-sm"
         id="status">
 
-        @foreach (var status in Enum.GetValues<EventStatus>())
+        @if (model.Type == EventType.Maintenance)
         {
-          <option value="@status">@status</option>
+          @foreach (
+            var status in new[]
+            {
+              EventStatus.Scheduled,
+              EventStatus.Performing,
+              EventStatus.Completed,
+              EventStatus.Cancelled
+            })
+          {
+            <option value="@status">@status</option>
+          }
+        }
+        else
+        {
+          @foreach (
+            var status in new[]
+            {
+              EventStatus.Investigating,
+              EventStatus.Fixing,
+              EventStatus.Monitoring,
+              EventStatus.Resolved
+            })
+          {
+            <option value="@status">@status</option>
+          }
         }
       </InputSelect>
     </div>
 
     <div class="flex flex-col gap-y-2">
-      <label for="updateMsg">Update Message:</label>
+      <label for="updateMsg">Update Message</label>
 
       <InputTextArea
         @bind-Value="model.UpdateMsg"
