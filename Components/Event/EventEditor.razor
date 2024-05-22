@@ -5,43 +5,68 @@
   heading="Edit Event"
   id="@nameof(EventEditor)"
   size="small">
-  <EditForm Model="model">
+  <EditForm class="flex flex-col gap-y-6" Model="model">
     <DataAnnotationsValidator />
 
-    <InputNumber class="hidden" @bind-Value="model.EventId" />
+    <InputNumber @bind-Value="model.EventId" class="hidden" />
 
-    <div>
-      <label for="title">Title:</label>
-      <InputText @bind-Value="model.Title" id="title" />
-      <ValidationMessage For="@(() => model.Title)" />
+    <div class="flex flex-col gap-y-2">
+      <label class="font-bold" for="title">Title</label>
+
+      <InputText
+        autocomplete="off"
+        @bind-Value="model.Title"
+        class="border-0 ring-1 w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset ring-red-600 placeholder:text-gray-400 last:ring-gray-300 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6 sm:text-sm"
+        id="title"
+        placeholder="Title of Event"
+        required />
+
+      <ValidationMessage
+        class="text-red-600"
+        For="@(() => model.Title)" />
     </div>
-    
-    <div>
-      <label for="type">Type:</label>
-      <InputSelect id="type" @bind-Value="model.Type">
+
+    <div class="flex flex-col gap-y-2">
+      <label for="type">Type</label>
+
+      <InputSelect
+        @bind-Value="model.Type"
+        class="border-0 ring-1 w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6 sm:max-w-52 sm:text-sm"
+        id="type">
+
         @foreach (var type in Enum.GetValues<EventType>())
         {
           <option value="@type">@type</option>
         }
       </InputSelect>
-      <ValidationMessage For="@(() => model.Type)" />
     </div>
-    
-    <div>
+
+    <div class="flex flex-col gap-y-2">
       <label>Status:</label>
-      <InputSelect id="status" @bind-Value="model.Status">
+      <InputSelect
+        @bind-Value="model.Status"
+        class="border-0 ring-1 w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6 sm:max-w-52 sm:text-sm"
+        id="status">
+
         @foreach (var status in Enum.GetValues<EventStatus>())
         {
           <option value="@status">@status</option>
         }
       </InputSelect>
-      <ValidationMessage For="@(() => model.Status)" />
     </div>
 
-    <div>
+    <div class="flex flex-col gap-y-2">
       <label for="updateMsg">Update Message:</label>
-      <InputTextArea id="updateMsg" @bind-Value="model.UpdateMsg" />
-      <ValidationMessage For="@(() => model.UpdateMsg)" />
+
+      <InputTextArea
+        @bind-Value="model.UpdateMsg"
+        class="border-0 ring-1 w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset ring-red-600 placeholder:text-gray-400 last:ring-gray-300 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6 sm:text-sm"
+        id="updateMsg"
+        required />
+
+      <ValidationMessage 
+        class="text-red-600"
+        For="@(() => model.UpdateMsg)" />
     </div>
   </EditForm>
 </scale-modal>

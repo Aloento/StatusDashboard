@@ -11,7 +11,6 @@ public class EventForm {
     public string? Title { get; set; }
 
     [Required]
-    [Range(1, 4)]
     public EventType? Type { get; set; }
 
     [Required]
