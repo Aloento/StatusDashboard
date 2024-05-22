@@ -4,9 +4,6 @@ using System.ComponentModel.DataAnnotations;
 
 public class EventForm {
     [Required]
-    public int EventId { get; set; }
-
-    [Required]
     [StringLength(maximumLength: 200, MinimumLength = 8)]
     public string? Title { get; set; }
 
