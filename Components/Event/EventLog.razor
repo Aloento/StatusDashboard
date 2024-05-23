@@ -1,0 +1,80 @@
+﻿<scale-table class="rounded-md bg-white p-6 shadow-md" show-sort>
+  <table>
+    <thead>
+    <tr>
+      <th aria-sort="descending"
+        id="title"
+        onclick="sortTable('title')"
+        onkeyup="handleKeyUp(event, 'title')"
+        tabindex="0">
+        Title
+      </th>
+
+      <th aria-disabled="true">Tags</th>
+      <th id="stats"
+        onclick="sortTable('stats')"
+        onkeyup="handleKeyUp(event, 'stats')"
+        tabindex="0">
+        Stats
+      </th>
+      <th id="time"
+        onclick="sortTable('time')"
+        onkeyup="handleKeyUp(event, 'time')"
+        tabindex="0">
+        Time
+      </th>
+      <th id="euros"
+        onclick="sortTable('euros')"
+        onkeyup="handleKeyUp(event, 'euros')"
+        tabindex="0">
+        Euros
+      </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <td>Jane</td>
+      <td>
+        <ul style="display: flex; list-style: none; margin: 0; padding-left: 0;">
+          <li>
+            <scale-tag size="small" style="margin-right: 8px;" type="strong">Other</scale-tag>
+          </li>
+          <li>
+            <scale-tag size="small" style="margin-right: 8px;" type="strong">N/A</scale-tag>
+          </li>
+          <li>
+            <scale-tag size="small" type="strong">Demo</scale-tag>
+          </li>
+        </ul>
+      </td>
+      <td>
+        <div style="align-items: center; display: inline-flex;">
+          <span style="margin-right: 8px;">9.356</span>
+          <scale-progress-bar percentage="90"
+            show-status="false"
+            stroke-width="6"
+            style="width: 120px"
+            variant="info" />
+        </div>
+      </td>
+      <td style="font-weight: 200; text-align: right;">00:00:20</td>
+      <td style="font-weight: 200; text-align: right;">100.245,10</td>
+    </tr>
+    </tbody>
+
+    <tfoot>
+    <tr>
+      <td>Total</td>
+      <td></td>
+      <td></td>
+      <td>00:00:20</td>
+      <td>100.245,10</td>
+    </tr>
+    </tfoot>
+  </table>
+</scale-table>
+
+@code {
+
+}
