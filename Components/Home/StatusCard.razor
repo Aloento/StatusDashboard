@@ -10,7 +10,7 @@
   <ul class="px-3.5">
     @for (var i = 0; i < Random.Shared.Next(1, 5); i++)
     {
-      <ServiceItem Name="@(Enum.GetName((EventType)i) + " Service")" Type="@((EventType)i)" />
+      <ServiceItem Name="@((EventType)i + " Service")" Type="@((EventType)i)" />
     }
   </ul>
 </div>

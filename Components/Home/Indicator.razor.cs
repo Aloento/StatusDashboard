@@ -1,7 +1,7 @@
 ﻿namespace StatusDashboard.Components.Home;
 
+using Event;
 using Microsoft.AspNetCore.Components;
-using StatusDashboard.Components.Event;
 
 public partial class Indicator {
     private const string scaleIcon = "scale-icon-";
@@ -34,7 +34,7 @@ public partial class Indicator {
 
             return x => {
                 x.OpenElement(0, $"{scaleIcon}{name}");
-                x.AddAttribute(1, "accessibility-title", Enum.GetName(this.Type));
+                x.AddAttribute(1, "accessibility-title", this.Type);
                 x.AddAttribute(2, "fill", fillColor);
                 x.AddAttribute(3, "class", this.Class);
                 x.CloseElement();
