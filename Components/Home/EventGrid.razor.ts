@@ -27,7 +27,7 @@ function refresh() {
   if (dataGrid)
     observer.disconnect();
 
-  dataGrid = document.querySelector<HTMLScaleDataGridElement>("#CurrentEvent")!;
+  dataGrid = document.querySelector<HTMLScaleDataGridElement>("#EventGrid")!;
   dataGrid.hideBorder = true;
 
   observer.observe(dataGrid.shadowRoot!, {

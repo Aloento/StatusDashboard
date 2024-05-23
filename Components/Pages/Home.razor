@@ -1,6 +1,5 @@
 ﻿@page "/"
 @using StatusDashboard.Components.Home
-@using StatusDashboard.Components.CurrentEvent
 @using StatusDashboard.Components.Event
 
 <PageTitle>OTC Status Dashboard</PageTitle>
@@ -10,7 +9,7 @@
   opened
   variant="success" />
 
-<DataGrid />
+<EventGrid />
 
 <section class="flex flex-col" id="RegionSelector">
   <div class="flex items-center justify-between">

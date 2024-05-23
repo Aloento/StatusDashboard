@@ -1,4 +1,4 @@
-﻿namespace StatusDashboard.Components.CurrentEvent;
+﻿namespace StatusDashboard.Components.Home;
 
 public static class FieldTypes {
     public static string Actions => "actions";

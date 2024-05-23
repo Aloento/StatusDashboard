@@ -1,4 +1,4 @@
-﻿namespace StatusDashboard.Components.CurrentEvent;
+﻿namespace StatusDashboard.Components.Home;
 
 public record FieldOption {
     /// <remarks>
@@ -19,12 +19,12 @@ public record FieldOption {
     public bool? Sortable { get; set; }
 
     /// <remarks>
-    /// <see cref="CurrentEvent.SortBy"/>.
+    /// <see cref="Home.SortBy"/>.
     /// </remarks>
     public string? SortBy { get; set; }
 
     /// <remarks>
-    /// <see cref="CurrentEvent.TextAlign"/>.
+    /// <see cref="Home.TextAlign"/>.
     /// </remarks>
     public string? TextAlign { get; set; }
 
