@@ -1,9 +1,4 @@
-﻿#RegionSelector,
-scale-divider {
-  --spacing: 0;
-}
-
-@keyframes scale {
+﻿@keyframes scale {
   0% {
     transform: scale(1);
   }
