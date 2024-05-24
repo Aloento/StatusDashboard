@@ -1,8 +1,9 @@
-﻿namespace StatusDashboard.Components.Event;
+﻿namespace StatusDashboard.Components.New;
 
 using System.ComponentModel.DataAnnotations;
+using Event;
 
-public class EventForm {
+public class NewModel {
     [Required]
     [StringLength(maximumLength: 200, MinimumLength = 8)]
     public string? Title { get; set; }
@@ -10,10 +11,11 @@ public class EventForm {
     [Required]
     public EventType? Type { get; set; }
 
-    [Required]
+    [StringLength(maximumLength: 200, MinimumLength = 10)]
+    public string? Description { get; set; }
+
     [StringLength(maximumLength: 200, MinimumLength = 10)]
     public string? UpdateMsg { get; set; }
 
-    [Required]
     public EventStatus? Status { get; set; }
 }

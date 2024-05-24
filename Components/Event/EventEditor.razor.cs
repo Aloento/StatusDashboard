@@ -6,7 +6,8 @@ using Microsoft.JSInterop;
 public partial class EventEditor {
     private IJSObjectReference? module;
 
-    [SupplyParameterFromForm] private EventForm model { get; set; } = new();
+    [SupplyParameterFromForm]
+    private EventModel model { get; set; } = new();
 
     public async ValueTask DisposeAsync() {
         if (this.module is not null)

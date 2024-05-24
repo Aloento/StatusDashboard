@@ -1,0 +1,96 @@
+﻿@using StatusDashboard.Components.Event
+
+<EditForm class="flex flex-col gap-y-6 rounded-md bg-white px-8 py-6 shadow-md" Model="model" OnValidSubmit="submit">
+  <DataAnnotationsValidator />
+
+  <div class="flex flex-col gap-y-2">
+    <label for="@nameof(model.Title)">
+      @nameof(model.Title)
+    </label>
+
+    <InputText autocomplete="off"
+      @bind-Value="model.Title"
+      class="border-0 ring-1 w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset ring-red-600 placeholder:text-gray-400 last:ring-gray-300 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6 sm:text-sm"
+      id="@nameof(model.Title)"
+      placeholder="Title of Event"
+      required />
+
+    <ValidationMessage class="text-red-600"
+      For="@(() => model.Title)" />
+  </div>
+
+  <div class="flex flex-col gap-y-2">
+    <label for="@nameof(model.Type)">
+      @nameof(model.Type)
+    </label>
+
+    <InputSelect @bind-Value="model.Type"
+      class="border-0 ring-1 w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6 sm:max-w-60 sm:text-sm"
+      id="@nameof(model.Type)">
+
+      @for (var i = 1; i < Enum.GetValues<EventType>().Length; i++)
+      {
+        var type = Enum.GetValues<EventType>()[i];
+        <option value="@type">@type</option>
+      }
+    </InputSelect>
+  </div>
+
+  <div class="flex flex-col gap-y-2">
+    <label for="@nameof(model.Status)">
+      @nameof(model.Status)
+    </label>
+
+    <InputSelect @bind-Value="model.Status"
+      class="border-0 ring-1 w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6 sm:max-w-60 sm:text-sm"
+      id="@nameof(model.Status)">
+
+      @if (model.Type == EventType.Maintenance)
+      {
+        @foreach (
+          var status in new[]
+          {
+            EventStatus.Scheduled,
+            EventStatus.Performing,
+            EventStatus.Completed,
+            EventStatus.Cancelled
+          })
+        {
+          <option value="@status">@status</option>
+        }
+      }
+      else
+      {
+        @foreach (
+          var status in new[]
+          {
+            EventStatus.Investigating,
+            EventStatus.Fixing,
+            EventStatus.Monitoring,
+            EventStatus.Resolved
+          })
+        {
+          <option value="@status">@status</option>
+        }
+      }
+    </InputSelect>
+  </div>
+
+  <div class="flex flex-col gap-y-2">
+    <label for="@nameof(model.UpdateMsg)">
+      Update Message
+    </label>
+
+    <InputTextArea @bind-Value="model.UpdateMsg"
+      class="border-0 ring-1 w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset ring-red-600 placeholder:text-gray-400 last:ring-gray-300 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6 sm:text-sm"
+      id="@nameof(model.UpdateMsg)"
+      required />
+
+    <ValidationMessage class="text-red-600"
+      For="@(() => model.UpdateMsg)" />
+  </div>
+
+  <scale-button class="self-end" size="small" type="submit">
+    Submit
+  </scale-button>
+</EditForm>
