@@ -2,46 +2,70 @@
   const string docsLink = "https://docs.otc.t-systems.com/status-dashboard/index.html";
 }
 
-<header class="fixed left-0 top-0 z-50 h-16 w-full px-8 shadow-md" id="TopNavBar">
-  <nav class="mx-auto flex h-full max-w-screen-2xl items-center justify-between">
-    <div class="flex items-center gap-x-5">
-      <scale-logo class="Logo" href="/" variant="white" />
+<scale-telekom-header
+  app-name="Open Telekom Cloud"
+  app-name-link="/"
+  logo-href="/"
+  slot="header"
+  type="slim">
 
-      <a class="text-2xl font-medium text-white" href="/">
-        Open Telekom Cloud
-      </a>
-    </div>
+  <scale-telekom-nav-list aria-label="Main Navigation Links" slot="main-nav">
+    <scale-telekom-nav-item aria-label="History">
+      <NavLink href="/History">History</NavLink>
+    </scale-telekom-nav-item>
 
-    <div class="hidden items-center gap-x-2 md:flex">
-      <scale-button href="History" variant="ghost">History</scale-button>
-      <scale-button href="Availability" variant="ghost">Availability</scale-button>
-      <scale-button href="@docsLink" target="_black" variant="ghost">Docs</scale-button>
+    <scale-telekom-nav-item active aria-label="Availability">
+      <NavLink href="/Availability">Availability</NavLink>
+    </scale-telekom-nav-item>
 
-      <scale-button href="NewEvent" variant="ghost">New Incident</scale-button>
-      <scale-button variant="ghost">UserName</scale-button>
-    </div>
+    <scale-telekom-nav-item aria-label="Docs">
+      <a href="@docsLink" target="_black">Docs</a>
+    </scale-telekom-nav-item>
 
-    <scale-menu-flyout class="md:hidden">
-      <scale-button icon-only slot="trigger" variant="secondary-white">
-        <scale-icon-action-menu accessibility-title="Open Menu" selected />
-      </scale-button>
+    <scale-telekom-nav-item aria-label="New Event">
+      <NavLink href="/NewEvent">New Event</NavLink>
+    </scale-telekom-nav-item>
+  </scale-telekom-nav-list>
 
-      <scale-menu-flyout-list>
-        <a href="History">
-          <scale-menu-flyout-item>History</scale-menu-flyout-item>
-        </a>
-        <a href="Availability">
-          <scale-menu-flyout-item>Availability</scale-menu-flyout-item>
-        </a>
-        <a href="@docsLink">
-          <scale-menu-flyout-item>Docs</scale-menu-flyout-item>
-        </a>
+  <scale-telekom-nav-list alignment="right" aria-label="Functions Menu" slot="functions" variant="functions">
+    <scale-telekom-profile-menu
+      accessibility-label="Login"
+      app-name="Application"
+      label="Login"
+      logged-in="false"
+      login-label="Log in"
+      login-url="https://www.telekom.de/todo/login" />
 
-        <a href="">
-          <scale-menu-flyout-item>New Incident</scale-menu-flyout-item>
-        </a>
-        <scale-menu-flyout-item>UserName</scale-menu-flyout-item>
-      </scale-menu-flyout-list>
-    </scale-menu-flyout>
-  </nav>
-</header>
+    <scale-telekom-nav-item hide-on-desktop>
+      <button>
+        <scale-icon-action-menu accessibility-title="Menu" />
+      </button>
+
+      <scale-telekom-nav-flyout>
+        <scale-telekom-mobile-flyout-canvas>
+          <scale-telekom-mobile-menu slot="mobile-main-nav">
+
+            <scale-telekom-mobile-menu-item aria-label="History">
+              <NavLink href="/History">History</NavLink>
+            </scale-telekom-mobile-menu-item>
+
+            <scale-telekom-mobile-menu-item aria-label="Availability">
+              <NavLink href="/Availability">Availability</NavLink>
+            </scale-telekom-mobile-menu-item>
+
+            <scale-telekom-mobile-menu-item aria-label="Docs">
+              <a href="@docsLink" target="_black">Docs</a>
+            </scale-telekom-mobile-menu-item>
+
+            <scale-telekom-mobile-menu-item aria-label="New Event">
+              <NavLink href="/NewEvent">New Event</NavLink>
+            </scale-telekom-mobile-menu-item>
+
+          </scale-telekom-mobile-menu>
+        </scale-telekom-mobile-flyout-canvas>
+      </scale-telekom-nav-flyout>
+
+    </scale-telekom-nav-item>
+  </scale-telekom-nav-list>
+
+</scale-telekom-header>
