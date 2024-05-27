@@ -1,24 +1,25 @@
+@{
+  const string unpkg = "https://unpkg.com/@telekom/scale-components@next/dist/scale-components/scale-components.";
+}
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <base href="/" />
-    <link href="tw.output.css" rel="stylesheet" />
-    <link href="StatusDashboard.styles.css" rel="stylesheet" />
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <base href="/" />
+  <link href="tw.output.css" rel="stylesheet" />
+  <link href="StatusDashboard.styles.css" rel="stylesheet" />
 
-    <link href="lib/@@telekom/scale-components/dist/scale-components/scale-components.css"
-      rel="stylesheet"
-    />
-    <script src="lib/@@telekom/scale-components/dist/scale-components/scale-components.esm.js"
-      type="module"
-    ></script>
+  <link href="@(unpkg + "css")" rel="stylesheet" />
+  <script src="@(unpkg + "esm.js")" type="module"></script>
 
-    <HeadOutlet @rendermode="InteractiveServer" />
-  </head>
+  <HeadOutlet @rendermode="InteractiveServer" />
+</head>
 
-  <body data-mode="light">
-    <Routes @rendermode="InteractiveServer" />
-    <script src="_framework/blazor.web.js"></script>
-  </body>
+<body data-mode="light">
+  <Routes @rendermode="InteractiveServer" />
+  <script src="_framework/blazor.web.js"></script>
+</body>
+
 </html>

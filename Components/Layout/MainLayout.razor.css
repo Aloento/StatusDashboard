@@ -20,3 +20,8 @@
   right: 0.75rem;
   top: 0.5rem;
 }
+
+#blazor-error-ui .reload {
+  cursor: pointer;
+  color: blue;
+}
