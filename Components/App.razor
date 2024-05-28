@@ -1,5 +1,5 @@
 @{
-  const string unpkg = "https://unpkg.com/@telekom/scale-components@next/dist/scale-components/scale-components.";
+  const string cdn = "https://unpkg.com/@telekom/scale-components@next/dist/scale-components/scale-components.";
 }
 
 <!DOCTYPE html>
@@ -11,8 +11,8 @@
   <link href="tw.output.css" rel="stylesheet" />
   <link href="StatusDashboard.styles.css" rel="stylesheet" />
 
-  <link href="@(unpkg + "css")" rel="stylesheet" />
-  <script src="@(unpkg + "esm.js")" type="module"></script>
+  <link href="@(cdn + "css")" rel="stylesheet" />
+  <script src="@(cdn + "esm.js")" type="module"></script>
 
   <HeadOutlet @rendermode="InteractiveServer" />
 </head>

@@ -10,21 +10,15 @@
   type="slim">
 
   <scale-telekom-nav-list aria-label="Main Navigation Links" slot="main-nav">
-    <scale-telekom-nav-item aria-label="History">
-      <NavLink href="/History">History</NavLink>
-    </scale-telekom-nav-item>
-
-    <scale-telekom-nav-item active aria-label="Availability">
-      <NavLink href="/Availability">Availability</NavLink>
-    </scale-telekom-nav-item>
+    <NavItem href="/History" Label="History" />
+    
+    <NavItem href="/Availability" Label="Availability" />
 
     <scale-telekom-nav-item aria-label="Docs">
       <a href="@docsLink" target="_black">Docs</a>
     </scale-telekom-nav-item>
-
-    <scale-telekom-nav-item aria-label="New Event">
-      <NavLink href="/NewEvent">New Event</NavLink>
-    </scale-telekom-nav-item>
+    
+    <NavItem href="/NewEvent" Label="New Event" />
   </scale-telekom-nav-list>
 
   <scale-telekom-nav-list alignment="right" aria-label="Functions Menu" slot="functions" variant="functions">
@@ -46,11 +40,11 @@
           <scale-telekom-mobile-menu slot="mobile-main-nav">
 
             <scale-telekom-mobile-menu-item aria-label="History">
-              <NavLink href="/History">History</NavLink>
+              <a href="/History">History</a>
             </scale-telekom-mobile-menu-item>
 
             <scale-telekom-mobile-menu-item aria-label="Availability">
-              <NavLink href="/Availability">Availability</NavLink>
+              <a href="/Availability">Availability</a>
             </scale-telekom-mobile-menu-item>
 
             <scale-telekom-mobile-menu-item aria-label="Docs">
@@ -58,7 +52,7 @@
             </scale-telekom-mobile-menu-item>
 
             <scale-telekom-mobile-menu-item aria-label="New Event">
-              <NavLink href="/NewEvent">New Event</NavLink>
+              <a href="/NewEvent">New Event</a>
             </scale-telekom-mobile-menu-item>
 
           </scale-telekom-mobile-menu>
