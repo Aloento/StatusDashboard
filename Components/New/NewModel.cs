@@ -14,8 +14,9 @@ public class NewModel {
     [StringLength(maximumLength: 200, MinimumLength = 10)]
     public string? Description { get; set; }
 
-    [StringLength(maximumLength: 200, MinimumLength = 10)]
-    public string? UpdateMsg { get; set; }
+    public dynamic? Services { get; set; }
 
-    public EventStatus? Status { get; set; }
+    public DateTime? Start { get; set; }
+
+    public DateTime? End { get; set; }
 }

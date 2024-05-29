@@ -1,5 +1,6 @@
 @{
-  const string cdn = "https://unpkg.com/@telekom/scale-components@next/dist/scale-components/scale-components.";
+  const string cdn = "https://unpkg.com/@telekom/scale-components@3.0.0-beta.151/dist/scale-components/scale-components.";
+  const string fluent = "Microsoft.FluentUI.AspNetCore.Components";
 }
 
 <!DOCTYPE html>
@@ -8,11 +9,15 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <base href="/" />
+  
   <link href="tw.output.css" rel="stylesheet" />
   <link href="StatusDashboard.styles.css" rel="stylesheet" />
 
-  <link href="@(cdn + "css")" rel="stylesheet" />
-  <script src="@(cdn + "esm.js")" type="module"></script>
+  <link href="@($"{cdn}css")" rel="stylesheet" />
+  <script src="@($"{cdn}esm.js")" type="module"></script>
+
+  <script src="@($"_content/{fluent}/{fluent}.lib.module.js")"
+          type="module"></script>
 
   <HeadOutlet @rendermode="InteractiveServer" />
 </head>

@@ -35,60 +35,18 @@
       }
     </InputSelect>
   </div>
+  
+  <FluentTextField Required="true" />
 
-  <div class="flex flex-col gap-y-2">
-    <label for="@nameof(model.Status)">
-      @nameof(model.Status)
-    </label>
+  <scale-date-picker
+    label="Standard"
+    placeholder="Select date"
+    value="2020-12-31" />
 
-    <InputSelect @bind-Value="model.Status"
-      class="border-0 ring-1 w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6 sm:max-w-60 sm:text-sm"
-      id="@nameof(model.Status)">
-
-      @if (model.Type == EventType.Maintenance)
-      {
-        @foreach (
-          var status in new[]
-          {
-            EventStatus.Scheduled,
-            EventStatus.Performing,
-            EventStatus.Completed,
-            EventStatus.Cancelled
-          })
-        {
-          <option value="@status">@status</option>
-        }
-      }
-      else
-      {
-        @foreach (
-          var status in new[]
-          {
-            EventStatus.Investigating,
-            EventStatus.Fixing,
-            EventStatus.Monitoring,
-            EventStatus.Resolved
-          })
-        {
-          <option value="@status">@status</option>
-        }
-      }
-    </InputSelect>
-  </div>
-
-  <div class="flex flex-col gap-y-2">
-    <label for="@nameof(model.UpdateMsg)">
-      Update Message
-    </label>
-
-    <InputTextArea @bind-Value="model.UpdateMsg"
-      class="border-0 ring-1 w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset ring-red-600 placeholder:text-gray-400 last:ring-gray-300 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6 sm:text-sm"
-      id="@nameof(model.UpdateMsg)"
-      required />
-
-    <ValidationMessage class="text-red-600"
-      For="@(() => model.UpdateMsg)" />
-  </div>
+  <scale-date-picker
+    label="Standard"
+    placeholder="Select date"
+    value="2020-12-31" />
 
   <scale-button class="self-end" size="small" type="submit">
     Submit
