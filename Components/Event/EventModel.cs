@@ -8,12 +8,12 @@ public class EventModel {
     public string? Title { get; set; }
 
     [Required]
-    public EventType? Type { get; set; }
+    public EventType Type { get; set; } = EventType.Maintenance;
 
     [Required]
     [StringLength(maximumLength: 200, MinimumLength = 10)]
     public string? UpdateMsg { get; set; }
 
     [Required]
-    public EventStatus? Status { get; set; }
+    public EventStatus Status { get; set; }
 }

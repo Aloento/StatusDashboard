@@ -1,100 +1,55 @@
-﻿@inject IJSRuntime JS
-@implements IAsyncDisposable
-
-<scale-modal
+﻿<scale-modal
   heading="Edit Event"
   id="@nameof(EventEditor)"
   size="small">
   <EditForm class="flex flex-col gap-y-6" Model="model" OnValidSubmit="submit">
     <DataAnnotationsValidator />
 
-    <div class="flex flex-col gap-y-2">
-      <label for="@nameof(model.Title)">
-        @nameof(model.Title)
-      </label>
-
-      <InputText
-        autocomplete="off"
+    <div>
+      <FluentTextField
+        AutoComplete="off"
+        Autofocus="true"
         @bind-Value="model.Title"
-        class="border-0 ring-1 w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset ring-red-600 placeholder:text-gray-400 last:ring-gray-300 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6 sm:text-sm"
-        id="@nameof(model.Title)"
-        placeholder="Title of Event"
-        required />
+        Class="w-full"
+        Label="@nameof(model.Title)"
+        Placeholder="Please give the title of event"
+        Required="true" />
 
       <ValidationMessage
         class="text-red-600"
         For="@(() => model.Title)" />
     </div>
 
-    <div class="flex flex-col gap-y-2">
-      <label for="@nameof(model.Type)">
-        @nameof(model.Type)
-      </label>
-
-      <InputSelect
-        @bind-Value="model.Type"
-        class="border-0 ring-1 w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6 sm:max-w-60 sm:text-sm"
-        id="@nameof(model.Type)">
-
-        @for (var i = 1; i < Enum.GetValues<EventType>().Length; i++)
-        {
-          var type = Enum.GetValues<EventType>()[i];
-          <option value="@type">@type</option>
-        }
-      </InputSelect>
+    <div>
+      <FluentSelect
+        @bind-SelectedOption="model.Type"
+        Items="@(Enum.GetValues<EventType>().Skip(1))"
+        Label="@nameof(model.Type)"
+        TOption="EventType" />
     </div>
 
-    <div class="flex flex-col gap-y-2">
-      <label for="@nameof(model.Status)">
-        @nameof(model.Status)
-      </label>
+    @{
+      var values = Enum.GetValues<EventStatus>();
+      var status =
+        model.Type == EventType.Maintenance
+          ? values.Take(4)
+          : values.Skip(4);
+    }
 
-      <InputSelect
-        @bind-Value="model.Status"
-        class="border-0 ring-1 w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6 sm:max-w-60 sm:text-sm"
-        id="@nameof(model.Status)">
-
-        @if (model.Type == EventType.Maintenance)
-        {
-          @foreach (
-            var status in new[]
-            {
-              EventStatus.Scheduled,
-              EventStatus.Performing,
-              EventStatus.Completed,
-              EventStatus.Cancelled
-            })
-          {
-            <option value="@status">@status</option>
-          }
-        }
-        else
-        {
-          @foreach (
-            var status in new[]
-            {
-              EventStatus.Investigating,
-              EventStatus.Fixing,
-              EventStatus.Monitoring,
-              EventStatus.Resolved
-            })
-          {
-            <option value="@status">@status</option>
-          }
-        }
-      </InputSelect>
+    <div>
+      <FluentSelect
+        @bind-SelectedOption="model.Status"
+        Items="@status"
+        Label="@nameof(model.Status)"
+        TOption="EventStatus" />
     </div>
 
-    <div class="flex flex-col gap-y-2">
-      <label for="@nameof(model.UpdateMsg)">
-        Update Message
-      </label>
-
-      <InputTextArea
+    <div>
+      <FluentTextArea
         @bind-Value="model.UpdateMsg"
-        class="border-0 ring-1 w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset ring-red-600 placeholder:text-gray-400 last:ring-gray-300 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6 sm:text-sm"
-        id="@nameof(model.UpdateMsg)"
-        required />
+        Class="w-full"
+        Label="Update Message"
+        Resize="TextAreaResize.Vertical" />
 
       <ValidationMessage
         class="text-red-600"
@@ -107,7 +62,14 @@
   </EditForm>
 </scale-modal>
 
-<scale-button @onclick="openModal" size="small">
+<scale-button onclick="openModal()" size="small">
   <scale-icon-action-edit accessibility-title="edit" />
   Edit
 </scale-button>
+
+<script>
+  function openModal() {
+    const modal = document.getElementById("EventEditor");
+    modal.opened = true;
+  }
+</script>
