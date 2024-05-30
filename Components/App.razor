@@ -1,5 +1,5 @@
 @{
-  const string cdn = "https://unpkg.com/@telekom/scale-components@3.0.0-beta.151/dist/scale-components/scale-components.";
+  const string cdn = "https://cdn.jsdelivr.net/npm/@telekom/scale-components@3.0.0-beta.151/dist/scale-components/scale-components.";
   const string fluent = "Microsoft.FluentUI.AspNetCore.Components";
 }
 
@@ -17,7 +17,7 @@
   <script src="@($"{cdn}esm.js")" type="module"></script>
 
   <script src="@($"_content/{fluent}/{fluent}.lib.module.js")"
-          type="module"></script>
+    type="module"></script>
 
   <HeadOutlet @rendermode="InteractiveServer" />
 </head>
