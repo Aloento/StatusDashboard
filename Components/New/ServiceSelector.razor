@@ -1,68 +1,47 @@
 ﻿@{
-  var items = new List<RegionalService>
+  var items = new List<ServiceItem>();
+
+  for (var i = 1; i <= 10; i++)
   {
-    new()
+    items.Add(new()
     {
-      Id = 1, Name = "Service 1", Regions =
+      Id = i,
+      Name = $"Service {i}",
+      Regions =
       [
-        new() { Id = 1, Name = "Region 1", Selected = false },
-        new() { Id = 2, Name = "Region 2", Selected = false }
+        new() { Id = 1, Name = "EU-DE" },
+        new() { Id = 2, Name = "EU-NL" }
       ]
-    },
-    new()
-    {
-      Id = 2, Name = "Service 2", Regions =
-      [
-        new() { Id = 1, Name = "Region 1", Selected = false },
-        new() { Id = 2, Name = "Region 2", Selected = false }
-      ]
-    },
-    new()
-    {
-      Id = 3, Name = "Service 3",Regions =
-      [
-        new() { Id = 1, Name = "Region 1", Selected = true },
-        new() { Id = 2, Name = "Region 2", Selected = false }
-      ]
-    },
-  }.AsQueryable();
+    });
+  }
+
+  var queryable = items.AsQueryable();
 }
 
-<FluentDataGrid
-  TGridItem="RegionalService"
-  Items="@items"
-  ItemKey="@(x => x.Id)">
+<FluentLabel Class="pb-1">
+  Affected Services
+</FluentLabel>
 
-  <PropertyColumn
-    Property="@(x => x.Name)"
-    Title="@nameof(RegionalService.Name)" />
+<div class="max-h-52 overflow-auto">
+  <FluentDataGrid
+    GenerateHeader="GenerateHeaderOption.Sticky"
+    ItemKey="@(x => x.Id)"
+    Items="@queryable"
+    ShowHover="true"
+    TGridItem="ServiceItem">
 
-  @foreach (var i in items.First().Regions)
-  {
-    <TemplateColumn
-      Title="@i.Name"
-      TGridItem="RegionalService">
-      <FluentCheckbox ValueChanged="@(x => { context.Regions.Single(y => y.Name == i.Name).Selected = x; })" />
-    </TemplateColumn>
-  }
-</FluentDataGrid>
+    <PropertyColumn
+      Property="@(x => x.Name)"
+      Title="@nameof(ServiceItem.Name)" />
 
-@code {
-  public class RegionalService
-  {
-    public required int Id { get; set; }
-
-    public required string Name { get; set; }
-
-    public required List<RegionItem> Regions { get; set; }
-  }
-
-  public class RegionItem
-  {
-    public required int Id { get; set; }
-
-    public required string Name { get; set; }
-
-    public bool Selected { get; set; }
-  }
-}
+    @foreach (var i in items.First().Regions)
+    {
+      <TemplateColumn
+        TGridItem="ServiceItem"
+        Title="@i.Name">
+        <FluentCheckbox
+          ValueChanged="@(x => context.Regions.Single(y => y.Name == i.Name).Selected = x)" />
+      </TemplateColumn>
+    }
+  </FluentDataGrid>
+</div>
