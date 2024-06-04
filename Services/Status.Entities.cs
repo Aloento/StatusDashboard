@@ -1,4 +1,4 @@
-﻿namespace StatusDashboard.Services.ComponentStatus;
+﻿namespace StatusDashboard.Services;
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
