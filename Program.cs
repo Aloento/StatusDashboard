@@ -11,6 +11,7 @@ builder.Services.AddOptions<StatusOption>()
 
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton<StatusService>();
+builder.Services.AddHostedService(x => x.GetRequiredService<StatusService>());
 
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
