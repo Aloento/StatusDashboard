@@ -49,7 +49,7 @@ internal class NameEnumConverter : JsonConverter<NameEnum> {
 internal class IncidentEntity {
     [JsonPropertyName("end_date")]
     [JsonConverter(typeof(UtcConverter))]
-    public DateTime EndDate { get; set; }
+    public DateTime? EndDate { get; set; }
 
     [JsonPropertyName("id")]
     public int Id { get; set; }
@@ -59,7 +59,7 @@ internal class IncidentEntity {
 
     [JsonPropertyName("start_date")]
     [JsonConverter(typeof(UtcConverter))]
-    public DateTime StartDate { get; set; }
+    public DateTime? StartDate { get; set; }
 
     [JsonPropertyName("text")]
     public string Text { get; set; }
@@ -78,7 +78,7 @@ internal class UpdateEntity {
 
     [JsonPropertyName("timestamp")]
     [JsonConverter(typeof(UtcConverter))]
-    public DateTime Timestamp { get; set; }
+    public DateTime? Timestamp { get; set; }
 }
 
 internal enum StatusEnum {
@@ -87,7 +87,9 @@ internal enum StatusEnum {
     Description,
     InProgress,
     Resolved,
-    System
+    System,
+    Scheduled,
+    Fixing
 }
 
 internal class StatusEnumConverter : JsonConverter<StatusEnum> {
@@ -100,6 +102,8 @@ internal class StatusEnumConverter : JsonConverter<StatusEnum> {
             "description" => StatusEnum.Description,
             "in progress" => StatusEnum.InProgress,
             "resolved" => StatusEnum.Resolved,
+            "scheduled" => StatusEnum.Scheduled,
+            "fixing" => StatusEnum.Fixing,
             _ => throw new JsonException($"Unknown status value: {value}")
         };
     }
@@ -107,13 +111,14 @@ internal class StatusEnumConverter : JsonConverter<StatusEnum> {
     public override void Write(Utf8JsonWriter writer, StatusEnum value, JsonSerializerOptions options) => throw new NotImplementedException();
 }
 
-internal class UtcConverter : JsonConverter<DateTime> {
+internal class UtcConverter : JsonConverter<DateTime?> {
     private const string dateFormat = "yyyy-MM-dd HH:mm";
 
-    public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) {
+    public override DateTime? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) {
         var timestamp = reader.GetString();
-        return DateTime.ParseExact(timestamp, dateFormat, null, System.Globalization.DateTimeStyles.AssumeUniversal);
+        var ok = DateTime.TryParseExact(timestamp, dateFormat, null, System.Globalization.DateTimeStyles.AssumeUniversal, out var res);
+        return ok ? res : null;
     }
 
-    public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options) => throw new NotImplementedException();
+    public override void Write(Utf8JsonWriter writer, DateTime? value, JsonSerializerOptions options) => throw new NotImplementedException();
 }
