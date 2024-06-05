@@ -10,14 +10,14 @@ builder.Services.AddOptions<StatusOption>()
     .ValidateDataAnnotations()
     .ValidateOnStart();
 
-builder.Services.AddDbContext<StatusContext>(
+builder.Services.AddDbContextFactory<StatusContext>(
     x => x
         .UseInMemoryDatabase(nameof(StatusDashboard))
         .EnableDetailedErrors()
         .EnableSensitiveDataLogging()
 );
 
-builder.Services.AddHttpClient();
+builder.Services.AddHttpClient<StatusHttp>();
 builder.Services.AddSingleton<StatusService>();
 builder.Services.AddHostedService(x => x.GetRequiredService<StatusService>());
 
