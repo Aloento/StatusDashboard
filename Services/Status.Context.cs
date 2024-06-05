@@ -12,4 +12,6 @@ internal class StatusContext(DbContextOptions<StatusContext> opts) : DbContext(o
     public DbSet<Event> Events { get; set; }
 
     public DbSet<History> Histories { get; set; }
+
+    public DbSet<EventService> EventService { get; set; }
 }

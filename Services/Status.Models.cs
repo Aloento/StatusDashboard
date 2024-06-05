@@ -3,7 +3,9 @@ namespace StatusDashboard.Services;
 
 using System.ComponentModel.DataAnnotations;
 using Components.Event;
+using Microsoft.EntityFrameworkCore;
 
+[Index(nameof(Name), IsUnique = true)]
 internal class Service {
     public int Id { get; set; }
 
@@ -17,15 +19,20 @@ internal class Service {
     public ICollection<Event> Events { get; set; }
 }
 
+[Index(nameof(Name), IsUnique = true)]
 internal class Category {
     public int Id { get; set; }
 
     [StringLength(byte.MaxValue, MinimumLength = 1)]
     public string Name { get; set; }
 
+    [StringLength(10, MinimumLength = 1)]
+    public string Abbr { get; set; }
+
     public ICollection<Service> Services { get; set; }
 }
 
+[Index(nameof(Name), IsUnique = true)]
 internal class Region {
     public int Id { get; set; }
 
@@ -47,7 +54,20 @@ internal class Event {
 
     public DateTime? End { get; set; }
 
+    public ICollection<Service> Services { get; set; }
+
     public ICollection<History> Histories { get; set; }
+}
+
+[Keyless]
+internal class EventService {
+    public int EventId { get; set; }
+
+    public Event Event { get; set; }
+
+    public int ServiceId { get; set; }
+
+    public Service Service { get; set; }
 }
 
 internal class History {
