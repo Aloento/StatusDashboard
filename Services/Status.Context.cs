@@ -2,5 +2,14 @@
 
 using Microsoft.EntityFrameworkCore;
 
-public class StatusContext(DbContextOptions<StatusContext> opts) : DbContext(opts) {
+internal class StatusContext(DbContextOptions<StatusContext> opts) : DbContext(opts) {
+    public DbSet<Service> Services { get; set; }
+
+    public DbSet<Category> Categories { get; set; }
+
+    public DbSet<Region> Regions { get; set; }
+
+    public DbSet<Event> Events { get; set; }
+
+    public DbSet<History> Histories { get; set; }
 }
