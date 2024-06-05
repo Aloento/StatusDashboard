@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.FluentUI.AspNetCore.Components;
 using StatusDashboard.Components;
 using StatusDashboard.Services;
@@ -5,9 +6,16 @@ using StatusDashboard.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOptions<StatusOption>()
-    .BindConfiguration("SDB")
+    .BindConfiguration(nameof(StatusDashboard))
     .ValidateDataAnnotations()
     .ValidateOnStart();
+
+builder.Services.AddDbContext<StatusContext>(
+    x => x
+        .UseInMemoryDatabase(nameof(StatusDashboard))
+        .EnableDetailedErrors()
+        .EnableSensitiveDataLogging()
+);
 
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton<StatusService>();
@@ -21,7 +29,7 @@ builder.Services.AddFluentUIComponents();
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment()) {
-    app.UseExceptionHandler("/Error", createScopeForErrors: true);
+    app.UseExceptionHandler("/Error", true);
     app.UseHsts();
 }
 

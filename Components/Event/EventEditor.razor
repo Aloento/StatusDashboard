@@ -2,58 +2,58 @@
   heading="Edit Event"
   id="@nameof(EventEditor)"
   size="small">
-  <EditForm class="flex flex-col gap-y-6" Model="model" OnValidSubmit="submit">
+  <EditForm class="flex flex-col gap-y-6" Model="form" OnValidSubmit="submit">
     <DataAnnotationsValidator />
 
     <div>
       <FluentTextField
         AutoComplete="off"
         Autofocus="true"
-        @bind-Value="model.Title"
+        @bind-Value="form.Title"
         Class="w-full"
-        Label="@nameof(model.Title)"
+        Label="@nameof(form.Title)"
         Placeholder="Please give the title of event"
         Required="true" />
 
       <ValidationMessage
         class="text-red-600"
-        For="@(() => model.Title)" />
+        For="@(() => form.Title)" />
     </div>
 
     <div>
       <FluentSelect
-        @bind-SelectedOption="model.Type"
+        @bind-SelectedOption="form.Type"
         Items="@(Enum.GetValues<EventType>().Skip(1))"
-        Label="@nameof(model.Type)"
+        Label="@nameof(form.Type)"
         TOption="EventType" />
     </div>
 
     @{
       var values = Enum.GetValues<EventStatus>();
       var status =
-        model.Type == EventType.Maintenance
+        form.Type == EventType.Maintenance
           ? values.Take(4)
           : values.Skip(4);
     }
 
     <div>
       <FluentSelect
-        @bind-SelectedOption="model.Status"
+        @bind-SelectedOption="form.Status"
         Items="@status"
-        Label="@nameof(model.Status)"
+        Label="@nameof(form.Status)"
         TOption="EventStatus" />
     </div>
 
     <div>
       <FluentTextArea
-        @bind-Value="model.UpdateMsg"
+        @bind-Value="form.UpdateMsg"
         Class="w-full"
         Label="Update Message"
         Resize="TextAreaResize.Vertical" />
 
       <ValidationMessage
         class="text-red-600"
-        For="@(() => model.UpdateMsg)" />
+        For="@(() => form.UpdateMsg)" />
     </div>
 
     <scale-button class="self-end" size="small" type="submit">

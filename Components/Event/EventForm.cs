@@ -2,7 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-public class EventModel {
+public class EventForm {
     [Required]
     [StringLength(maximumLength: 200, MinimumLength = 8)]
     public string? Title { get; set; }
