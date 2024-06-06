@@ -1,16 +1,20 @@
-﻿@using StatusDashboard.Components.Event
+﻿@using Microsoft.EntityFrameworkCore
+@using StatusDashboard.Components.Event
+@using StatusDashboard.Services
+@implements IAsyncDisposable
+@inject IDbContextFactory<StatusContext> context;
 
 <div class="flex h-fit flex-col rounded-md bg-white px-3.5 py-5 shadow-md">
   <h3 class="px-3.5 text-2xl font-medium text-slate-800">
-    Application Services
+    @Category?.Name
   </h3>
 
   <scale-divider class="h-auto" />
 
   <ul class="px-3.5">
-    @for (var i = 0; i < Random.Shared.Next(1, 5); i++)
+    @foreach (var item in services)
     {
-      <ServiceItem Name="@((EventType)i + " Service")" Type="@((EventType)i)" />
+      <ServiceItem Name="@item.Name" Type="EventType.Operational" />
     }
   </ul>
 </div>

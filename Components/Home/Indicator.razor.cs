@@ -1,5 +1,6 @@
 ﻿namespace StatusDashboard.Components.Home;
 
+using System.Diagnostics.CodeAnalysis;
 using Event;
 using Microsoft.AspNetCore.Components;
 
@@ -9,10 +10,13 @@ public partial class Indicator {
     private const string func = "functional-";
     private const string text = scaleColor + "text-and-icon-" + func;
 
-    [Parameter, EditorRequired]
-    public EventType Type { get; set; }
+    [NotNull]
+    [Parameter]
+    [EditorRequired]
+    public EventType? Type { get; set; }
 
-    [Parameter] public string? Class { get; set; }
+    [Parameter]
+    public string? Class { get; set; }
 
     private RenderFragment icon {
         get {

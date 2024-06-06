@@ -6,7 +6,7 @@ using Components.Event;
 using Microsoft.EntityFrameworkCore;
 
 [Index(nameof(Name), IsUnique = true)]
-internal class Service {
+public class Service {
     public int Id { get; set; }
 
     [StringLength(byte.MaxValue, MinimumLength = 1)]
@@ -18,7 +18,7 @@ internal class Service {
 }
 
 [Index(nameof(Name), IsUnique = true)]
-internal class Category {
+public class Category {
     public int Id { get; set; }
 
     [StringLength(byte.MaxValue, MinimumLength = 1)]
@@ -31,7 +31,7 @@ internal class Category {
 }
 
 [Index(nameof(Name), IsUnique = true)]
-internal class Region {
+public class Region {
     public int Id { get; set; }
 
     [StringLength(byte.MaxValue, MinimumLength = 1)]
@@ -40,7 +40,7 @@ internal class Region {
     public ICollection<Service> Services { get; set; }
 }
 
-internal class RegionService {
+public class RegionService {
     public int Id { get; set; }
 
     public int RegionId { get; set; }
@@ -54,7 +54,7 @@ internal class RegionService {
     public ICollection<Event> Events { get; set; }
 }
 
-internal class Event {
+public class Event {
     public int Id { get; set; }
 
     [StringLength(200, MinimumLength = 8)]
@@ -72,7 +72,7 @@ internal class Event {
 }
 
 [Keyless]
-internal class EventRegionService {
+public class EventRegionService {
     public int EventId { get; set; }
 
     public Event Event { get; set; }
@@ -82,7 +82,7 @@ internal class EventRegionService {
     public RegionService RegionService { get; set; }
 }
 
-internal class History {
+public class History {
     public int Id { get; set; }
 
     [StringLength(200, MinimumLength = 10)]
