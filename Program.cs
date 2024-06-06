@@ -12,7 +12,7 @@ builder.Services.AddOptions<StatusOption>()
 
 builder.Services.AddDbContextFactory<StatusContext>(
     x => x
-        .UseInMemoryDatabase(nameof(StatusDashboard))
+        .UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
         .EnableDetailedErrors()
         .EnableSensitiveDataLogging()
 );

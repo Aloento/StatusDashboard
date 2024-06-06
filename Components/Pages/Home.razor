@@ -1,6 +1,10 @@
 ﻿@page "/"
+@using Microsoft.EntityFrameworkCore
 @using StatusDashboard.Components.Home
 @using StatusDashboard.Components.Event
+@using StatusDashboard.Services
+@implements IAsyncDisposable
+@inject IDbContextFactory<StatusContext> context;
 
 <PageTitle>OTC Status Dashboard</PageTitle>
 

@@ -13,5 +13,19 @@ internal class StatusContext(DbContextOptions<StatusContext> opts) : DbContext(o
 
     public DbSet<History> Histories { get; set; }
 
-    public DbSet<EventService> EventService { get; set; }
+    public DbSet<RegionService> RegionService { get; set; }
+
+    public DbSet<EventRegionService> EventRegionService { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder) {
+        modelBuilder.Entity<Service>()
+            .HasMany(s => s.Regions)
+            .WithMany(r => r.Services)
+            .UsingEntity<RegionService>();
+
+        modelBuilder.Entity<Event>()
+            .HasMany(e => e.RegionServices)
+            .WithMany(rs => rs.Events)
+            .UsingEntity<EventRegionService>();
+    }
 }

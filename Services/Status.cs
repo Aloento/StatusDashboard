@@ -12,8 +12,10 @@ internal class StatusService : IHostedService {
         StatusHttp http) {
         this.logger = logger;
         this.option = config.Value;
-        this.context = context;
         this.http = http;
+
+        this.db = context.CreateDbContext();
+        this.db.Database.OpenConnection();
     }
 
     private ILogger<StatusService> logger { get; }
@@ -22,11 +24,10 @@ internal class StatusService : IHostedService {
 
     private StatusHttp http { get; }
 
-    private IDbContextFactory<StatusContext> context { get; }
+    private StatusContext db { get; }
 
     public async Task StartAsync(CancellationToken cancellationToken) {
-        await using var db = await this.context.CreateDbContextAsync(cancellationToken);
-        await db.Database.EnsureCreatedAsync(cancellationToken);
+        await this.db.Database.EnsureCreatedAsync(cancellationToken);
 
         var list = this.http.GetStatus(cancellationToken);
 
@@ -35,38 +36,52 @@ internal class StatusService : IHostedService {
 
             var targetCate = item.Attributes.Single(x => x.Name == NameEnum.Category).Value;
 
-            var dbCate = await db.Categories
+            var dbCate = await this.db.Categories
                              .Where(x => x.Name == targetCate)
                              .SingleOrDefaultAsync(cancellationToken)
-                         ?? db.Categories.Add(new() {
+                         ?? this.db.Categories.Add(new() {
                              Name = targetCate,
                              Abbr = item.Attributes.Single(x => x.Name == NameEnum.Type).Value
                          }).Entity;
 
             var targetRegion = item.Attributes.Single(x => x.Name == NameEnum.Region).Value;
 
-            var dbRegion = await db.Regions
+            var dbRegion = await this.db.Regions
                                .Where(x => x.Name == targetRegion)
                                .SingleOrDefaultAsync(cancellationToken)
-                           ?? db.Regions.Add(new() {
+                           ?? this.db.Regions.Add(new() {
                                Name = targetRegion
                            }).Entity;
 
-            var dbService = db.Services.Add(new() {
-                Id = item.Id,
-                Name = item.Name,
-                Category = dbCate,
-                Region = dbRegion,
-                Events = new List<Event>()
-            }).Entity;
+            var targetService = item.Name;
+
+            var dbService = await this.db.Services
+                                .Where(x => x.Name == targetService)
+                                .Include(x => x.Regions)
+                                .SingleOrDefaultAsync(cancellationToken)
+                            ?? this.db.Services.Add(new() {
+                                Name = targetService,
+                                Category = dbCate,
+                                Regions = [dbRegion]
+                            }).Entity;
+
+            if (dbService.Regions.All(x => x.Name != targetRegion))
+                dbService.Regions.Add(dbRegion);
+
+            await this.db.SaveChangesAsync(cancellationToken);
+
+            var regionService = await this.db.RegionService
+                .Where(x => x.Region == dbRegion)
+                .Where(x => x.Service == dbService)
+                .SingleAsync(cancellationToken);
 
             foreach (var incident in item.Incidents) {
-                var dbEvent = await db.Events
+                var dbEvent = await this.db.Events
                     .Where(x => x.Id == incident.Id)
                     .SingleOrDefaultAsync(cancellationToken);
 
                 if (dbEvent is null) {
-                    dbEvent = db.Events.Add(new() {
+                    dbEvent = this.db.Events.Add(new() {
                         Id = incident.Id,
                         Title = incident.Text,
                         Start = (DateTime)incident.StartDate!,
@@ -81,7 +96,7 @@ internal class StatusService : IHostedService {
                     };
 
                     foreach (var update in incident.Updates.OrderBy(x => x.Timestamp)) {
-                        var history = db.Histories.Add(new() {
+                        var history = this.db.Histories.Add(new() {
                             Created = (DateTime)update.Timestamp!,
                             Message = update.Text,
                             Event = dbEvent
@@ -103,15 +118,14 @@ internal class StatusService : IHostedService {
                     }
                 }
 
-                dbService.Events.Add(dbEvent);
-                await db.SaveChangesAsync(cancellationToken);
+                regionService.Events.Add(dbEvent);
+                await this.db.SaveChangesAsync(cancellationToken);
             }
-
-            await db.SaveChangesAsync(cancellationToken);
         }
     }
 
     public async Task StopAsync(CancellationToken cancellationToken) {
         this.http.Dispose();
+        await this.db.DisposeAsync();
     }
 }

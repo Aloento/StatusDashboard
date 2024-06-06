@@ -14,9 +14,7 @@ internal class Service {
 
     public Category Category { get; set; }
 
-    public Region Region { get; set; }
-
-    public ICollection<Event> Events { get; set; }
+    public ICollection<Region> Regions { get; set; }
 }
 
 [Index(nameof(Name), IsUnique = true)]
@@ -42,6 +40,20 @@ internal class Region {
     public ICollection<Service> Services { get; set; }
 }
 
+internal class RegionService {
+    public int Id { get; set; }
+
+    public int RegionId { get; set; }
+
+    public Region Region { get; set; }
+
+    public int ServiceId { get; set; }
+
+    public Service Service { get; set; }
+
+    public ICollection<Event> Events { get; set; }
+}
+
 internal class Event {
     public int Id { get; set; }
 
@@ -54,20 +66,20 @@ internal class Event {
 
     public DateTime? End { get; set; }
 
-    public ICollection<Service> Services { get; set; }
+    public ICollection<RegionService> RegionServices { get; set; }
 
     public ICollection<History> Histories { get; set; }
 }
 
 [Keyless]
-internal class EventService {
+internal class EventRegionService {
     public int EventId { get; set; }
 
     public Event Event { get; set; }
 
-    public int ServiceId { get; set; }
+    public int RegionServiceId { get; set; }
 
-    public Service Service { get; set; }
+    public RegionService RegionService { get; set; }
 }
 
 internal class History {
