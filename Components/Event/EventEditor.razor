@@ -33,7 +33,7 @@
       var status =
         form.Type == EventType.Maintenance
           ? values.Take(4)
-          : values.Skip(4);
+          : values.Skip(4).Take(4);
     }
 
     <div>

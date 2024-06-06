@@ -78,5 +78,7 @@ internal class History {
 
     public DateTime Created { get; set; }
 
+    public EventStatus Status { get; set; }
+
     public Event Event { get; set; }
 }

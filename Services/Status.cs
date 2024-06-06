@@ -1,5 +1,6 @@
 ﻿namespace StatusDashboard.Services;
 
+using Components.Event;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -51,14 +52,58 @@ internal class StatusService : IHostedService {
                                Name = targetRegion
                            }).Entity;
 
-            db.Services.Add(new() {
+            var dbService = db.Services.Add(new() {
+                Id = item.Id,
                 Name = item.Name,
                 Category = dbCate,
-                Region = dbRegion
-            });
+                Region = dbRegion,
+                Events = new List<Event>()
+            }).Entity;
 
             foreach (var incident in item.Incidents) {
+                var dbEvent = await db.Events
+                    .Where(x => x.Id == incident.Id)
+                    .SingleOrDefaultAsync(cancellationToken);
 
+                if (dbEvent is null) {
+                    dbEvent = db.Events.Add(new() {
+                        Id = incident.Id,
+                        Title = incident.Text,
+                        Start = (DateTime)incident.StartDate!,
+                        End = incident.EndDate
+                    }).Entity;
+
+                    dbEvent.Type = incident.Impact switch {
+                        0 => EventType.Maintenance,
+                        1 => EventType.MinorIssue,
+                        2 => EventType.MajorIssue,
+                        _ => EventType.Outage
+                    };
+
+                    foreach (var update in incident.Updates.OrderBy(x => x.Timestamp)) {
+                        var history = db.Histories.Add(new() {
+                            Created = (DateTime)update.Timestamp!,
+                            Message = update.Text,
+                            Event = dbEvent
+                        }).Entity;
+
+                        history.Status = update.Status switch {
+                            StatusEnum.Analyzing => EventStatus.Investigating,
+                            StatusEnum.Fixing => EventStatus.Fixing,
+                            StatusEnum.Observing => EventStatus.Monitoring,
+                            StatusEnum.Resolved => EventStatus.Resolved,
+
+                            StatusEnum.Description => EventStatus.Scheduled,
+                            StatusEnum.Scheduled => EventStatus.Scheduled,
+                            StatusEnum.InProgress => EventStatus.Performing,
+                            StatusEnum.Completed => EventStatus.Completed,
+
+                            _ => EventStatus.SysInfo
+                        };
+                    }
+                }
+
+                dbService.Events.Add(dbEvent);
             }
         }
 

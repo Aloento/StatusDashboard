@@ -9,5 +9,7 @@ public enum EventStatus {
     Scheduled,
     Performing,
     Completed,
-    Cancelled
+    Cancelled,
+
+    SysInfo
 }

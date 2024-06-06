@@ -89,7 +89,8 @@ internal enum StatusEnum {
     Resolved,
     System,
     Scheduled,
-    Fixing
+    Fixing,
+    Observing
 }
 
 internal class StatusEnumConverter : JsonConverter<StatusEnum> {
@@ -104,6 +105,7 @@ internal class StatusEnumConverter : JsonConverter<StatusEnum> {
             "resolved" => StatusEnum.Resolved,
             "scheduled" => StatusEnum.Scheduled,
             "fixing" => StatusEnum.Fixing,
+            "observing" => StatusEnum.Observing,
             _ => throw new JsonException($"Unknown status value: {value}")
         };
     }
