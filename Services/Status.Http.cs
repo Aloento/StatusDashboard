@@ -2,7 +2,7 @@
 
 using Microsoft.Extensions.Options;
 
-internal class StatusHttp {
+internal class StatusHttp : IDisposable {
     private HttpClient client { get; }
 
     private const string endpoint = "api/v1/component_status";
@@ -14,4 +14,6 @@ internal class StatusHttp {
 
     public IAsyncEnumerable<StatusEntity?> GetStatus(CancellationToken cancellationToken) =>
         this.client.GetFromJsonAsAsyncEnumerable<StatusEntity>(endpoint, cancellationToken);
+
+    public void Dispose() => this.client.Dispose();
 }

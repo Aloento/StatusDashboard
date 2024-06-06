@@ -104,11 +104,14 @@ internal class StatusService : IHostedService {
                 }
 
                 dbService.Events.Add(dbEvent);
+                await db.SaveChangesAsync(cancellationToken);
             }
-        }
 
-        await db.SaveChangesAsync(cancellationToken);
+            await db.SaveChangesAsync(cancellationToken);
+        }
     }
 
-    public async Task StopAsync(CancellationToken cancellationToken) => Console.WriteLine("Stop");
+    public async Task StopAsync(CancellationToken cancellationToken) {
+        this.http.Dispose();
+    }
 }
