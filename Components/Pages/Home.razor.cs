@@ -1,6 +1,7 @@
 ﻿namespace StatusDashboard.Components.Pages;
 
 using System.Diagnostics.CodeAnalysis;
+using Components.Event;
 using Microsoft.EntityFrameworkCore;
 using Services;
 using JB = JetBrains.Annotations;
@@ -15,6 +16,14 @@ public partial class Home {
 
     [NotNull]
     private ICollection<Category>? categories { get; set; }
+
+    private int abnormalCount => this.db.Events
+        .Where(x => x.End == null)
+        .Count(x => x.Type != EventType.Maintenance);
+
+    private string heading => this.abnormalCount > 0
+        ? $"{this.abnormalCount} components have issue, but don't worry, we are working on it."
+        : "All Systems Operational";
 
     public async ValueTask DisposeAsync() => await this.db.DisposeAsync();
 

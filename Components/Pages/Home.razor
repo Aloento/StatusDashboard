@@ -9,9 +9,9 @@
 <PageTitle>OTC Status Dashboard</PageTitle>
 
 <scale-notification
-  heading="All Systems Operational"
+  heading="@heading"
   opened
-  variant="success" />
+  variant="@(abnormalCount > 0 ? "warning" : "success")" />
 
 <EventGrid />
 
