@@ -3,13 +3,18 @@
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Services;
+using JB = JetBrains.Annotations;
 
+[JB.PublicAPI]
 public partial class Home {
-    [NotNull] private StatusContext? db { get; set; }
+    [NotNull]
+    private StatusContext? db { get; set; }
 
-    [NotNull] private Region? currentRegion { get; set; }
+    [NotNull]
+    private Region? currentRegion { get; set; }
 
-    [NotNull] private ICollection<Category>? categories { get; set; }
+    [NotNull]
+    private ICollection<Category>? categories { get; set; }
 
     public async ValueTask DisposeAsync() => await this.db.DisposeAsync();
 
