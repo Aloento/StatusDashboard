@@ -1,5 +1,4 @@
 ﻿@using Microsoft.EntityFrameworkCore
-@using StatusDashboard.Components.Event
 @using StatusDashboard.Services
 @implements IAsyncDisposable
 @inject IDbContextFactory<StatusContext> context;
@@ -14,7 +13,7 @@
   <ul class="px-3.5">
     @foreach (var item in services)
     {
-      <ServiceItem Name="@item.Name" Type="EventType.Operational" />
+      <ServiceItem RegionService="item" />
     }
   </ul>
 </div>

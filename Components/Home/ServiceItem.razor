@@ -1,7 +1,12 @@
-﻿<li class="flex items-center py-2">
-  <Indicator Type="@Type" />
+﻿@using Microsoft.EntityFrameworkCore
+@using StatusDashboard.Services
+@implements IAsyncDisposable
+@inject IDbContextFactory<StatusContext> context;
+
+<li class="flex items-center py-2">
+  <Indicator Type="@status" />
 
   <label class="ml-2.5 text-xl font-medium text-slate-700">
-    @Name
+    @RegionService.Service.Name
   </label>
 </li>

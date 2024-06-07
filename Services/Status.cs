@@ -73,6 +73,7 @@ internal class StatusService : IHostedService {
             var regionService = await this.db.RegionService
                 .Where(x => x.Region == dbRegion)
                 .Where(x => x.Service == dbService)
+                .Include(x => x.Events)
                 .SingleAsync(cancellationToken);
 
             foreach (var incident in item.Incidents) {

@@ -71,8 +71,9 @@ public class Event {
     public ICollection<History> Histories { get; set; }
 }
 
-[Keyless]
 public class EventRegionService {
+    public int Id { get; set; }
+
     public int EventId { get; set; }
 
     public Event Event { get; set; }
