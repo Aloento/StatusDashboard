@@ -1,9 +1,12 @@
-﻿@inject IJSRuntime JS
+﻿@using Microsoft.EntityFrameworkCore
+@using StatusDashboard.Services
 @implements IAsyncDisposable
+@inject IJSRuntime JS
+@inject IDbContextFactory<StatusContext> context;
 
 <scale-data-grid
   class="rounded-lg bg-white shadow-md"
-  page-size="5"
+  page-size="4"
   heading="Current Events"
   id="@nameof(EventGrid)"
 />

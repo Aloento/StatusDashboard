@@ -17,7 +17,8 @@ public partial class ServiceItem {
     private EventType status => this.db.RegionService
         .Where(x => x.Id == this.RegionService.Id)
         .SelectMany(x => x.Events)
-        .Where(x => x.End == null)
+        .Select(x => new { x.Type, x.Histories.OrderByDescending(h => h.Created).First().Status })
+        .Where(x => x.Status != EventStatus.Completed && x.Status != EventStatus.Resolved)
         .OrderByDescending(x => x.Type)
         .Select(x => x.Type)
         .FirstOrDefault();
