@@ -13,8 +13,8 @@ public partial class EventGrid {
         new List<FieldOption> {
             new() { Type = FieldTypes.Number, Label = "ID" },
             new() { Type = FieldTypes.Tags, Label = "Type" },
-            new() { Type = FieldTypes.Date, Label = "Started" },
-            new() { Type = FieldTypes.Text, Label = "Status / Planned" },
+            new() { Type = FieldTypes.Date, Label = "Start" },
+            new() { Type = FieldTypes.Text, Label = "Status / Plan" },
             new() { Type = FieldTypes.Text, Label = "Region", Sortable = true },
             new() { Type = FieldTypes.Text, Label = "Service", Sortable = true, StretchWeight = 0.70f },
             new() { Type = FieldTypes.Actions, Label = "Detail" }
@@ -54,6 +54,7 @@ public partial class EventGrid {
                 Latest = x.Histories.OrderByDescending(e => e.Created).FirstOrDefault()
             })
             .Where(x => x.Latest!.Status != EventStatus.Completed && x.Latest.Status != EventStatus.Resolved)
+            .OrderByDescending(x => x.Start)
             .ToArrayAsync();
 
         var rows = events.Select(x => {
@@ -81,7 +82,7 @@ public partial class EventGrid {
                 new object[] { tag },
                 x.Start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm 'UTC'"),
                 x.End.HasValue
-                    ? x.End.Value.ToUniversalTime().ToString("yyyy-MM-dd HH:mm 'UTC'")
+                    ? x.End.Value.ToUniversalTime().ToString("MM-dd HH:mm")
                     : (x.Latest?.Status ?? default).ToString(),
                 x.Regions.Length > 1
                     ? $"{x.Regions[0]} +{x.Regions.Length - 1}"
