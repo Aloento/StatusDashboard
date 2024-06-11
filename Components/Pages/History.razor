@@ -1,5 +1,10 @@
 ﻿@page "/History"
 @using StatusDashboard.Components.History
+@using Ljbc1994.Blazor.IntersectionObserver.Components
+@using Microsoft.EntityFrameworkCore
+@using StatusDashboard.Services
+@implements IAsyncDisposable
+@inject IDbContextFactory<StatusContext> context;
 
 <PageTitle>Timeline - OTC Status Dashboard</PageTitle>
 
@@ -8,9 +13,30 @@
   <scale-divider />
 </section>
 
-<EventSection />
-<EventSection />
+<ol class="flex flex-col">
+  <li class="pb-6 text-2xl font-medium text-slate-800">
+    May 2024
+  </li>
+  
+  @foreach (var i in items)
+  {
+    <EventItem />
+  }
+</ol>
 
-@code {
+<IntersectionObserve @bind-IsIntersecting="isBottom">
+  <div @ref="context.Ref.Current" class="-ml-3 flex gap-x-5">
+    <FluentSkeleton Height="24px" Width="24px" Shape="SkeletonShape.Circle" Shimmer="true" Visible="loading" />
 
-}
+    <div class="flex flex-col gap-y-3">
+      <FluentSkeleton Height="32px" Width="25vw" Shimmer="true" Visible="loading" />
+      
+      <div class="flex gap-x-2.5">
+        <FluentSkeleton Height="25px" Width="5vw" Shimmer="true" Visible="loading" />
+        <FluentSkeleton Height="25px" Width="10vw" Shimmer="true" Visible="loading" />
+      </div>
+      
+      <FluentSkeleton Height="25px" Width="25vw" Shimmer="true" Visible="loading" />
+    </div>
+  </div>
+</IntersectionObserve>

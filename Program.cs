@@ -1,3 +1,4 @@
+using Ljbc1994.Blazor.IntersectionObserver;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.FluentUI.AspNetCore.Components;
 using StatusDashboard.Components;
@@ -25,6 +26,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddFluentUIComponents();
+builder.Services.AddIntersectionObserver();
 
 var app = builder.Build();
 
