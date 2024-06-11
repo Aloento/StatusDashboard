@@ -2,6 +2,17 @@
 @using StatusDashboard.Components.Event
 @using StatusDashboard.Components.Home
 
+@{
+  var cInf = new CultureInfo("en-US");
+}
+
+@if (isBegin)
+{
+  <li class="pb-6 text-2xl font-medium text-slate-800">
+    @curr.Start.ToUniversalTime().ToString("MMMM yyyy", cInf)
+  </li>
+}
+
 <li class="border-l-2 relative flex flex-col gap-y-2.5 border-slate-300 pb-10 pl-7 last:pb-0">
   <a class="w-fit text-2xl font-medium hover:underline" href="/Event/1">
     CCE EU-DE Outage
@@ -13,10 +24,8 @@
   </div>
 
   <label class="text-lg font-bold text-slate-500">
-    @(DateTime.UtcNow.ToString("dd MMM, HH:mm", new CultureInfo("en-US"))
-      + " - " +
-      DateTime.Now.ToString("dd MMM, HH:mm", new CultureInfo("en-US"))
-      + " UTC")
+    @(DateTime.UtcNow.ToString("dd MMM, HH:mm ' - '", cInf) + 
+      DateTime.Now.ToString("dd MMM, HH:mm ' UTC'", cInf))
   </label>
 
     <Indicator Class="absolute -left-3.5 top-0.5 bg-zinc-50" Type="EventType.Outage" />
