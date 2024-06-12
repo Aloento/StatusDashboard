@@ -1,6 +1,7 @@
 ﻿@using System.Globalization
 @using StatusDashboard.Components.Event
 @using StatusDashboard.Components.Home
+@inject IJSRuntime JS
 
 @{
   var cInf = new CultureInfo("en-US");
@@ -8,9 +9,9 @@
 
 @if (isBegin)
 {
-  <li class="pb-6 text-2xl font-medium text-slate-800">
+  <label class="mb-6 text-2xl font-medium text-slate-800" @ref="labelElement">
     @curr.Start.ToUniversalTime().ToString("MMMM yyyy", cInf)
-  </li>
+  </label>
 }
 
 <li class="border-l-2 relative flex flex-col gap-y-2.5 border-slate-300 pb-10 pl-7 last:pb-0">
@@ -28,5 +29,5 @@
       DateTime.Now.ToString("dd MMM, HH:mm ' UTC'", cInf))
   </label>
 
-    <Indicator Class="absolute -left-3.5 top-0.5 bg-zinc-50" Type="EventType.Outage" />
+  <Indicator Class="absolute -left-3.5 top-0.5 bg-zinc-50" Type="EventType.Outage" />
 </li>
