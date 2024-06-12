@@ -33,6 +33,21 @@ public partial class EventItem {
 
     private EventStatus status { get; set; }
 
+    [NotNull]
+    private Service[]? services { get; set; }
+
+    [NotNull]
+    private string? servicesTxt { get; set; }
+
+    [NotNull]
+    private string[]? regions { get; set; }
+
+    [NotNull]
+    private string? regionsTxt { get; set; }
+
+    [NotNull]
+    private string? color { get; set; }
+
     protected override async Task OnInitializedAsync() {
         this.db = await this.context.CreateDbContextAsync();
 
@@ -42,6 +57,37 @@ public partial class EventItem {
             .OrderByDescending(x => x.Created)
             .Select(x => x.Status)
             .FirstOrDefaultAsync();
+
+        this.services = await this.db.RegionService
+            .Where(x => x.Events.Contains(this.curr))
+            .Select(x => x.Service)
+            .Distinct()
+            .ToArrayAsync();
+
+        var upper = this.services
+            .Select(x => new { x.Name, Abbr = x.Abbr.ToUpperInvariant() })
+            .ToArray();
+
+        this.servicesTxt = upper.Length > 3
+            ? string.Join(", ", upper.Take(3).Select(x => x.Abbr)) + $" (+{upper.Length - 3})"
+            : string.Join(", ", upper.Select(x => x.Abbr));
+
+        this.regions = this.db.RegionService
+            .Where(x => x.Events.Contains(this.curr))
+            .Select(x => x.Region.Name)
+            .Distinct()
+            .ToArray();
+
+        this.regionsTxt = this.regions.Length > 2
+            ? string.Join(", ", this.regions.Take(2)) + $" (+{this.regions.Length - 2})"
+            : string.Join(", ", this.regions);
+
+        this.color = this.status switch {
+            EventStatus.Investigating or EventStatus.Fixing or EventStatus.Monitoring => "yellow",
+            EventStatus.Scheduled or EventStatus.Performing => "violet",
+            EventStatus.Resolved or EventStatus.Completed => "green",
+            _ => "standard"
+        };
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender) {

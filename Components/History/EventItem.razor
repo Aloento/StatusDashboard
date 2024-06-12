@@ -1,6 +1,5 @@
 ﻿@using System.Globalization
 @using Microsoft.EntityFrameworkCore
-@using StatusDashboard.Components.Event
 @using StatusDashboard.Components.Home
 @using StatusDashboard.Services
 @inject IJSRuntime JS
@@ -13,38 +12,6 @@
   <label class="mb-6 text-2xl font-medium text-slate-800" @ref="labelElement">
     @curr.Start.ToUniversalTime().ToString("MMMM yyyy", culture)
   </label>
-}
-
-@{
-  var services = db.RegionService
-    .Where(x => x.Events.Contains(curr))
-    .Select(x => x.Service)
-    .Distinct()
-    .ToArray()
-    .Select(x => new { x.Name, Abbr = x.Abbr.ToUpperInvariant() })
-    .ToArray();
-
-  var servicesTxt = services.Length > 3
-    ? string.Join(", ", services.Take(3).Select(x => x.Abbr)) + $" (+{services.Length - 3})"
-    : string.Join(", ", services.Select(x => x.Abbr));
-
-  var regions = db.RegionService
-    .Where(x => x == curr.RegionServices)
-    .Select(x => x.Region.Name)
-    .Distinct()
-    .ToArray();
-
-  var regionsTxt = regions.Length > 2
-    ? string.Join(", ", regions.Take(2)) + $" (+{regions.Length - 2})"
-    : string.Join(", ", regions);
-
-  var color = status switch
-  {
-    EventStatus.Investigating or EventStatus.Fixing or EventStatus.Monitoring => "yellow",
-    EventStatus.Scheduled or EventStatus.Performing => "violet",
-    EventStatus.Resolved or EventStatus.Completed => "green",
-    _ => "standard"
-  };
 }
 
 <li class="border-l-2 relative flex flex-col gap-y-2.5 border-slate-300 pb-10 pl-7 last:pb-0">
@@ -62,7 +29,7 @@
 
     @if (services.Length > 3)
     {
-      <scale-tag>+ @(services.Length - 3)</scale-tag>
+      <scale-tag>+@(services.Length - 3)</scale-tag>
     }
   </div>
 
