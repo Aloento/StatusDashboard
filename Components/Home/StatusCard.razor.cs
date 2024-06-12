@@ -18,14 +18,18 @@ public partial class StatusCard {
     [CascadingParameter]
     public Region? Region { get; set; }
 
-    private ICollection<RegionService> services => this.db.RegionService
-        .Where(x => x.Region == this.Region)
-        .Where(x => x.Service.Category == this.Category)
-        .OrderBy(x => x.Service.Name)
-        .Include(x => x.Service)
-        .ToArray();
+    [NotNull]
+    private ICollection<RegionService>? services { get; set; }
 
     public async ValueTask DisposeAsync() => await this.db.DisposeAsync();
 
-    protected override async Task OnInitializedAsync() => this.db = await this.context.CreateDbContextAsync();
+    protected override async Task OnInitializedAsync() {
+        this.db = await this.context.CreateDbContextAsync();
+        this.services = await this.db.RegionService
+            .Where(x => x.Region == this.Region)
+            .Where(x => x.Service.Category == this.Category)
+            .OrderBy(x => x.Service.Name)
+            .Include(x => x.Service)
+            .ToArrayAsync();
+    }
 }

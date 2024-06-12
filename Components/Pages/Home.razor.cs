@@ -17,13 +17,10 @@ public partial class Home {
     [NotNull]
     private ICollection<Category>? categories { get; set; }
 
-    private int abnormalCount => this.db.Events
-        .Where(x => x.End == null)
-        .Count(x => x.Type != EventType.Maintenance);
+    private int abnormalCount { get; set; }
 
-    private string heading => this.abnormalCount > 0
-        ? $"{this.abnormalCount} components have issue, but don't worry, we are working on it."
-        : "All Systems Operational";
+    [NotNull]
+    private string? heading { get; set; }
 
     public async ValueTask DisposeAsync() => await this.db.DisposeAsync();
 
@@ -38,6 +35,14 @@ public partial class Home {
             .Distinct()
             .OrderBy(x => x.Name)
             .ToArrayAsync();
+
+        this.abnormalCount = await this.db.Events
+            .Where(x => x.End == null)
+            .CountAsync(x => x.Type != EventType.Maintenance);
+
+        this.heading = this.abnormalCount > 0
+            ? $"{this.abnormalCount} components have issue, but don't worry, we are working on it."
+            : "All Systems Operational";
     }
 
     private void onClick(Region r) {

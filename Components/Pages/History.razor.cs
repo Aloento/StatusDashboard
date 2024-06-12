@@ -22,6 +22,9 @@ public partial class History {
     private List<Tuple<Services.Event?, Services.Event>> items { get; } = [];
 
     protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if (this.isEnd)
+            return;
+
         if (this.isBottom) {
             var prev = this.dbEvents.Current;
             var has = await this.dbEvents.MoveNextAsync();
@@ -42,11 +45,6 @@ public partial class History {
 
         this.dbEvents = this.db.Events
             .OrderByDescending(x => x.Start)
-            .Include(x => x.RegionServices)
-            .ThenInclude(x => x.Region)
-            .Include(x => x.RegionServices)
-            .ThenInclude(x => x.Service)
-            .ThenInclude(x => x.Category)
             .AsAsyncEnumerable()
             .GetAsyncEnumerator();
 

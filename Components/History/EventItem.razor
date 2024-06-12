@@ -16,10 +16,27 @@
 }
 
 @{
-  var services = curr.RegionServices.Select(x => x.Service.Abbr.ToUpperInvariant()).ToArray();
+  var services = db.RegionService
+    .Where(x => x.Events.Contains(curr))
+    .Select(x => x.Service)
+    .Distinct()
+    .ToArray()
+    .Select(x => new { x.Name, Abbr = x.Abbr.ToUpperInvariant() })
+    .ToArray();
+
   var servicesTxt = services.Length > 3
-    ? string.Join(", ", services.Take(3)) + $" (+{services.Length - 3})"
-    : string.Join(", ", services);
+    ? string.Join(", ", services.Take(3).Select(x => x.Abbr)) + $" (+{services.Length - 3})"
+    : string.Join(", ", services.Select(x => x.Abbr));
+
+  var regions = db.RegionService
+    .Where(x => x == curr.RegionServices)
+    .Select(x => x.Region.Name)
+    .Distinct()
+    .ToArray();
+
+  var regionsTxt = regions.Length > 2
+    ? string.Join(", ", regions.Take(2)) + $" (+{regions.Length - 2})"
+    : string.Join(", ", regions);
 
   var color = status switch
   {
@@ -32,18 +49,27 @@
 
 <li class="border-l-2 relative flex flex-col gap-y-2.5 border-slate-300 pb-10 pl-7 last:pb-0">
   <a class="w-fit text-2xl font-medium hover:underline" href="/Event/1">
-    @servicesTxt EU-DE @curr.Type
+    @servicesTxt @regionsTxt @curr.Type
   </a>
 
   <div class="flex gap-x-2.5">
     <scale-tag color="@color">@status</scale-tag>
-    <scale-tag>Cloud Container Service</scale-tag>
+
+    @foreach (var i in services.Take(3))
+    {
+      <scale-tag>@i.Name</scale-tag>
+    }
+
+    @if (services.Length > 3)
+    {
+      <scale-tag>+ @(services.Length - 3)</scale-tag>
+    }
   </div>
 
   <label class="text-lg font-bold text-slate-500">
-    @(DateTime.UtcNow.ToString("dd MMM, HH:mm", culture) +
-        DateTime.Now.ToString(" '-' dd MMM, HH:mm 'UTC'", culture))
+    @DateTime.UtcNow.ToString("dd MMM, HH:mm", culture)
+    @DateTime.Now.ToString(" '-' dd MMM, HH:mm 'UTC'", culture)
   </label>
 
-  <Indicator Class="absolute -left-3.5 top-0.5 bg-zinc-50" Type="@curr.Type" />
+  <Indicator Class="absolute -left-3.5 top-0.5 bg-zinc-50" Type="@curr.Type"/>
 </li>

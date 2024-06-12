@@ -3,6 +3,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Event;
 using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using Services;
 
@@ -30,14 +31,18 @@ public partial class EventItem {
         }
     }
 
-    private EventStatus status => this.db.Histories
-        .Where(x => x.Event == this.curr)
-        .Where(x => x.Status != EventStatus.SysInfo)
-        .OrderByDescending(x => x.Created)
-        .Select(x => x.Status)
-        .FirstOrDefault();
+    private EventStatus status { get; set; }
 
-    protected override async Task OnInitializedAsync() => this.db = await this.context.CreateDbContextAsync();
+    protected override async Task OnInitializedAsync() {
+        this.db = await this.context.CreateDbContextAsync();
+
+        this.status = await this.db.Histories
+            .Where(x => x.Event == this.curr)
+            .Where(x => x.Status != EventStatus.SysInfo)
+            .OrderByDescending(x => x.Created)
+            .Select(x => x.Status)
+            .FirstOrDefaultAsync();
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender) {
         if (firstRender && this.labelElement is not null) {
