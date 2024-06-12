@@ -1,11 +1,15 @@
 ﻿namespace StatusDashboard.Components.History;
 
 using System.Diagnostics.CodeAnalysis;
+using Event;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Services;
 
 public partial class EventItem {
+    [NotNull]
+    private StatusContext? db { get; set; }
+
     private ElementReference? labelElement { get; set; }
 
     [NotNull]
@@ -26,6 +30,15 @@ public partial class EventItem {
         }
     }
 
+    private EventStatus status => this.db.Histories
+        .Where(x => x.Event == this.curr)
+        .Where(x => x.Status != EventStatus.SysInfo)
+        .OrderByDescending(x => x.Created)
+        .Select(x => x.Status)
+        .FirstOrDefault();
+
+    protected override async Task OnInitializedAsync() => this.db = await this.context.CreateDbContextAsync();
+
     protected override async Task OnAfterRenderAsync(bool firstRender) {
         if (firstRender && this.labelElement is not null) {
             await using var module = await this.JS.InvokeAsync<IJSObjectReference>(
@@ -35,4 +48,6 @@ public partial class EventItem {
             await module.InvokeVoidAsync("onLabel", this.labelElement);
         }
     }
+
+    public async ValueTask DisposeAsync() => await this.db.DisposeAsync();
 }

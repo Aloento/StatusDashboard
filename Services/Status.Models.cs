@@ -12,6 +12,9 @@ public class Service {
     [StringLength(byte.MaxValue, MinimumLength = 1)]
     public string Name { get; set; }
 
+    [StringLength(10, MinimumLength = 1)]
+    public string Abbr { get; set; }
+
     public Category Category { get; set; }
 
     public ICollection<Region> Regions { get; set; }
@@ -23,9 +26,6 @@ public class Category {
 
     [StringLength(byte.MaxValue, MinimumLength = 1)]
     public string Name { get; set; }
-
-    [StringLength(10, MinimumLength = 1)]
-    public string Abbr { get; set; }
 
     public ICollection<Service> Services { get; set; }
 }

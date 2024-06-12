@@ -1,30 +1,49 @@
 ﻿@using System.Globalization
+@using Microsoft.EntityFrameworkCore
 @using StatusDashboard.Components.Event
 @using StatusDashboard.Components.Home
+@using StatusDashboard.Services
 @inject IJSRuntime JS
-@inject CultureInfo cInf
+@inject CultureInfo culture
+@inject IDbContextFactory<StatusContext> context;
+@implements IAsyncDisposable
 
 @if (isBegin)
 {
   <label class="mb-6 text-2xl font-medium text-slate-800" @ref="labelElement">
-    @curr.Start.ToUniversalTime().ToString("MMMM yyyy", cInf)
+    @curr.Start.ToUniversalTime().ToString("MMMM yyyy", culture)
   </label>
+}
+
+@{
+  var services = curr.RegionServices.Select(x => x.Service.Abbr.ToUpperInvariant()).ToArray();
+  var servicesTxt = services.Length > 3
+    ? string.Join(", ", services.Take(3)) + $" (+{services.Length - 3})"
+    : string.Join(", ", services);
+
+  var color = status switch
+  {
+    EventStatus.Investigating or EventStatus.Fixing or EventStatus.Monitoring => "yellow",
+    EventStatus.Scheduled or EventStatus.Performing => "violet",
+    EventStatus.Resolved or EventStatus.Completed => "green",
+    _ => "standard"
+  };
 }
 
 <li class="border-l-2 relative flex flex-col gap-y-2.5 border-slate-300 pb-10 pl-7 last:pb-0">
   <a class="w-fit text-2xl font-medium hover:underline" href="/Event/1">
-    CCE EU-DE Outage
+    @servicesTxt EU-DE @curr.Type
   </a>
 
   <div class="flex gap-x-2.5">
-    <scale-tag color="green">Resolved</scale-tag>
+    <scale-tag color="@color">@status</scale-tag>
     <scale-tag>Cloud Container Service</scale-tag>
   </div>
 
   <label class="text-lg font-bold text-slate-500">
-    @(DateTime.UtcNow.ToString("dd MMM, HH:mm ' - '", cInf) + 
-      DateTime.Now.ToString("dd MMM, HH:mm ' UTC'", cInf))
+    @(DateTime.UtcNow.ToString("dd MMM, HH:mm", culture) +
+        DateTime.Now.ToString(" '-' dd MMM, HH:mm 'UTC'", culture))
   </label>
 
-  <Indicator Class="absolute -left-3.5 top-0.5 bg-zinc-50" Type="EventType.Outage" />
+  <Indicator Class="absolute -left-3.5 top-0.5 bg-zinc-50" Type="@curr.Type" />
 </li>

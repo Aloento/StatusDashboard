@@ -40,8 +40,7 @@ internal class StatusService : IHostedService {
                              .Where(x => x.Name == targetCate)
                              .SingleOrDefaultAsync(cancellationToken)
                          ?? this.db.Categories.Add(new() {
-                             Name = targetCate,
-                             Abbr = item.Attributes.Single(x => x.Name == NameEnum.Type).Value
+                             Name = targetCate
                          }).Entity;
 
             var targetRegion = item.Attributes.Single(x => x.Name == NameEnum.Region).Value;
@@ -61,6 +60,7 @@ internal class StatusService : IHostedService {
                                 .SingleOrDefaultAsync(cancellationToken)
                             ?? this.db.Services.Add(new() {
                                 Name = targetService,
+                                Abbr = item.Attributes.Single(x => x.Name == NameEnum.Type).Value,
                                 Category = dbCate,
                                 Regions = [dbRegion]
                             }).Entity;
