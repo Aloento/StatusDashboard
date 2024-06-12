@@ -4,9 +4,12 @@
 @inject IJSRuntime JS
 @inject IDbContextFactory<StatusContext> context;
 
-<scale-data-grid
-  class="rounded-lg bg-white shadow-md"
-  page-size="4"
-  heading="Current Events"
-  id="@nameof(EventGrid)"
-/>
+@if (hasEvent)
+{
+  <scale-data-grid
+    class="rounded-lg bg-white shadow-md"
+    page-size="4"
+    heading="Current Events"
+    id="@nameof(EventGrid)"
+  />
+}

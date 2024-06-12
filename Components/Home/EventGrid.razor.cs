@@ -28,6 +28,8 @@ public partial class EventGrid {
     [NotNull]
     private StatusContext? db { get; set; }
 
+    private bool hasEvent { get; set; } = false;
+
     public async ValueTask DisposeAsync() {
         await this.db.DisposeAsync();
 
@@ -43,8 +45,6 @@ public partial class EventGrid {
                 "import",
                 $"./{nameof(Components)}/{nameof(Home)}/{nameof(EventGrid)}.razor.js");
 
-        await this.module!.InvokeVoidAsync("setFields", this.fields);
-
         var events = await this.db.Events
             .Select(x => new {
                 x.Id, x.Type,
@@ -56,6 +56,12 @@ public partial class EventGrid {
             .Where(x => x.Latest!.Status != EventStatus.Completed && x.Latest.Status != EventStatus.Resolved)
             .OrderByDescending(x => x.Start)
             .ToArrayAsync();
+
+        if (this.hasEvent is false && events.Length > 0) {
+            this.hasEvent = true;
+            this.StateHasChanged();
+        } else
+            return;
 
         var rows = events.Select(x => {
             var tag = x.Type switch {
@@ -100,6 +106,7 @@ public partial class EventGrid {
             };
         });
 
+        await this.module!.InvokeVoidAsync("setFields", this.fields);
         await this.module!.InvokeVoidAsync("setRows", rows);
     }
 }

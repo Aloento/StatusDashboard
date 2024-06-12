@@ -1,3 +1,6 @@
+using System.Globalization;
+using System.Reflection;
+using System.Resources;
 using Ljbc1994.Blazor.IntersectionObserver;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.FluentUI.AspNetCore.Components;
@@ -27,6 +30,13 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddFluentUIComponents();
 builder.Services.AddIntersectionObserver();
+
+builder.Services.AddSingleton(
+    new CultureInfo(Assembly
+        .GetExecutingAssembly()
+        .GetCustomAttribute<NeutralResourcesLanguageAttribute>()
+        ?.CultureName ?? "en-US")
+);
 
 var app = builder.Build();
 
