@@ -1,0 +1,38 @@
+﻿@using Microsoft.EntityFrameworkCore
+@using StatusDashboard.Services
+@implements IAsyncDisposable
+@inject IDbContextFactory<StatusContext> context;
+
+<scale-table>
+  <table>
+    <thead>
+    <tr>
+      <th>Service Name</th>
+      <th>Affected Regions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <td class="text-pretty">
+        Bare Metal Server
+      </td>
+
+      <td class="text-pretty">
+        EU-DE
+      </td>
+    </tr>
+
+    <tr>
+      <td class="text-pretty">
+        Anti DDoS
+      </td>
+
+      <td class="text-pretty">
+        EU-DE
+      </td>
+    </tr>
+    </tbody>
+
+  </table>
+</scale-table>

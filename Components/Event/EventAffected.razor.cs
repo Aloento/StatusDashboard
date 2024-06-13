@@ -2,10 +2,9 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Components;
-using Microsoft.EntityFrameworkCore;
 using Services;
 
-public partial class EventCard {
+public partial class EventAffected {
     [Parameter]
     [EditorRequired]
     public int Id { get; set; }
@@ -17,9 +16,5 @@ public partial class EventCard {
 
     protected override async Task OnInitializedAsync() {
         this.db = await this.context.CreateDbContextAsync();
-
-        var theEvent = await this.db.Events
-            .Where(x => x.Id == this.Id)
-            .SingleAsync();
     }
 }
