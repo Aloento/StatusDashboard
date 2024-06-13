@@ -1,4 +1,9 @@
-﻿<scale-table class="rounded-md bg-white p-6 shadow-md">
+﻿@using Microsoft.EntityFrameworkCore
+@using StatusDashboard.Services
+@implements IAsyncDisposable
+@inject IDbContextFactory<StatusContext> context;
+
+<scale-table class="rounded-md bg-white p-6 shadow-md">
   <table>
     <thead>
     <tr>

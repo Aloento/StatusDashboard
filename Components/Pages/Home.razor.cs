@@ -1,7 +1,6 @@
 ﻿namespace StatusDashboard.Components.Pages;
 
 using System.Diagnostics.CodeAnalysis;
-using Components.Event;
 using Microsoft.EntityFrameworkCore;
 using Services;
 using JB = JetBrains.Annotations;
