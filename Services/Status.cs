@@ -103,6 +103,11 @@ internal class StatusService : IHostedService {
                             Event = dbEvent
                         }).Entity;
 
+                        if (update.Status is StatusEnum.System) {
+                            history.Status = incident.EndDate is null ? default : EventStatus.Cancelled;
+                            continue;
+                        }
+
                         history.Status = update.Status switch {
                             StatusEnum.Analyzing => EventStatus.Investigating,
                             StatusEnum.Fixing => EventStatus.Fixing,
@@ -114,7 +119,7 @@ internal class StatusService : IHostedService {
                             StatusEnum.InProgress => EventStatus.Performing,
                             StatusEnum.Completed => EventStatus.Completed,
 
-                            _ => EventStatus.SysInfo
+                            _ => throw new NotImplementedException(),
                         };
                     }
                 }

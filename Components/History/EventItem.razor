@@ -15,7 +15,7 @@
 }
 
 <li class="border-l-2 relative flex flex-col gap-y-2.5 border-slate-300 pb-10 pl-7 last:pb-0">
-  <a class="w-fit text-2xl font-medium hover:underline" href="/Event/1">
+  <a class="w-fit text-2xl font-medium hover:underline" href="/Event/@curr.Id">
     @servicesTxt @regionsTxt @curr.Type
   </a>
 
@@ -34,8 +34,12 @@
   </div>
 
   <label class="text-lg font-bold text-slate-500">
-    @DateTime.UtcNow.ToString("dd MMM, HH:mm", culture)
-    @DateTime.Now.ToString(" '-' dd MMM, HH:mm 'UTC'", culture)
+    @curr.Start.ToUniversalTime().ToString("dd MMM, HH:mm", culture)
+
+    @if (curr.End is not null)
+    {
+      @curr.End.Value.ToUniversalTime().ToString(" '-' dd MMM, HH:mm 'UTC'", culture)
+    }
   </label>
 
   <Indicator Class="absolute -left-3.5 top-0.5 bg-zinc-50" Type="@curr.Type"/>

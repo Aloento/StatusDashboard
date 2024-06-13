@@ -38,7 +38,10 @@ public partial class Home {
 
         this.abnormalCount = await this.db.Events
             .Where(x => x.End == null)
-            .CountAsync(x => x.Type != EventType.Maintenance);
+            .SelectMany(x => x.RegionServices)
+            .Select(x => x.Service)
+            .Distinct()
+            .CountAsync();
 
         this.heading = this.abnormalCount > 0
             ? $"{this.abnormalCount} components have issue, but don't worry, we are working on it."

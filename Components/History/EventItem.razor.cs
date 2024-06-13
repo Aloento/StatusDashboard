@@ -53,7 +53,6 @@ public partial class EventItem {
 
         this.status = await this.db.Histories
             .Where(x => x.Event == this.curr)
-            .Where(x => x.Status != EventStatus.SysInfo)
             .OrderByDescending(x => x.Created)
             .Select(x => x.Status)
             .FirstOrDefaultAsync();
