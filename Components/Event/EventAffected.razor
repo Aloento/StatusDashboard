@@ -6,32 +6,25 @@
 <scale-table>
   <table>
     <thead>
-    <tr>
-      <th>Service Name</th>
-      <th>Affected Regions</th>
-    </tr>
+      <tr>
+        <th>Service Name</th>
+        <th>Affected Regions</th>
+      </tr>
     </thead>
 
     <tbody>
-    <tr>
-      <td class="text-pretty">
-        Bare Metal Server
-      </td>
+      @foreach (var (service, regions) in list)
+      {
+        <tr>
+          <td>
+            @service
+          </td>
 
-      <td class="text-pretty">
-        EU-DE
-      </td>
-    </tr>
-
-    <tr>
-      <td class="text-pretty">
-        Anti DDoS
-      </td>
-
-      <td class="text-pretty">
-        EU-DE
-      </td>
-    </tr>
+          <td>
+            @string.Join(", ", regions)
+          </td>
+        </tr>
+      }
     </tbody>
 
   </table>
