@@ -1,4 +1,9 @@
-﻿<scale-modal
+﻿@using Microsoft.EntityFrameworkCore
+@using StatusDashboard.Services
+@implements IAsyncDisposable
+@inject IDbContextFactory<StatusContext> context;
+
+<scale-modal
   heading="Edit Event"
   id="@nameof(EventEditor)"
   size="small">
@@ -32,8 +37,8 @@
       var values = Enum.GetValues<EventStatus>();
       var status =
         form.Type == EventType.Maintenance
-          ? values.Take(4)
-          : values.Skip(4).Take(4);
+          ? values.Skip(4)
+          : values.Take(4);
     }
 
     <div>
