@@ -13,38 +13,24 @@
     </thead>
 
     <tbody>
-    <tr>
-      <td class="flex flex-col">
-        <label class="font-medium">
-          @EventStatus.Investigating
-        </label>
+    @foreach (var history in list)
+    {
+      <tr>
+        <td class="flex flex-col">
+          <label class="font-medium">
+            @history.Status
+          </label>
 
-        <label>
-          @DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm 'UTC'")
-        </label>
-      </td>
+          <label>
+            @history.Created.ToUniversalTime().ToString("yyyy-MM-dd HH:mm 'UTC'")
+          </label>
+        </td>
 
-      <td class="text-pretty">
-        There was a Major incident on sd2 regarding the RTS service in EU-DE region. The service had no problem from Grafana side.
-        There was a Major incident on sd2 regarding the RTS service in EU-DE region. The service had no problem from Grafana side.
-      </td>
-    </tr>
-
-    <tr>
-      <td class="flex flex-col">
-        <label class="font-medium">
-          @EventStatus.Resolved
-        </label>
-
-        <label>
-          @DateTime.Now.ToString("yyyy-MM-dd HH:mm 'UTC'")
-        </label>
-      </td>
-
-      <td class="text-pretty">
-        Incident Resolved
-      </td>
-    </tr>
+        <td class="text-pretty">
+          @history.Message
+        </td>
+      </tr>
+    }
     </tbody>
 
   </table>
