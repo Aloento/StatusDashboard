@@ -3,14 +3,17 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+    <AnalysisLevel>preview</AnalysisLevel>
     <LangVersion>preview</LangVersion>
     <Nullable>enable</Nullable>
     <Version>0.1.0</Version>
 
-    <AnalysisLevel>preview</AnalysisLevel>
+    <DockerfileContext>.</DockerfileContext>
     <PublishReadyToRun>true</PublishReadyToRun>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <ServerGarbageCollection>true</ServerGarbageCollection>
     <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
+    <UserSecretsId>e9bd5e7a-882a-421b-8459-2fdb606a565e</UserSecretsId>
 
     <Company>T-Systems</Company>
     <Authors>Aloento</Authors>
@@ -18,9 +21,6 @@
     <Copyright>EcoSystem Squad</Copyright>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageProjectUrl>https://status.otc-service.com</PackageProjectUrl>
-    <UserSecretsId>e9bd5e7a-882a-421b-8459-2fdb606a565e</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>.</DockerfileContext>
   </PropertyGroup>
 
   <ItemGroup>

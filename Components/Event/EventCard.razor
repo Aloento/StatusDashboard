@@ -7,10 +7,10 @@
 <section class="flex flex-col gap-y-4 rounded-md bg-white px-8 py-6 shadow-md">
   <div class="flex justify-between">
     <div class="flex items-center gap-x-3">
-      <Indicator Type="EventType.MajorIssue" />
+      <Indicator Type="@theEvent.Type" />
 
       <h3 class="text-2xl font-medium text-slate-800">
-        Customised Event Title
+        @theEvent.Title
       </h3>
     </div>
     
@@ -38,19 +38,26 @@
 
     <div class="flex flex-col gap-y-2">
       <label class="text-xl font-medium text-slate-700">
-        @EventType.MajorIssue
+        @theEvent.Type
       </label>
 
       <label class="text-xl font-medium text-slate-700">
-        @EventStatus.Resolved
+        @status
       </label>
 
       <label class="text-xl font-medium text-slate-700">
-        @DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm 'UTC'")
+        @theEvent.Start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm 'UTC'")
       </label>
 
       <label class="text-xl font-medium text-slate-700">
-        @DateTime.Now.ToString("yyyy-MM-dd HH:mm 'UTC'")
+        @if (theEvent.End is null)
+        {
+          @("Still Ongoing")
+        }
+        else
+        {
+          @theEvent.End.Value.ToUniversalTime().ToString("yyyy-MM-dd HH:mm 'UTC'")
+        }
       </label>
     </div>
   </div>

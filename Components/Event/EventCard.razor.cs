@@ -13,13 +13,25 @@ public partial class EventCard {
     [NotNull]
     private StatusContext? db { get; set; }
 
+    [NotNull]
+    private Event? theEvent { get; set; }
+
+    private EventStatus status { get; set; }
+
     public async ValueTask DisposeAsync() => await this.db.DisposeAsync();
 
     protected override async Task OnInitializedAsync() {
         this.db = await this.context.CreateDbContextAsync();
 
-        var theEvent = await this.db.Events
+        this.theEvent = await this.db.Events
             .Where(x => x.Id == this.Id)
             .SingleAsync();
+
+        this.status = await this.db.Events
+            .Where(x => x.Id == this.Id)
+            .SelectMany(x => x.Histories)
+            .OrderByDescending(x => x.Created)
+            .Select(x => x.Status)
+            .FirstOrDefaultAsync();
     }
 }
