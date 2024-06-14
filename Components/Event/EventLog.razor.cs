@@ -6,8 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Services;
 
 public partial class EventLog {
-    [Parameter]
-    [EditorRequired]
+    [CascadingParameter]
     public int Id { get; set; }
 
     [NotNull]

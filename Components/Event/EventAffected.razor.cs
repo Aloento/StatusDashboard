@@ -6,8 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Services;
 
 public partial class EventAffected {
-    [Parameter]
-    [EditorRequired]
+    [CascadingParameter]
     public int Id { get; set; }
 
     [NotNull]

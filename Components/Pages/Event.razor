@@ -3,9 +3,10 @@
 
 <PageTitle>Event @Id - OTC Status Dashboard</PageTitle>
 
-<EventCard Id="@Id" />
-
-<EventLog Id="@Id" />
+<CascadingValue Value="Id">
+  <EventCard />
+  <EventLog />
+</CascadingValue>
 
 @code {
   [Parameter] public int Id { get; set; }
