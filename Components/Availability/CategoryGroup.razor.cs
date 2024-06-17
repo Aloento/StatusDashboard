@@ -21,6 +21,8 @@ public partial class CategoryGroup {
     [NotNull]
     private RegionService[]? services { get; set; }
 
+    private List<List<double>> slas { get; set; } = [];
+
     public async ValueTask DisposeAsync() => await this.db.DisposeAsync();
 
     protected override async Task OnInitializedAsync() {
@@ -34,5 +36,10 @@ public partial class CategoryGroup {
             .Include(x => x.Service)
             .OrderBy(x => x.Service.Name)
             .ToArrayAsync();
+
+        foreach (var service in this.services) {
+            var temp = await this.sla.Calc6Months(service);
+            this.slas.Add(temp);
+        }
     }
 }

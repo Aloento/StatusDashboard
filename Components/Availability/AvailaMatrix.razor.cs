@@ -32,16 +32,13 @@ public partial class AvailaMatrix {
 
     public async ValueTask DisposeAsync() => await this.db.DisposeAsync();
 
-    protected override async Task OnInitializedAsync() {
-        this.db = await this.context.CreateDbContextAsync();
-    }
+    protected override async Task OnInitializedAsync() => this.db = await this.context.CreateDbContextAsync();
 
-    protected override async Task OnParametersSetAsync() {
+    protected override async Task OnParametersSetAsync() =>
         this.categories = await this.db.RegionService
             .Where(x => x.Region == this.Region)
             .Select(x => x.Service.Category)
             .Distinct()
             .OrderBy(x => x.Name)
             .ToArrayAsync();
-    }
 }

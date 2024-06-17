@@ -1,6 +1,3 @@
-using System.Globalization;
-using System.Reflection;
-using System.Resources;
 using Ljbc1994.Blazor.IntersectionObserver;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.FluentUI.AspNetCore.Components;
@@ -24,6 +21,7 @@ builder.Services.AddDbContextFactory<StatusContext>(
 builder.Services.AddHttpClient<StatusHttp>();
 builder.Services.AddSingleton<StatusService>();
 builder.Services.AddHostedService(x => x.GetRequiredService<StatusService>());
+builder.Services.AddSingleton<SlaService>();
 
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
