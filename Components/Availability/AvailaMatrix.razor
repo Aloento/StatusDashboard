@@ -31,7 +31,10 @@
     </thead>
 
     <tbody>
-      <CategoryGroup />
+    @foreach (var i in categories)
+    {
+      <CategoryGroup Category="@i" />
+    }
     </tbody>
 
   </table>

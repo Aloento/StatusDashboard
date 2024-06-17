@@ -41,6 +41,7 @@ public partial class AvailaMatrix {
             .Where(x => x.Region == this.Region)
             .Select(x => x.Service.Category)
             .Distinct()
+            .OrderBy(x => x.Name)
             .ToArrayAsync();
     }
 }

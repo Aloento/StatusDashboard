@@ -4,25 +4,34 @@
 @inject IDbContextFactory<StatusContext> context;
 
 <tr>
-  <td rowspan="2" class="text-lg">Application Services</td>
+  <td rowspan="@services.Length" class="text-lg">
+    @Category.Name
+  </td>
 
-  <td class="text-lg">Application Operations Management</td>
+  <td class="text-lg">
+    @services.First().Service.Name
+  </td>
   
-  @for (var i = 0; i < 6; i++)
-  {
-    <td class="border-l bg-green-100 text-center hover:bg-green-200">
-      100.00
-    </td>
-  }
-</tr>
-
-<tr>
-  <td class="text-lg">Distributed Message Service</td>
-  
-  @for (var i = 0; i < 6; i++)
+  @for (var j = 0; j < 6; j++)
   {
     <td class="border-l bg-emerald-100 text-center hover:bg-emerald-200">
       100.00
     </td>
   }
 </tr>
+
+@for (var i = 1; i < services.Length; i ++)
+{
+  <tr>
+    <td class="text-lg">
+      @services[i].Service.Name
+    </td>
+  
+    @for (var j = 0; j < 6; j++)
+    {
+      <td class="border-l bg-emerald-100 text-center hover:bg-emerald-200">
+        100.00
+      </td>
+    }
+  </tr>
+}
