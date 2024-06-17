@@ -11,6 +11,7 @@
     <DockerfileContext>.</DockerfileContext>
     <PublishReadyToRun>true</PublishReadyToRun>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <InvariantGlobalization>true</InvariantGlobalization>
     <ServerGarbageCollection>true</ServerGarbageCollection>
     <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
     <UserSecretsId>e9bd5e7a-882a-421b-8459-2fdb606a565e</UserSecretsId>

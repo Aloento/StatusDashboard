@@ -21,41 +21,17 @@
       </tr>
 
       <tr>
-        <th class="!pb-1 !text-lg !text-center w-1/12" scope="col">
-          2023 <br /> December
-        </th>
-
-        <th class="!pb-1 !text-lg !text-center w-1/12" scope="col">
-          2024 <br />January
-        </th>
-
-        <th class="!pb-1 !text-lg !text-center !w-1/12" scope="col">
-          2024 <br /> February
-        </th>
-
-        <th class="!pb-1 !text-lg !text-center !w-1/12" scope="col">
-          2024 <br /> March
-        </th>
-
-        <th class="!pb-1 !text-lg !text-center !w-1/12" scope="col">
-          2024 <br /> April
-        </th>
-
-        <th class="!pb-1 !text-lg !text-center !w-1/12" scope="col">
-          2024 <br /> May
-        </th>
+        @foreach (var month in get6Months())
+        {
+          <th class="!pb-1 !text-lg !text-center w-1/12" scope="col">
+            @((MarkupString)month)
+          </th>
+        }
       </tr>
     </thead>
 
     <tbody>
-      <CategoryItem />
-      <CategoryItem />
-      <CategoryItem />
-      <CategoryItem />
-      <CategoryItem />
-      <CategoryItem />
-      <CategoryItem />
-      <CategoryItem />
+      <CategoryGroup />
     </tbody>
 
   </table>

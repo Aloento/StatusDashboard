@@ -1,6 +1,9 @@
 ﻿@page "/Availability"
+@using Microsoft.EntityFrameworkCore
 @using StatusDashboard.Components.Home
 @using StatusDashboard.Components.Availability
+@using StatusDashboard.Services
+@inject IDbContextFactory<StatusContext> context;
 
 <PageTitle>Availability - OTC Status Dashboard</PageTitle>
 

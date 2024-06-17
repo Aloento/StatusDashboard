@@ -43,7 +43,6 @@ public partial class Home {
 
     private async Task getCategory() =>
         this.categories = await this.db.RegionService
-            .Include(x => x.Service.Category)
             .Where(x => x.Region == this.currentRegion)
             .Select(x => x.Service.Category)
             .Distinct()

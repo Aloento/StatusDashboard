@@ -1,4 +1,9 @@
-﻿<tr>
+﻿@using Microsoft.EntityFrameworkCore
+@using StatusDashboard.Services
+@implements IAsyncDisposable
+@inject IDbContextFactory<StatusContext> context;
+
+<tr>
   <td rowspan="2" class="text-lg">Application Services</td>
 
   <td class="text-lg">Application Operations Management</td>
