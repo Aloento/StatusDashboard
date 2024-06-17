@@ -3,14 +3,13 @@
 @using StatusDashboard.Components.Home
 @using StatusDashboard.Services
 @inject IJSRuntime JS
-@inject CultureInfo culture
 @inject IDbContextFactory<StatusContext> context;
 @implements IAsyncDisposable
 
 @if (isBegin)
 {
   <label class="mb-6 text-2xl font-medium text-slate-800" @ref="labelElement">
-    @curr.Start.ToUniversalTime().ToString("MMMM yyyy", culture)
+    @curr.Start.ToUniversalTime().ToString("MMMM yyyy", CultureInfo.InvariantCulture)
   </label>
 }
 
@@ -34,11 +33,11 @@
   </div>
 
   <label class="text-lg font-bold text-slate-500">
-    @curr.Start.ToUniversalTime().ToString("dd MMM, HH:mm", culture)
+    @curr.Start.ToUniversalTime().ToString("dd MMM, HH:mm", CultureInfo.InvariantCulture)
 
     @if (curr.End is not null)
     {
-      @curr.End.Value.ToUniversalTime().ToString(" '-' dd MMM, HH:mm 'UTC'", culture)
+      @curr.End.Value.ToUniversalTime().ToString(" '-' dd MMM, HH:mm 'UTC'", CultureInfo.InvariantCulture)
     }
   </label>
 

@@ -14,7 +14,7 @@ public partial class Home {
     private Region? currentRegion { get; set; }
 
     [NotNull]
-    private ICollection<Category>? categories { get; set; }
+    private Category[]? categories { get; set; }
 
     private int abnormalCount { get; set; }
 
@@ -25,9 +25,9 @@ public partial class Home {
 
     protected override async Task OnInitializedAsync() {
         this.db = await this.context.CreateDbContextAsync();
-        this.currentRegion = await this.db.Regions.FirstAsync();
 
-        await this.updateCategory();
+        this.currentRegion = await this.db.Regions.FirstAsync();
+        await this.getCategory();
 
         this.abnormalCount = await this.db.Events
             .Where(x => x.End == null)
@@ -41,7 +41,7 @@ public partial class Home {
             : "All Systems Operational";
     }
 
-    private async Task updateCategory() =>
+    private async Task getCategory() =>
         this.categories = await this.db.RegionService
             .Include(x => x.Service.Category)
             .Where(x => x.Region == this.currentRegion)
@@ -52,7 +52,7 @@ public partial class Home {
 
     private async void onClick(Region r) {
         this.currentRegion = r;
-        await this.updateCategory();
+        await this.getCategory();
         this.StateHasChanged();
     }
 }

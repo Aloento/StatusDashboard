@@ -1,6 +1,7 @@
 ﻿namespace StatusDashboard.Components.Home;
 
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Event;
@@ -86,9 +87,9 @@ public partial class EventGrid {
             return new object[] {
                 x.Id,
                 new object[] { tag },
-                x.Start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm 'UTC'"),
+                x.Start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm 'UTC'", CultureInfo.InvariantCulture),
                 x.End.HasValue
-                    ? x.End.Value.ToUniversalTime().ToString("MM-dd HH:mm")
+                    ? x.End.Value.ToUniversalTime().ToString("MM-dd HH:mm", CultureInfo.InvariantCulture)
                     : (x.Latest?.Status ?? default).ToString(),
                 x.Regions.Length > 1
                     ? $"{x.Regions[0]} +{x.Regions.Length - 1}"

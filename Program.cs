@@ -31,13 +31,6 @@ builder.Services.AddRazorComponents()
 builder.Services.AddFluentUIComponents();
 builder.Services.AddIntersectionObserver();
 
-builder.Services.AddSingleton(
-    new CultureInfo(Assembly
-        .GetExecutingAssembly()
-        .GetCustomAttribute<NeutralResourcesLanguageAttribute>()
-        ?.CultureName ?? "en-US")
-);
-
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment()) {

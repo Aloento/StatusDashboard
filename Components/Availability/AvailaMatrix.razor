@@ -1,4 +1,9 @@
-﻿<scale-table class="relative">
+﻿@using Microsoft.EntityFrameworkCore
+@using StatusDashboard.Services
+@implements IAsyncDisposable
+@inject IDbContextFactory<StatusContext> context;
+
+<scale-table class="relative">
   <table>
     <thead class="sticky top-16">
       <tr>

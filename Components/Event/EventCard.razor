@@ -1,4 +1,5 @@
-﻿@using Microsoft.EntityFrameworkCore
+﻿@using System.Globalization
+@using Microsoft.EntityFrameworkCore
 @using StatusDashboard.Components.Home
 @using StatusDashboard.Services
 @implements IAsyncDisposable
@@ -46,7 +47,7 @@
       </label>
 
       <label class="text-xl font-medium text-slate-700">
-        @theEvent.Start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm 'UTC'")
+        @theEvent.Start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm 'UTC'", CultureInfo.InvariantCulture)
       </label>
 
       <label class="text-xl font-medium text-slate-700">
@@ -56,7 +57,7 @@
         }
         else
         {
-          @theEvent.End.Value.ToUniversalTime().ToString("yyyy-MM-dd HH:mm 'UTC'")
+          @theEvent.End.Value.ToUniversalTime().ToString("yyyy-MM-dd HH:mm 'UTC'", CultureInfo.InvariantCulture)
         }
       </label>
     </div>

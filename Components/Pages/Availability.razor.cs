@@ -2,7 +2,9 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Services;
+using JB = JetBrains.Annotations;
 
+[JB.PublicAPI]
 public partial class Availability {
     [NotNull]
     private Region? currentRegion { get; set; }
