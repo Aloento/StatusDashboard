@@ -1,20 +1,9 @@
-﻿@{
-  var items = new List<ServiceItem>();
+﻿@using Microsoft.EntityFrameworkCore
+@using StatusDashboard.Services
+@implements IAsyncDisposable
+@inject IDbContextFactory<StatusContext> context;
 
-  for (var i = 1; i <= 10; i++)
-  {
-    items.Add(new()
-    {
-      Id = i,
-      Name = $"Service {i}",
-      Regions =
-      [
-        new() { Id = 1, Name = "EU-DE" },
-        new() { Id = 2, Name = "EU-NL" }
-      ]
-    });
-  }
-
+@{
   var queryable = items.AsQueryable();
 }
 
@@ -40,7 +29,8 @@
         TGridItem="ServiceItem"
         Title="@i.Name">
         <FluentCheckbox
-          ValueChanged="@(x => context.Regions.Single(y => y.Name == i.Name).Selected = x)" />
+          Disabled="@(context.Regions.All(x => x.Id != i.Id))"
+          ValueChanged="@(x => context.Regions.Single(y => y.Id == i.Id).Selected = x)" />
       </TemplateColumn>
     }
   </FluentDataGrid>
