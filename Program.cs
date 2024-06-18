@@ -18,6 +18,7 @@ builder.Services.AddDbContextFactory<StatusContext>(
         .EnableSensitiveDataLogging()
 );
 
+builder.Services.AddMemoryCache();
 builder.Services.AddHttpClient<StatusHttp>();
 builder.Services.AddSingleton<StatusService>();
 builder.Services.AddHostedService(x => x.GetRequiredService<StatusService>());

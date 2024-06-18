@@ -2,11 +2,18 @@
 
 using Components.Event;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 
-internal class SlaService(IDbContextFactory<StatusContext> factory) : IAsyncDisposable {
+internal class SlaService(IDbContextFactory<StatusContext> factory, IMemoryCache cache) : IAsyncDisposable {
     private StatusContext db { get; } = factory.CreateDbContext();
 
+    private IMemoryCache cache { get; } = cache;
+
     public async Task<List<double>> Calc6Months(RegionService service) {
+        var cacheKey = $"{nameof(this.Calc6Months)}_{service.Id}";
+        if (this.cache.TryGetValue(cacheKey, out List<double>? res)) 
+            return res!;
+
         var now = DateTime.UtcNow;
         var sixMonth = now.AddMonths(-6);
 
@@ -21,19 +28,23 @@ internal class SlaService(IDbContextFactory<StatusContext> factory) : IAsyncDisp
 
         for (var i = 0; i < 6; i++) {
             var startOfMonth = new DateTime(now.Year, now.Month, 1).AddMonths(-i);
-            var endOfMonth = new DateTime(now.Year, now.Month, DateTime.DaysInMonth(now.Year, now.Month)).AddMonths(-i);
+            var daysInMonth = DateTime.DaysInMonth(startOfMonth.Year, startOfMonth.Month);
+            var endOfMonth = new DateTime(startOfMonth.Year, startOfMonth.Month, daysInMonth);
 
             var monthlyEvents = events
                 .Where(e => e.Start < endOfMonth)
                 .Where(e => (e.End ?? now) > startOfMonth);
 
-            double totalDowntime = 0;
-
-            foreach (var evt in monthlyEvents) {
-                var start = evt.Start < startOfMonth ? startOfMonth : evt.Start;
-                var end = evt.End.HasValue && evt.End.Value < endOfMonth ? evt.End.Value : endOfMonth;
-                totalDowntime += (end - start).TotalMinutes;
-            }
+            var totalDowntime =
+                (from evt in monthlyEvents
+                    let start = evt.Start < startOfMonth
+                        ? startOfMonth
+                        : evt.Start
+                    let end = (evt.End.HasValue && evt.End.Value < endOfMonth)
+                        ? evt.End.Value
+                        : endOfMonth
+                    select (end - start).TotalMinutes)
+                .Sum();
 
             var totalMinutes = (endOfMonth - startOfMonth).TotalMinutes;
             var uptimePercentage = (totalMinutes - totalDowntime) / totalMinutes * 100;
@@ -41,6 +52,7 @@ internal class SlaService(IDbContextFactory<StatusContext> factory) : IAsyncDisp
         }
 
         results.Reverse();
+        this.cache.Set(cacheKey, results, TimeSpan.FromHours(1));
         return results;
     }
 
