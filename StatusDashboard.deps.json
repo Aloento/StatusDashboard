@@ -7,12 +7,12 @@
   "targets": {
     ".NETCoreApp,Version=v8.0": {},
     ".NETCoreApp,Version=v8.0/linux-x64": {
-      "StatusDashboard/0.1.0": {
+      "StatusDashboard/0.5.0": {
         "dependencies": {
           "BlazorIntersectionObserver": "3.1.0",
           "JetBrains.Annotations": "2023.3.0",
           "Microsoft.EntityFrameworkCore.Sqlite": "8.0.6",
-          "Microsoft.FluentUI.AspNetCore.Components": "4.7.2",
+          "Microsoft.FluentUI.AspNetCore.Components": "4.8.0",
           "Microsoft.TypeScript.MSBuild": "5.4.5",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.20.1",
           "runtimepack.Microsoft.NETCore.App.Runtime.linux-x64": "8.0.6",
@@ -1304,8 +1304,8 @@
       },
       "BlazorIntersectionObserver/3.1.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.Components.Web": "8.0.4",
-          "Microsoft.JSInterop": "8.0.4"
+          "Microsoft.AspNetCore.Components.Web": "8.0.6",
+          "Microsoft.JSInterop": "8.0.6"
         },
         "runtime": {
           "lib/net5.0/Ljbc1994.Blazor.IntersectionObserver.dll": {
@@ -1322,36 +1322,36 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Authorization/8.0.4": {
+      "Microsoft.AspNetCore.Authorization/8.0.6": {
         "dependencies": {
-          "Microsoft.AspNetCore.Metadata": "8.0.4",
+          "Microsoft.AspNetCore.Metadata": "8.0.6",
           "Microsoft.Extensions.Logging.Abstractions": "8.0.1",
           "Microsoft.Extensions.Options": "8.0.2"
         }
       },
-      "Microsoft.AspNetCore.Components/8.0.4": {
+      "Microsoft.AspNetCore.Components/8.0.6": {
         "dependencies": {
-          "Microsoft.AspNetCore.Authorization": "8.0.4",
-          "Microsoft.AspNetCore.Components.Analyzers": "8.0.4"
+          "Microsoft.AspNetCore.Authorization": "8.0.6",
+          "Microsoft.AspNetCore.Components.Analyzers": "8.0.6"
         }
       },
-      "Microsoft.AspNetCore.Components.Analyzers/8.0.4": {},
-      "Microsoft.AspNetCore.Components.Forms/8.0.4": {
+      "Microsoft.AspNetCore.Components.Analyzers/8.0.6": {},
+      "Microsoft.AspNetCore.Components.Forms/8.0.6": {
         "dependencies": {
-          "Microsoft.AspNetCore.Components": "8.0.4"
+          "Microsoft.AspNetCore.Components": "8.0.6"
         }
       },
-      "Microsoft.AspNetCore.Components.Web/8.0.4": {
+      "Microsoft.AspNetCore.Components.Web/8.0.6": {
         "dependencies": {
-          "Microsoft.AspNetCore.Components": "8.0.4",
-          "Microsoft.AspNetCore.Components.Forms": "8.0.4",
+          "Microsoft.AspNetCore.Components": "8.0.6",
+          "Microsoft.AspNetCore.Components.Forms": "8.0.6",
           "Microsoft.Extensions.DependencyInjection": "8.0.0",
           "Microsoft.Extensions.Primitives": "8.0.0",
-          "Microsoft.JSInterop": "8.0.4",
+          "Microsoft.JSInterop": "8.0.6",
           "System.IO.Pipelines": "8.0.0"
         }
       },
-      "Microsoft.AspNetCore.Metadata/8.0.4": {},
+      "Microsoft.AspNetCore.Metadata/8.0.6": {},
       "Microsoft.Data.Sqlite.Core/8.0.6": {
         "dependencies": {
           "SQLitePCLRaw.core": "2.1.6"
@@ -1531,21 +1531,21 @@
         }
       },
       "Microsoft.Extensions.Primitives/8.0.0": {},
-      "Microsoft.FluentUI.AspNetCore.Components/4.7.2": {
+      "Microsoft.FluentUI.AspNetCore.Components/4.8.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.Components.Web": "8.0.4",
+          "Microsoft.AspNetCore.Components.Web": "8.0.6",
           "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
           "Microsoft.Extensions.Hosting.Abstractions": "8.0.0",
           "Microsoft.Extensions.Http": "8.0.0"
         },
         "runtime": {
           "lib/net8.0/Microsoft.FluentUI.AspNetCore.Components.dll": {
-            "assemblyVersion": "4.7.2.24124",
-            "fileVersion": "4.7.2.24124"
+            "assemblyVersion": "4.8.0.24169",
+            "fileVersion": "4.8.0.24169"
           }
         }
       },
-      "Microsoft.JSInterop/8.0.4": {},
+      "Microsoft.JSInterop/8.0.6": {},
       "Microsoft.TypeScript.MSBuild/5.4.5": {},
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.20.1": {},
       "SQLitePCLRaw.bundle_e_sqlite3/2.1.6": {
@@ -1601,7 +1601,7 @@
     }
   },
   "libraries": {
-    "StatusDashboard/0.1.0": {
+    "StatusDashboard/0.5.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -1630,47 +1630,47 @@
       "path": "jetbrains.annotations/2023.3.0",
       "hashPath": "jetbrains.annotations.2023.3.0.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Authorization/8.0.4": {
+    "Microsoft.AspNetCore.Authorization/8.0.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-dzYUHvqyavBiYVd5BZNAgV5rT+DC4HyIWPnbeYgxQNBYOFomvvwzPfidQf1Ld/HhkXhEj3tlzqNb4gy2P2ukUg==",
-      "path": "microsoft.aspnetcore.authorization/8.0.4",
-      "hashPath": "microsoft.aspnetcore.authorization.8.0.4.nupkg.sha512"
+      "sha512": "sha512-H1CSbD7UeSPsrJSUpvbms6SqWMa5y8ch4Rw+gyHh2uztOEb20fTP2r0AUnStn1Q9WYghikiDO5wzkgV+n6KC2Q==",
+      "path": "microsoft.aspnetcore.authorization/8.0.6",
+      "hashPath": "microsoft.aspnetcore.authorization.8.0.6.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Components/8.0.4": {
+    "Microsoft.AspNetCore.Components/8.0.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ExTJT1u3QCTKaq2LjazkoHMNVlz0Q93A4ei5Zqd38bj3hggpShi4A/U22zk1LOmT0eUE5WklOBMpKZMg+T6Veg==",
-      "path": "microsoft.aspnetcore.components/8.0.4",
-      "hashPath": "microsoft.aspnetcore.components.8.0.4.nupkg.sha512"
+      "sha512": "sha512-Je2l+rd5i8gB+ZWsN5wBHOsnyAh81h6+a5vNq6rjfQhM2ZYxH+BVsmanCYa+F8BFy6rmd+ZL61SEiNaAyAOgtg==",
+      "path": "microsoft.aspnetcore.components/8.0.6",
+      "hashPath": "microsoft.aspnetcore.components.8.0.6.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Components.Analyzers/8.0.4": {
+    "Microsoft.AspNetCore.Components.Analyzers/8.0.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-kEvEOOkgN8uLjP2PMR481yxSjUsyGLaehHSD3HWjboNsXA5++7Hxn83LRdVri9/0rlY2zS/dP9oGHZpgxYu2iQ==",
-      "path": "microsoft.aspnetcore.components.analyzers/8.0.4",
-      "hashPath": "microsoft.aspnetcore.components.analyzers.8.0.4.nupkg.sha512"
+      "sha512": "sha512-SEL0CN1jJdJkCDwRox3kSY1ffMnahlOCDJZYrYWfQ6ftjqRuuiPtwyvI3VIeVHLcpT3VP1AXww8wzKDK3oeFxg==",
+      "path": "microsoft.aspnetcore.components.analyzers/8.0.6",
+      "hashPath": "microsoft.aspnetcore.components.analyzers.8.0.6.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Components.Forms/8.0.4": {
+    "Microsoft.AspNetCore.Components.Forms/8.0.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-I/kttR/nmRZTc+bsetYnvbkVzHgsJXrWKxHo30vGvQV+dTeur9LV2g2TvyLerpWL9OFbNWgpTGBUwgX1IW/0Zw==",
-      "path": "microsoft.aspnetcore.components.forms/8.0.4",
-      "hashPath": "microsoft.aspnetcore.components.forms.8.0.4.nupkg.sha512"
+      "sha512": "sha512-49wIE1ns3ZGDU4NPMcKCSTC716IxujUeaynsUyflM5Qmb2WlF6M6m4pMcJ6UET1Ixmn027nZjMEc8J7pU4BLBg==",
+      "path": "microsoft.aspnetcore.components.forms/8.0.6",
+      "hashPath": "microsoft.aspnetcore.components.forms.8.0.6.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Components.Web/8.0.4": {
+    "Microsoft.AspNetCore.Components.Web/8.0.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-K9zcUkciMHmPjYdaB417xlG9Srv2udLT5j7CIAN92H5KNLH1ItIGIEIIUMJT3r+2Ma3ZLZO0eddEbR+Z59MbOQ==",
-      "path": "microsoft.aspnetcore.components.web/8.0.4",
-      "hashPath": "microsoft.aspnetcore.components.web.8.0.4.nupkg.sha512"
+      "sha512": "sha512-xxYlTpcTEWsxaWUscDLN32mM32ysslLFtNQBS6wJOxaKJ9LCvusXDyBVEKL2DPbB8PZdereNvyrVr0deHkuOEw==",
+      "path": "microsoft.aspnetcore.components.web/8.0.6",
+      "hashPath": "microsoft.aspnetcore.components.web.8.0.6.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Metadata/8.0.4": {
+    "Microsoft.AspNetCore.Metadata/8.0.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-TG3JhI7dkDCIoxZ3TL/5yptLYLg56w1f4jE8GSYnZXSso1xY5JKKCxObK+xKQJU5kZir30+QUGX1WpbC1kDcow==",
-      "path": "microsoft.aspnetcore.metadata/8.0.4",
-      "hashPath": "microsoft.aspnetcore.metadata.8.0.4.nupkg.sha512"
+      "sha512": "sha512-3e7S/kz1MGds8zDA8SfQiutqifyVcULs5P/8Bxpes0WIkJRMGkU/l+XlMllj9KrDfCGwHW8bgjRy/zxfoILgfg==",
+      "path": "microsoft.aspnetcore.metadata/8.0.6",
+      "hashPath": "microsoft.aspnetcore.metadata.8.0.6.nupkg.sha512"
     },
     "Microsoft.Data.Sqlite.Core/8.0.6": {
       "type": "package",
@@ -1847,19 +1847,19 @@
       "path": "microsoft.extensions.primitives/8.0.0",
       "hashPath": "microsoft.extensions.primitives.8.0.0.nupkg.sha512"
     },
-    "Microsoft.FluentUI.AspNetCore.Components/4.7.2": {
+    "Microsoft.FluentUI.AspNetCore.Components/4.8.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-FqwRxABrxXsokO/30txUrkoemrBAk0rlXC7c2XlqE0EFMxQut3urjZu1Bo3NXjzeQROHZVMA1BE36v7QbaV3jQ==",
-      "path": "microsoft.fluentui.aspnetcore.components/4.7.2",
-      "hashPath": "microsoft.fluentui.aspnetcore.components.4.7.2.nupkg.sha512"
+      "sha512": "sha512-yIP7xCr8EGvYPHOtfpsfzrc7DsVT7JMpjH90AOVgBLARSffsjxaIy16e57SD9xMGddj601j/+Ih1xRfmB2xTeA==",
+      "path": "microsoft.fluentui.aspnetcore.components/4.8.0",
+      "hashPath": "microsoft.fluentui.aspnetcore.components.4.8.0.nupkg.sha512"
     },
-    "Microsoft.JSInterop/8.0.4": {
+    "Microsoft.JSInterop/8.0.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-97XhCIlz57G74fuf9XsuItyeO/8e6etWYAPH8XuDmmIW7461Gu9WN3louVqjkh4BU0q3Nf5acvSIfkIuGzHVWw==",
-      "path": "microsoft.jsinterop/8.0.4",
-      "hashPath": "microsoft.jsinterop.8.0.4.nupkg.sha512"
+      "sha512": "sha512-E1djWS3d41fcd++7sGlbYhOHde5Pb0oBpOcNvUbn+1ga/yCvsjzUfbd/tDRg1qacNKS0iwKWYOIqTZxJnh99dQ==",
+      "path": "microsoft.jsinterop/8.0.6",
+      "hashPath": "microsoft.jsinterop.8.0.6.nupkg.sha512"
     },
     "Microsoft.TypeScript.MSBuild/5.4.5": {
       "type": "package",
