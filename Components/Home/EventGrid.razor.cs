@@ -84,6 +84,10 @@ public partial class EventGrid {
                 }
             };
 
+            // TODO: when use PGSQL, move to LINQ
+            var regions = x.Regions.Distinct().ToArray();
+            var services = x.Services.Distinct().ToArray();
+
             return new object[] {
                 x.Id,
                 new object[] { tag },
@@ -91,12 +95,12 @@ public partial class EventGrid {
                 x.End.HasValue
                     ? x.End.Value.ToUniversalTime().ToString("MM-dd HH:mm", CultureInfo.InvariantCulture)
                     : (x.Latest?.Status ?? default).ToString(),
-                x.Regions.Length > 1
-                    ? $"{x.Regions[0]} +{x.Regions.Length - 1}"
-                    : x.Regions[0],
-                x.Services.Length > 1
-                    ? $"{x.Services[0]} +{x.Services.Length - 1}"
-                    : x.Services[0],
+                regions.Length > 1
+                    ? $"{regions[0]} +{regions.Length - 1}"
+                    : regions[0],
+                services.Length > 1
+                    ? $"{services[0]} +{services.Length - 1}"
+                    : services[0],
                 new object[] {
                     new {
                         label = "↗",
