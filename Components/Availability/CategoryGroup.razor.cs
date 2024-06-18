@@ -42,4 +42,14 @@ public partial class CategoryGroup {
             this.slas.Add(temp);
         }
     }
+
+    private string getColor(double val) {
+        var color = val switch {
+            >= 99.95 => "emerald",
+            >= 99 => "amber",
+            _ => "rose"
+        };
+
+        return $"bg-{color}-100 hover:bg-{color}-200";
+    }
 }

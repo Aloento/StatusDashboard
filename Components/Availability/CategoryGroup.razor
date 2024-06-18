@@ -15,7 +15,7 @@
   
   @foreach (var i in slas.First())
   {
-    <td class="border-l bg-emerald-100 text-center hover:bg-emerald-200">
+    <td class="border-l text-center @getColor(i)">
       @i.ToString("0.00")
     </td>
   }
@@ -30,7 +30,7 @@
   
     @foreach (var j in slas[i])
     {
-      <td class="border-l bg-emerald-100 text-center hover:bg-emerald-200">
+      <td class="border-l text-center @getColor(i)">
         @j.ToString("0.00")
       </td>
     }
