@@ -1,5 +1,6 @@
 ﻿namespace StatusDashboard.Components.Home;
 
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using Event;
 using Microsoft.AspNetCore.Components;
@@ -14,6 +15,10 @@ public partial class Indicator {
     [Parameter]
     [EditorRequired]
     public EventType? Type { get; set; }
+
+    [Parameter]
+    [Range(12, 128)]
+    public byte? Size { get; set; }
 
     [Parameter]
     public string? Class { get; set; }
@@ -41,6 +46,10 @@ public partial class Indicator {
                 x.AddAttribute(1, "accessibility-title", this.Type);
                 x.AddAttribute(2, "fill", fillColor);
                 x.AddAttribute(3, "class", this.Class);
+
+                if (this.Size is not null) 
+                    x.AddAttribute(4, "size", this.Size);
+
                 x.CloseElement();
             };
         }

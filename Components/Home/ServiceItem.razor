@@ -1,10 +1,24 @@
 ﻿@using Microsoft.EntityFrameworkCore
+@using StatusDashboard.Components.Event
 @using StatusDashboard.Services
 @implements IAsyncDisposable
 @inject IDbContextFactory<StatusContext> context;
 
 <li class="flex items-center py-2">
-  <Indicator Type="@status" />
+  @if (future)
+  {
+    <div class="flex h-6">
+      <FluentCounterBadge
+        Dot="true"
+        Style="background: royalblue; border: none">
+        <Indicator Type="EventType.Operational" />
+      </FluentCounterBadge>
+    </div>
+  }
+  else
+  {
+    <Indicator Type="@status" />
+  }
 
   <label class="ml-2.5 text-xl font-medium text-slate-700">
     @RegionService.Service.Name

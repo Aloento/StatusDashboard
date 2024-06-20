@@ -26,13 +26,13 @@
   </section>
 </CascadingValue>
 
-<section class="flex justify-between py-2">
+<section class="flex flex-wrap justify-between gap-y-2 py-2">
   <div class="flex items-center gap-x-2">
     <div class="Blink" />
     <label>Auto Refresh Enabled</label>
   </div>
 
-  <legend class="flex items-center gap-x-6">
+  <legend class="flex flex-wrap items-center gap-x-6 gap-y-2.5">
     @foreach (var state in Enum.GetValues<EventType>())
     {
       <div class="flex gap-x-2">
