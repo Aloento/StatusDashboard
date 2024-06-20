@@ -19,8 +19,9 @@ public partial class ServiceItem {
 
     public async ValueTask DisposeAsync() => await this.db.DisposeAsync();
 
-    protected override async Task OnInitializedAsync() {
-        this.db = await this.context.CreateDbContextAsync();
+    protected override async Task OnInitializedAsync() => this.db = await this.context.CreateDbContextAsync();
+
+    protected override async Task OnParametersSetAsync() {
         this.status = await this.db.RegionService
             .Where(x => x.Id == this.RegionService.Id)
             .SelectMany(x => x.Events)
