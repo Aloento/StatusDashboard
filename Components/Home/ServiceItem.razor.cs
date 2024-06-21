@@ -33,10 +33,7 @@ public partial class ServiceItem {
             .Select(x => new { x.Type , x.Start })
             .FirstOrDefaultAsync();
 
-        if (res is null)
-            return;
-
-        this.status = res.Type;
-        this.future = res.Start > DateTime.UtcNow;
+        this.status = res?.Type ?? default;
+        this.future = res?.Start > DateTime.UtcNow;
     }
 }
