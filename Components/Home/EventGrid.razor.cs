@@ -54,7 +54,10 @@ public partial class EventGrid {
                 Regions = x.RegionServices.Select(r => r.Region.Name).ToArray(),
                 Latest = x.Histories.OrderByDescending(e => e.Created).FirstOrDefault()
             })
-            .Where(x => x.Latest!.Status != EventStatus.Completed && x.Latest.Status != EventStatus.Resolved)
+            .Where(x => 
+                x.Latest!.Status != EventStatus.Completed && 
+                x.Latest.Status != EventStatus.Resolved &&
+                x.Latest.Status != EventStatus.Cancelled)
             .OrderByDescending(x => x.Start)
             .ToArrayAsync();
 
