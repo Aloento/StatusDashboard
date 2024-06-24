@@ -7,17 +7,26 @@
 <li class="flex items-center py-2">
   @if (future)
   {
-    <div class="flex h-6">
+    <a class="flex h-6" href="/Event/@id">
       <FluentCounterBadge
         Dot="true"
         Style="background: royalblue; border: none">
-        <Indicator Type="EventType.Operational" />
+        <Indicator Type="EventType.Operational"/>
       </FluentCounterBadge>
-    </div>
+    </a>
   }
   else
   {
-    <Indicator Type="@status" />
+    @if (id is null)
+    {
+      <Indicator Type="@status"/>
+    }
+    else
+    {
+      <a class="flex items-center" href="/Event/@id">
+        <Indicator Type="@status"/>
+      </a>
+    }
   }
 
   <label class="ml-2.5 text-xl font-medium text-slate-700">
