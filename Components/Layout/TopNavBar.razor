@@ -17,18 +17,10 @@
     <scale-telekom-nav-item aria-label="Docs">
       <a href="@docsLink" target="_black">Docs</a>
     </scale-telekom-nav-item>
-    
-    <NavItem href="/NewEvent" Label="New Event" />
   </scale-telekom-nav-list>
 
   <scale-telekom-nav-list alignment="right" aria-label="Functions Menu" slot="functions" variant="functions">
-    <scale-telekom-profile-menu
-      accessibility-label="Login"
-      app-name="Application"
-      label="Login"
-      logged-in="false"
-      login-label="Log in"
-      login-url="https://www.telekom.de/todo/login" />
+    <ProfileMenu />
 
     <scale-telekom-nav-item hide-on-desktop>
       <button>

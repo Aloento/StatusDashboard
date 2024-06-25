@@ -1,3 +1,5 @@
+using Keycloak.AuthServices.Authentication;
+using Keycloak.AuthServices.Authorization;
 using Ljbc1994.Blazor.IntersectionObserver;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.FluentUI.AspNetCore.Components;
@@ -10,6 +12,11 @@ builder.Services.AddOptions<StatusOption>()
     .BindConfiguration(nameof(StatusDashboard))
     .ValidateDataAnnotations()
     .ValidateOnStart();
+
+builder.Services.AddKeycloakWebAppAuthentication(builder.Configuration);
+builder.Services
+    .AddAuthorization()
+    .AddKeycloakAuthorization(builder.Configuration);
 
 builder.Services.AddDbContextFactory<StatusContext>(
     x => x
@@ -41,6 +48,9 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
