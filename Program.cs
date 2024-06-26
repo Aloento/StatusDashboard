@@ -46,9 +46,8 @@ builder.Services.AddDbContextFactory<StatusContext>(
 
 builder.Services.AddMemoryCache();
 builder.Services.AddHttpClient<StatusHttp>();
-builder.Services.AddSingleton<StatusService>();
-builder.Services.AddHostedService(x => x.GetRequiredService<StatusService>());
-builder.Services.AddSingleton<SlaService>();
+builder.Services.AddHostedService<StatusService>();
+builder.Services.AddScoped<SlaService>();
 
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();

@@ -2,28 +2,20 @@
 
 using Components.Event;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 internal class StatusService : IHostedService {
     public StatusService(
-        ILogger<StatusService> logger,
-        IOptions<StatusOption> config,
         IDbContextFactory<StatusContext> context,
         StatusHttp http) {
-        this.logger = logger;
-        this.option = config.Value;
         this.http = http;
 
         this.db = context.CreateDbContext();
         this.db.Database.OpenConnection();
     }
 
-    private ILogger<StatusService> logger { get; }
-
-    private StatusOption option { get; }
-
     private StatusHttp http { get; }
 
+    // Due to the use of an in-memory database, at least one active connection is required to ensure that no data is lost.
     private StatusContext db { get; }
 
     public async Task StartAsync(CancellationToken cancellationToken) {
@@ -128,10 +120,9 @@ internal class StatusService : IHostedService {
                 await this.db.SaveChangesAsync(cancellationToken);
             }
         }
+
+        this.http.Dispose();
     }
 
-    public async Task StopAsync(CancellationToken cancellationToken) {
-        this.http.Dispose();
-        await this.db.DisposeAsync();
-    }
+    public async Task StopAsync(CancellationToken cancellationToken) => await this.db.DisposeAsync();
 }

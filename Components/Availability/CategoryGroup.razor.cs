@@ -23,11 +23,12 @@ public partial class CategoryGroup {
 
     private List<List<double>> slas { get; set; } = [];
 
-    public async ValueTask DisposeAsync() => await this.db.DisposeAsync();
-
-    protected override async Task OnInitializedAsync() {
-        this.db = await this.context.CreateDbContextAsync();
+    public async ValueTask DisposeAsync() {
+        await this.db.DisposeAsync();
+        await this.sla.DisposeAsync();
     }
+
+    protected override async Task OnInitializedAsync() => this.db = await this.context.CreateDbContextAsync();
 
     protected override async Task OnParametersSetAsync() {
         this.services = await this.db.RegionService
