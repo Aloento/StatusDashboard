@@ -918,6 +918,11 @@ video:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[clas
   font-weight: 500;
 }
 
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
 .text-red-600 {
   --tw-text-opacity: 1;
   color: rgb(220 38 38 / var(--tw-text-opacity));
@@ -941,6 +946,10 @@ video:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[clas
 .text-slate-800 {
   --tw-text-opacity: 1;
   color: rgb(30 41 59 / var(--tw-text-opacity));
+}
+
+.no-underline {
+  text-decoration-line: none;
 }
 
 .shadow-md {
