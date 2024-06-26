@@ -1,8 +1,4 @@
-﻿@{
-  const string docsLink = "https://docs.otc.t-systems.com/status-dashboard/index.html";
-}
-
-<scale-telekom-header
+﻿<scale-telekom-header
   app-name="Open Telekom Cloud"
   app-name-link="/"
   logo-href="/"
@@ -15,43 +11,15 @@
     <NavItem href="/Availability" Label="Availability" />
 
     <scale-telekom-nav-item aria-label="Docs">
-      <a href="@docsLink" target="_black">Docs</a>
+      <a href="https://docs.otc.t-systems.com/status-dashboard/index.html" target="_black">
+        Docs
+      </a>
     </scale-telekom-nav-item>
   </scale-telekom-nav-list>
 
   <scale-telekom-nav-list alignment="right" aria-label="Functions Menu" slot="functions" variant="functions">
     <ProfileMenu />
-
-    <scale-telekom-nav-item hide-on-desktop>
-      <button>
-        <scale-icon-action-menu accessibility-title="Menu" />
-      </button>
-
-      <scale-telekom-nav-flyout>
-        <scale-telekom-mobile-flyout-canvas>
-          <scale-telekom-mobile-menu slot="mobile-main-nav">
-
-            <scale-telekom-mobile-menu-item aria-label="History">
-              <a href="/History">History</a>
-            </scale-telekom-mobile-menu-item>
-
-            <scale-telekom-mobile-menu-item aria-label="Availability">
-              <a href="/Availability">Availability</a>
-            </scale-telekom-mobile-menu-item>
-
-            <scale-telekom-mobile-menu-item aria-label="Docs">
-              <a href="@docsLink" target="_black">Docs</a>
-            </scale-telekom-mobile-menu-item>
-
-            <scale-telekom-mobile-menu-item aria-label="New Event">
-              <a href="/NewEvent">New Event</a>
-            </scale-telekom-mobile-menu-item>
-
-          </scale-telekom-mobile-menu>
-        </scale-telekom-mobile-flyout-canvas>
-      </scale-telekom-nav-flyout>
-
-    </scale-telekom-nav-item>
+    <MobileMenu />
   </scale-telekom-nav-list>
 
 </scale-telekom-header>

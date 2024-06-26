@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+
+<scale-telekom-nav-item hide-on-desktop>
+  <button>
+    <scale-icon-action-menu accessibility-title="Menu"/>
+  </button>
+
+  <scale-telekom-nav-flyout>
+    <scale-telekom-mobile-flyout-canvas>
+      <scale-telekom-mobile-menu slot="mobile-main-nav">
+
+        <scale-telekom-mobile-menu-item>
+          <a href="/History">History</a>
+        </scale-telekom-mobile-menu-item>
+
+        <scale-telekom-mobile-menu-item>
+          <a href="/Availability">Availability</a>
+        </scale-telekom-mobile-menu-item>
+
+        <scale-telekom-mobile-menu-item>
+          <a href="https://docs.otc.t-systems.com/status-dashboard/index.html" target="_black">
+            Docs
+          </a>
+        </scale-telekom-mobile-menu-item>
+
+        <AuthorizeView>
+          <Authorized>
+            <scale-telekom-mobile-menu-item>
+              <a href="/NewEvent">New Event</a>
+            </scale-telekom-mobile-menu-item>
+
+            <scale-telekom-mobile-menu-item>
+              <a href="/Auth/Logout">Logout @context.User.Identity?.Name</a>
+            </scale-telekom-mobile-menu-item>
+          </Authorized>
+
+          <NotAuthorized>
+            <scale-telekom-mobile-menu-item>
+              <a href="/Auth/Login">Login</a>
+            </scale-telekom-mobile-menu-item>
+          </NotAuthorized>
+        </AuthorizeView>
+      </scale-telekom-mobile-menu>
+    </scale-telekom-mobile-flyout-canvas>
+  </scale-telekom-nav-flyout>
+</scale-telekom-nav-item>

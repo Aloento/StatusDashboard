@@ -1,8 +1,10 @@
 using Keycloak.AuthServices.Authentication;
 using Keycloak.AuthServices.Authorization;
 using Ljbc1994.Blazor.IntersectionObserver;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.FluentUI.AspNetCore.Components;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using StatusDashboard.Components;
 using StatusDashboard.Services;
 
@@ -13,7 +15,24 @@ builder.Services.AddOptions<StatusOption>()
     .ValidateDataAnnotations()
     .ValidateOnStart();
 
-builder.Services.AddKeycloakWebAppAuthentication(builder.Configuration);
+builder.Services
+    .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+    .AddKeycloakWebApp(
+        builder.Configuration.GetSection(KeycloakAuthenticationOptions.Section),
+        configureOpenIdConnectOptions: options => {
+            options.SaveTokens = true;
+            options.ResponseType = OpenIdConnectResponseType.Code;
+            options.Events = new() {
+                OnSignedOutCallbackRedirect = context => {
+                    context.Response.Redirect("/");
+                    context.HandleResponse();
+
+                    return Task.CompletedTask;
+                }
+            };
+        }
+    );
+
 builder.Services
     .AddAuthorization()
     .AddKeycloakAuthorization(builder.Configuration);
