@@ -1,4 +1,6 @@
-﻿<scale-telekom-nav-item hide-on-mobile>
+﻿@using Microsoft.AspNetCore.Components.Authorization
+
+<scale-telekom-nav-item hide-on-mobile>
   
   <scale-menu-flyout>
     <FluentButton slot="trigger" Appearance="Appearance.Stealth">
@@ -6,11 +8,27 @@
     </FluentButton>
 
     <scale-menu-flyout-list>
-      <scale-menu-flyout-item>
-        <a class="text-black no-underline" href="/NewEvent">
-          Login
-        </a>
-      </scale-menu-flyout-item>
+      <AuthorizeView>
+        <Authorized>
+          <scale-menu-flyout-item>
+            Hi, @context.User.Identity?.Name
+          </scale-menu-flyout-item>
+          
+          <scale-menu-flyout-item>
+            <a class="text-black no-underline" href="/Auth/Logout">
+              Logout
+            </a>
+          </scale-menu-flyout-item>
+        </Authorized>
+
+        <NotAuthorized>
+          <scale-menu-flyout-item>
+            <a class="text-black no-underline" href="/Auth/Login">
+              Login
+            </a>
+          </scale-menu-flyout-item>
+        </NotAuthorized>
+      </AuthorizeView>
 
       <scale-menu-flyout-item>
         <a class="text-black no-underline" href="/NewEvent">

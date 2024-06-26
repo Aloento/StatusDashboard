@@ -34,6 +34,8 @@ builder.Services.AddSingleton<SlaService>();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddControllers();
+
 builder.Services.AddFluentUIComponents();
 builder.Services.AddIntersectionObserver();
 
@@ -54,5 +56,7 @@ app.UseAuthorization();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
+
+app.MapControllers();
 
 app.Run();
