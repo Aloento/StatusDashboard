@@ -15,6 +15,11 @@ builder.Services.AddOptions<StatusOption>()
     .ValidateDataAnnotations()
     .ValidateOnStart();
 
+builder.Services.Configure<CookiePolicyOptions>(x => {
+    x.CheckConsentNeeded = _ => true;
+    x.MinimumSameSitePolicy = SameSiteMode.Unspecified;
+});
+
 builder.Services
     .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
     .AddKeycloakWebApp(
@@ -65,6 +70,7 @@ if (!app.Environment.IsDevelopment()) {
 }
 
 app.UseHttpsRedirection();
+app.UseCookiePolicy();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
