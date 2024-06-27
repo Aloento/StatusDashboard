@@ -18,21 +18,22 @@
   <meta name="msapplication-TileColor" content="#ea0a8e">
   <meta name="theme-color" content="#ffffff">
   
-  <link href="tw.output.css" rel="stylesheet" />
-  <link href="StatusDashboard.styles.css" rel="stylesheet" />
+  <script src="_framework/blazor.web.js" defer></script>
 
-  <link href="@($"{cdn}css")" rel="stylesheet" />
-  <script src="@($"{cdn}esm.js")" type="module"></script>
+  <link href="tw.output.css" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link href="StatusDashboard.styles.css" rel="stylesheet" media="print" onload="this.media='all'" />
+
+  <link href="@($"{cdn}css")" rel="stylesheet" media="print" onload="this.media='all'" />
+  <script src="@($"{cdn}esm.js")" type="module" async></script>
 
   <script src="@($"_content/{fluent}/{fluent}.lib.module.js")"
-    type="module"></script>
+          type="module" async></script>
 
   <HeadOutlet @rendermode="InteractiveServer" />
 </head>
 
 <body data-mode="light">
   <Routes @rendermode="InteractiveServer" />
-  <script src="_framework/blazor.web.js"></script>
 </body>
 
 </html>
