@@ -15,19 +15,17 @@ builder.Services.AddOptions<StatusOption>()
     .ValidateDataAnnotations()
     .ValidateOnStart();
 
-builder.Services.Configure<CookiePolicyOptions>(x => {
-    x.CheckConsentNeeded = _ => true;
-    x.MinimumSameSitePolicy = SameSiteMode.Unspecified;
-});
+if (!builder.Environment.IsDevelopment())
+    builder.Services.AddLettuceEncrypt();
 
 builder.Services
     .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
     .AddKeycloakWebApp(
         builder.Configuration.GetSection(KeycloakAuthenticationOptions.Section),
-        configureOpenIdConnectOptions: options => {
-            options.SaveTokens = true;
-            options.ResponseType = OpenIdConnectResponseType.Code;
-            options.Events = new() {
+        configureOpenIdConnectOptions: x => {
+            x.SaveTokens = true;
+            x.ResponseType = OpenIdConnectResponseType.Code;
+            x.Events = new() {
                 OnSignedOutCallbackRedirect = context => {
                     context.Response.Redirect("/");
                     context.HandleResponse();
@@ -70,7 +68,6 @@ if (!app.Environment.IsDevelopment()) {
 }
 
 app.UseHttpsRedirection();
-app.UseCookiePolicy();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
