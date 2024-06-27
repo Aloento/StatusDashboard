@@ -75,7 +75,13 @@ app.UseHttpsRedirection();
 app.UseResponseCompression();
 app.UseResponseCaching();
 
-app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions {
+    OnPrepareResponse = ctx => {
+        const int durationInSeconds = 60 * 60 * 24 * 30;
+        ctx.Context.Response.Headers["Cache-Control"] = $"no-cache, max-age={durationInSeconds}";
+    }
+});
+
 app.UseRouting();
 app.UseAntiforgery();
 
