@@ -60,6 +60,10 @@ builder.Services.AddControllers();
 builder.Services.AddFluentUIComponents();
 builder.Services.AddIntersectionObserver();
 
+builder.Services.AddResponseCompression(x => x.EnableForHttps = true);
+builder.Services.AddResponseCaching();
+builder.Services.AddOutputCache(x => x.AddBasePolicy(b => b.Cache()));
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment()) {
@@ -68,9 +72,14 @@ if (!app.Environment.IsDevelopment()) {
 }
 
 app.UseHttpsRedirection();
+app.UseResponseCompression();
+app.UseResponseCaching();
 
 app.UseStaticFiles();
+app.UseRouting();
 app.UseAntiforgery();
+
+app.UseOutputCache();
 
 app.UseAuthentication();
 app.UseAuthorization();
