@@ -1,4 +1,5 @@
 let dataGrid;
+let skeleton;
 const observer = new MutationObserver((mutationsList) => {
     mutationsList.forEach((mutation) => {
         if (mutation.type === "childList") {
@@ -20,6 +21,7 @@ const observer = new MutationObserver((mutationsList) => {
 function refresh() {
     if (dataGrid)
         observer.disconnect();
+    skeleton = document.querySelector("#SkeletonGrid");
     dataGrid = document.querySelector("#EventGrid");
     dataGrid.hideBorder = true;
     observer.observe(dataGrid.shadowRoot, {
@@ -35,4 +37,6 @@ export function setFields(fields) {
 }
 export function setRows(rows) {
     dataGrid.rows = rows;
+    dataGrid.classList.remove("!hidden");
+    skeleton.classList.add("hidden");
 }

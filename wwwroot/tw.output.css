@@ -647,6 +647,10 @@ video:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[clas
   display: grid;
 }
 
+.\!hidden {
+  display: none !important;
+}
+
 .hidden {
   display: none;
 }
