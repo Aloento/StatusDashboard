@@ -4,12 +4,21 @@
 @inject IJSRuntime JS
 @inject IDbContextFactory<StatusContext> context;
 
-@if (hasEvent)
+@if (numEvent > 0)
 {
   <scale-data-grid
-    class="rounded-lg bg-white shadow-md"
+    class="!hidden rounded-lg bg-white shadow-md"
     page-size="4"
     heading="Current Events"
     id="@nameof(EventGrid)"
   />
+
+  <FluentCard Id="SkeletonGrid" Class="flex flex-col gap-y-3">
+    <FluentSkeleton Shimmer="true" Height="28px" Width="120px" />
+
+    @for (var i = 0; i < (numEvent > 4 ? 4 : numEvent); i++)
+    {
+      <FluentSkeleton Shimmer="true" Height="42px" Width="100%" />
+    }
+  </FluentCard>
 }

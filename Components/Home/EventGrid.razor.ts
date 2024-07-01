@@ -1,6 +1,7 @@
 import { Components } from "@telekom/scale-components";
 
 let dataGrid: HTMLScaleDataGridElement;
+let skeleton: HTMLDivElement;
 
 const observer = new MutationObserver((mutationsList) => {
   mutationsList.forEach((mutation) => {
@@ -27,6 +28,7 @@ function refresh() {
   if (dataGrid)
     observer.disconnect();
 
+  skeleton = document.querySelector<HTMLDivElement>("#SkeletonGrid")!;
   dataGrid = document.querySelector<HTMLScaleDataGridElement>("#EventGrid")!;
   dataGrid.hideBorder = true;
 
@@ -55,4 +57,6 @@ export function setRows(
   ][]
 ) {
   dataGrid.rows = rows;
+  dataGrid.classList.remove("!hidden");
+  skeleton.classList.add("hidden");
 }

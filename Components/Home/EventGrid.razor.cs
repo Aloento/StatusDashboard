@@ -10,7 +10,7 @@ using Microsoft.JSInterop;
 using Services;
 
 public partial class EventGrid {
-    private readonly byte[] fields = JsonSerializer.SerializeToUtf8Bytes(
+    private static readonly byte[] fields = JsonSerializer.SerializeToUtf8Bytes(
         new List<FieldOption> {
             new() { Type = FieldTypes.Number, Label = "ID" },
             new() { Type = FieldTypes.Tags, Label = "Type" },
@@ -29,7 +29,7 @@ public partial class EventGrid {
     [NotNull]
     private StatusContext? db { get; set; }
 
-    private bool hasEvent { get; set; } = false;
+    private int numEvent { get; set; }
 
     public async ValueTask DisposeAsync() {
         await this.db.DisposeAsync();
@@ -38,13 +38,26 @@ public partial class EventGrid {
             await this.module.DisposeAsync();
     }
 
-    protected override async Task OnInitializedAsync() => this.db = await this.context.CreateDbContextAsync();
+    protected override async Task OnInitializedAsync() {
+        this.db = await this.context.CreateDbContextAsync();
+
+        this.numEvent = await this.db.Events
+            .Select(x => x.Histories.OrderByDescending(e => e.Created).FirstOrDefault())
+            .Where(x =>
+                x!.Status != EventStatus.Completed &&
+                x.Status != EventStatus.Resolved &&
+                x.Status != EventStatus.Cancelled)
+            .CountAsync();
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender) {
         if (firstRender)
             this.module = await this.JS.InvokeAsync<IJSObjectReference>(
                 "import",
                 $"./{nameof(Components)}/{nameof(Home)}/{nameof(EventGrid)}.razor.js");
+
+        if (this.numEvent < 1)
+            return;
 
         var events = await this.db.Events
             .Select(x => new {
@@ -61,11 +74,7 @@ public partial class EventGrid {
             .OrderByDescending(x => x.Start)
             .ToArrayAsync();
 
-        if (this.hasEvent is false && events.Length > 0) {
-            this.hasEvent = true;
-            this.StateHasChanged();
-        } else
-            return;
+        _ = this.module!.InvokeVoidAsync("setFields", fields).ConfigureAwait(false);
 
         var rows = events.Select(x => {
             var tag = x.Type switch {
@@ -114,7 +123,6 @@ public partial class EventGrid {
             };
         });
 
-        await this.module!.InvokeVoidAsync("setFields", this.fields);
         await this.module!.InvokeVoidAsync("setRows", rows);
     }
 }
