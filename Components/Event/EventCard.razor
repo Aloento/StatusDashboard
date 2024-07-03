@@ -2,6 +2,7 @@
 @using Microsoft.EntityFrameworkCore
 @using StatusDashboard.Components.Home
 @using StatusDashboard.Services
+@using Microsoft.AspNetCore.Components.Authorization
 @implements IAsyncDisposable
 @inject IDbContextFactory<StatusContext> context;
 
@@ -15,7 +16,9 @@
       </h3>
     </div>
     
-    <EventEditor Event="@theEvent" />
+    <AuthorizeView>
+      <EventEditor Event="@theEvent" />
+    </AuthorizeView>
   </div>
 
   <div class="flex gap-x-2.5">
