@@ -1,11 +1,15 @@
 ﻿@page "/Event/{id:int}"
 @using StatusDashboard.Components.Event
+@using StatusDashboard.Services
+@inject IEventManager<EventEditor> onSubmit
 
 <PageTitle>Event @Id - OTC Status Dashboard</PageTitle>
 
 <CascadingValue Value="Id">
-  <EventCard />
-  <EventLog />
+  <CascadingValue Value="onSubmit">
+    <EventCard/>
+    <EventLog/>
+  </CascadingValue>
 </CascadingValue>
 
 @code {

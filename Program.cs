@@ -56,6 +56,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddControllers();
+builder.Services.AddScoped(typeof(IEventManager<>), typeof(EventManager<>));
 
 builder.Services.AddFluentUIComponents();
 builder.Services.AddIntersectionObserver();

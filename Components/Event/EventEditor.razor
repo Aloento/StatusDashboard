@@ -1,11 +1,16 @@
-﻿@using Microsoft.EntityFrameworkCore
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.EntityFrameworkCore
 @using StatusDashboard.Services
 @implements IAsyncDisposable
 @inject IDbContextFactory<StatusContext> context;
+@inject AuthenticationStateProvider auth;
+@inject ILogger<EventEditor> logger;
+@inject IJSRuntime JS
 
 <scale-modal
   heading="Edit Event"
   id="@nameof(EventEditor)"
+  omit-close-button
   size="small">
   <EditForm class="flex flex-col gap-y-6" Model="form" OnValidSubmit="submit">
     <DataAnnotationsValidator />
@@ -60,10 +65,16 @@
         class="text-red-600"
         For="@(() => form.UpdateMsg)" />
     </div>
-
-    <scale-button class="self-end" size="small" type="submit">
-      Submit
-    </scale-button>
+    
+    <div class="flex gap-x-3 self-end">
+      <FluentButton OnClick="closeModal">
+        Cancel
+      </FluentButton>
+      
+      <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent">
+        Submit
+      </FluentButton>
+    </div>
   </EditForm>
 </scale-modal>
 
@@ -74,7 +85,10 @@
 
 <script>
   function openModal() {
-    const modal = document.getElementById("EventEditor");
-    modal.opened = true;
+    document.getElementById("EventEditor").opened = true;
+  }
+
+  function closeModal() {
+    document.getElementById("EventEditor").opened = false;
   }
 </script>

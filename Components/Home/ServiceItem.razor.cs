@@ -40,6 +40,6 @@ public partial class ServiceItem {
 
         this.id = res?.Id;
         this.status = res?.Type ?? default;
-        this.future = res?.Start > DateTime.UtcNow;
+        this.future = res?.Start.ToUniversalTime() > DateTime.UtcNow;
     }
 }

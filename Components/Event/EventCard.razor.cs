@@ -10,6 +10,10 @@ public partial class EventCard {
     public int Id { get; set; }
 
     [NotNull]
+    [CascadingParameter]
+    public IEventManager<EventEditor>? OnSubmit { get; set; }
+
+    [NotNull]
     private StatusContext? db { get; set; }
 
     [NotNull]
@@ -17,11 +21,22 @@ public partial class EventCard {
 
     private EventStatus status { get; set; }
 
-    public async ValueTask DisposeAsync() => await this.db.DisposeAsync();
+    public async ValueTask DisposeAsync() {
+        await this.db.DisposeAsync();
+        this.OnSubmit.Unsubscribe(this.onSubmit);
+    }
+
+    private async void onSubmit() {
+        await this.OnParametersSetAsync();
+        this.StateHasChanged();
+    }
 
     protected override async Task OnInitializedAsync() {
         this.db = await this.context.CreateDbContextAsync();
+        this.OnSubmit.Subscribe(this.onSubmit);
+    }
 
+    protected override async Task OnParametersSetAsync() {
         this.theEvent = await this.db.Events
             .Where(x => x.Id == this.Id)
             .SingleAsync();
