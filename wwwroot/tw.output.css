@@ -570,10 +570,6 @@ video:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[clas
   position: sticky;
 }
 
-.-left-3 {
-  left: -0.75rem;
-}
-
 .-left-3\.5 {
   left: -0.875rem;
 }
@@ -588,10 +584,6 @@ video:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[clas
 
 .right-3 {
   right: 0.75rem;
-}
-
-.top-0 {
-  top: 0px;
 }
 
 .top-0\.5 {
@@ -621,10 +613,6 @@ video:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[clas
 
 .mb-6 {
   margin-bottom: 1.5rem;
-}
-
-.ml-2 {
-  margin-left: 0.5rem;
 }
 
 .ml-2\.5 {
