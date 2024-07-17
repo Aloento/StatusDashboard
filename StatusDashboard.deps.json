@@ -7,7 +7,7 @@
   "targets": {
     ".NETCoreApp,Version=v8.0": {},
     ".NETCoreApp,Version=v8.0/linux-x64": {
-      "StatusDashboard/0.7.0": {
+      "StatusDashboard/0.8.0": {
         "dependencies": {
           "BlazorIntersectionObserver": "3.1.0",
           "JetBrains.Annotations": "2024.2.0",
@@ -1810,7 +1810,7 @@
     }
   },
   "libraries": {
-    "StatusDashboard/0.7.0": {
+    "StatusDashboard/0.8.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
