@@ -1,7 +1,9 @@
 ﻿namespace StatusDashboard.Components.New;
 
 using System.Diagnostics.CodeAnalysis;
+using Event;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.EntityFrameworkCore;
 
 public partial class NewForm {
@@ -28,17 +30,38 @@ public partial class NewForm {
             .ToArrayAsync();
     }
 
-    private async void submit() {
-        var regions = this.items
-            .SelectMany(x => x.Regions, (service, region) => new { service.Id, region })
-            .Where(x => x.region.Selected)
+    private async Task submit(EditContext ctx) {
+        var targets = this.items
+            .SelectMany(x => x.Regions
+                .Where(r => r.Selected)
+                .Select(r => this.db.RegionService
+                    .Single(y =>
+                        y.ServiceId == x.Id &&
+                        y.RegionId == r.Id)))
             .ToArray();
 
-        var targets = await this.db.RegionService
-            .Where(rs => regions
-                .Any(sr => 
-                    sr.Id == rs.ServiceId &&
-                    sr.region.Id == rs.RegionId))
-            .ToArrayAsync();
+        this.model.Services = targets.Length == 0 ? null : new();
+        var isValid = ctx.Validate();
+        if (!isValid) return;
+
+        var entity = this.db.Events.Add(new() {
+            Title = this.model.Title,
+            Type = this.model.Type,
+            Start = this.model.Start.Value,
+            End = this.model.Type is EventType.Maintenance ? this.model.End : null,
+            RegionServices = targets
+        }).Entity;
+
+        if (!string.IsNullOrWhiteSpace(this.model.Description))
+            entity.Histories = [
+                new() {
+                    Created = DateTime.UtcNow,
+                    Message = this.model.Description,
+                    Status = this.model.Type is EventType.Maintenance ? EventStatus.Scheduled : default
+                }
+            ];
+
+        await this.db.SaveChangesAsync();
+        this.nav.NavigateTo($"Event/{entity.Id}");
     }
 }

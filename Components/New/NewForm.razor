@@ -1,11 +1,12 @@
 ﻿@using StatusDashboard.Components.Event
 @using StatusDashboard.Helpers
 @inherits ComponentBaseWithDb
+@inject NavigationManager nav
 
 <EditForm
   class="flex flex-col gap-y-6 rounded-md bg-white px-8 py-7 shadow-md"
   Model="model"
-  OnValidSubmit="submit">
+  OnSubmit="submit">
 
   <DataAnnotationsValidator />
 
@@ -47,6 +48,10 @@
   
   <div>
     <ServiceSelector Items="@items.AsQueryable()" />
+    
+    <ValidationMessage
+      class="text-red-600"
+      For="@(() => model.Services)" />
   </div>
 
   <div>
