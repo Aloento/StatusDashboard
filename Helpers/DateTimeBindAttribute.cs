@@ -1,4 +1,4 @@
-﻿namespace StatusDashboard.Components.New;
+﻿namespace StatusDashboard.Helpers;
 
 using System.ComponentModel.DataAnnotations;
 

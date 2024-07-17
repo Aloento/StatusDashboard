@@ -1,4 +1,6 @@
 ﻿@using StatusDashboard.Components.Event
+@using StatusDashboard.Helpers
+@inherits ComponentBaseWithDb
 
 <EditForm
   class="flex flex-col gap-y-6 rounded-md bg-white px-8 py-7 shadow-md"
@@ -44,7 +46,7 @@
   </div>
   
   <div>
-    <ServiceSelector />
+    <ServiceSelector Items="@items.AsQueryable()" />
   </div>
 
   <div>

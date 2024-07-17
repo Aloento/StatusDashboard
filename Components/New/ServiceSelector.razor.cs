@@ -1,28 +1,13 @@
 ﻿namespace StatusDashboard.Components.New;
 
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Components;
 
 public partial class ServiceSelector {
     [NotNull]
-    private ServiceItem[]? items { get; set; }
-
-    protected override async Task OnInitializedAsync() {
-        await base.OnInitializedAsync();
-
-        this.items = await this.db.Services
-            .OrderBy(x => x.Name)
-            .Select(x => new ServiceItem {
-                Id = x.Id,
-                Name = x.Name,
-                Regions = x.Regions
-                    .Select(r => new RegionItem {
-                        Id = r.Id,
-                        Name = r.Name
-                    }).ToList()
-            })
-            .ToArrayAsync();
-    }
+    [Parameter]
+    [EditorRequired]
+    public IQueryable<ServiceItem>? Items { get; set; }
 }
 
 public class ServiceItem {

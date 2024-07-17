@@ -1,11 +1,4 @@
-﻿@using StatusDashboard.Helpers
-@inherits ComponentBaseWithDb
-
-@{
-  var queryable = items.AsQueryable();
-}
-
-<FluentInputLabel Required="true" Class="pb-1">
+﻿<FluentInputLabel Required="true" Class="pb-1">
   Affected Services
 </FluentInputLabel>
 
@@ -13,7 +6,7 @@
   <FluentDataGrid
     GenerateHeader="GenerateHeaderOption.Sticky"
     ItemKey="@(x => x.Id)"
-    Items="@queryable"
+    Items="@Items"
     ShowHover="true"
     TGridItem="ServiceItem">
 
@@ -21,7 +14,7 @@
       Property="@(x => x.Name)"
       Title="@nameof(ServiceItem.Name)" />
 
-    @foreach (var i in items.First().Regions)
+    @foreach (var i in Items.First().Regions)
     {
       <TemplateColumn
         TGridItem="ServiceItem"
