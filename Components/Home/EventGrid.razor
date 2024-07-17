@@ -1,8 +1,6 @@
-﻿@using Microsoft.EntityFrameworkCore
-@using StatusDashboard.Services
-@implements IAsyncDisposable
+﻿@using StatusDashboard.Helpers
+@inherits ComponentBaseWithDb
 @inject IJSRuntime JS
-@inject IDbContextFactory<StatusContext> context;
 
 @if (numEvent > 0)
 {

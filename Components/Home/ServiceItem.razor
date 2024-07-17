@@ -1,8 +1,6 @@
-﻿@using Microsoft.EntityFrameworkCore
-@using StatusDashboard.Components.Event
-@using StatusDashboard.Services
-@implements IAsyncDisposable
-@inject IDbContextFactory<StatusContext> context;
+﻿@using StatusDashboard.Components.Event
+@using StatusDashboard.Helpers
+@inherits ComponentBaseWithDb
 
 <li class="flex items-center py-2">
   @if (future)

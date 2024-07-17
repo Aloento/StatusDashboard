@@ -14,15 +14,12 @@ public partial class EventCard {
     public IEventManager<EventEditor>? OnSubmit { get; set; }
 
     [NotNull]
-    private StatusContext? db { get; set; }
-
-    [NotNull]
     private Event? theEvent { get; set; }
 
     private EventStatus status { get; set; }
 
-    public async ValueTask DisposeAsync() {
-        await this.db.DisposeAsync();
+    public override async ValueTask DisposeAsync() {
+        await base.DisposeAsync();
         this.OnSubmit.Unsubscribe(this.onSubmit);
     }
 
@@ -32,7 +29,7 @@ public partial class EventCard {
     }
 
     protected override async Task OnInitializedAsync() {
-        this.db = await this.context.CreateDbContextAsync();
+        await base.OnInitializedAsync();
         this.OnSubmit.Subscribe(this.onSubmit);
     }
 

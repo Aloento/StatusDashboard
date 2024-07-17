@@ -1,7 +1,5 @@
-﻿@using Microsoft.EntityFrameworkCore
-@using StatusDashboard.Services
-@implements IAsyncDisposable
-@inject IDbContextFactory<StatusContext> context;
+﻿@using StatusDashboard.Helpers
+@inherits ComponentBaseWithDb
 
 <div class="flex h-fit flex-col rounded-md bg-white px-3.5 py-5 shadow-md">
   <h3 class="px-3.5 text-2xl font-medium text-slate-800">

@@ -8,9 +8,6 @@ using Services;
 
 public partial class ServiceItem {
     [NotNull]
-    private StatusContext? db { get; set; }
-
-    [NotNull]
     [Parameter]
     [EditorRequired]
     public RegionService? RegionService { get; set; }
@@ -20,10 +17,6 @@ public partial class ServiceItem {
     private bool future { get; set; }
 
     private int? id { get; set; }
-
-    public async ValueTask DisposeAsync() => await this.db.DisposeAsync();
-
-    protected override async Task OnInitializedAsync() => this.db = await this.context.CreateDbContextAsync();
 
     protected override async Task OnParametersSetAsync() {
         var res = await this.db.RegionService

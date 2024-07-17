@@ -1,10 +1,8 @@
 ﻿@using System.Globalization
-@using Microsoft.EntityFrameworkCore
 @using StatusDashboard.Components.Home
-@using StatusDashboard.Services
 @using Microsoft.AspNetCore.Components.Authorization
-@implements IAsyncDisposable
-@inject IDbContextFactory<StatusContext> context;
+@using StatusDashboard.Helpers
+@inherits ComponentBaseWithDb
 
 <section class="flex flex-col gap-y-4 rounded-md bg-white px-8 py-6 shadow-md">
   <div class="flex justify-between">

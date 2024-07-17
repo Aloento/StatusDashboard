@@ -2,19 +2,13 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
-using Services;
 
 public partial class ServiceSelector {
     [NotNull]
-    private StatusContext? db { get; set; }
-
-    [NotNull]
     private ServiceItem[]? items { get; set; }
 
-    public async ValueTask DisposeAsync() => await this.db.DisposeAsync();
-
     protected override async Task OnInitializedAsync() {
-        this.db = await this.context.CreateDbContextAsync();
+        await base.OnInitializedAsync();
 
         this.items = await this.db.Services
             .OrderBy(x => x.Name)

@@ -8,9 +8,6 @@ using JB = JetBrains.Annotations;
 [JB.PublicAPI]
 public partial class Home {
     [NotNull]
-    private StatusContext? db { get; set; }
-
-    [NotNull]
     private Region? currentRegion { get; set; }
 
     [NotNull]
@@ -21,10 +18,8 @@ public partial class Home {
     [NotNull]
     private string? heading { get; set; }
 
-    public async ValueTask DisposeAsync() => await this.db.DisposeAsync();
-
     protected override async Task OnInitializedAsync() {
-        this.db = await this.context.CreateDbContextAsync();
+        await base.OnInitializedAsync();
 
         this.currentRegion = await this.db.Regions.FirstAsync();
         await this.getCategory();

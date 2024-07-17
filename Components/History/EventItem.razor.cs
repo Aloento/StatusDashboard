@@ -8,9 +8,6 @@ using Microsoft.JSInterop;
 using Services;
 
 public partial class EventItem {
-    [NotNull]
-    private StatusContext? db { get; set; }
-
     private ElementReference? labelElement { get; set; }
 
     [NotNull]
@@ -49,7 +46,7 @@ public partial class EventItem {
     private string? color { get; set; }
 
     protected override async Task OnInitializedAsync() {
-        this.db = await this.context.CreateDbContextAsync();
+        await base.OnInitializedAsync();
 
         this.status = await this.db.Histories
             .Where(x => x.Event == this.curr)
@@ -98,6 +95,4 @@ public partial class EventItem {
             await module.InvokeVoidAsync("onLabel", this.labelElement);
         }
     }
-
-    public async ValueTask DisposeAsync() => await this.db.DisposeAsync();
 }

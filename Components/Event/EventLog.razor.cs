@@ -12,15 +12,12 @@ public partial class EventLog {
     [NotNull]
     [CascadingParameter]
     public IEventManager<EventEditor>? OnSubmit { get; set; }
-
-    [NotNull]
-    private StatusContext? db { get; set; }
-
+    
     [NotNull]
     private History[]? list { get; set; }
 
-    public async ValueTask DisposeAsync() {
-        await this.db.DisposeAsync();
+    public override async ValueTask DisposeAsync() {
+        await base.DisposeAsync();
         this.OnSubmit.Unsubscribe(this.onSubmit);
     }
 
@@ -30,7 +27,7 @@ public partial class EventLog {
     }
 
     protected override async Task OnInitializedAsync() {
-        this.db = await this.context.CreateDbContextAsync();
+        await base.OnInitializedAsync();
         this.OnSubmit.Subscribe(this.onSubmit);
     }
 

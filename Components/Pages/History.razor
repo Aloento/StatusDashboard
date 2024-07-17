@@ -1,10 +1,8 @@
 ﻿@page "/History"
 @using StatusDashboard.Components.History
 @using Ljbc1994.Blazor.IntersectionObserver.Components
-@using Microsoft.EntityFrameworkCore
-@using StatusDashboard.Services
-@implements IAsyncDisposable
-@inject IDbContextFactory<StatusContext> context;
+@using StatusDashboard.Helpers
+@inherits ComponentBaseWithDb
 
 <PageTitle>Timeline - OTC Status Dashboard</PageTitle>
 

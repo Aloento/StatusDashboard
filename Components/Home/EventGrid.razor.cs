@@ -1,13 +1,11 @@
 ﻿namespace StatusDashboard.Components.Home;
 
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Event;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
-using Services;
 
 public partial class EventGrid {
     private static readonly byte[] fields = JsonSerializer.SerializeToUtf8Bytes(
@@ -26,20 +24,17 @@ public partial class EventGrid {
 
     private IJSObjectReference? module;
 
-    [NotNull]
-    private StatusContext? db { get; set; }
-
     private int numEvent { get; set; }
 
-    public async ValueTask DisposeAsync() {
-        await this.db.DisposeAsync();
+    public override async ValueTask DisposeAsync() {
+        await base.DisposeAsync();
 
         if (this.module is not null)
             await this.module.DisposeAsync();
     }
 
     protected override async Task OnInitializedAsync() {
-        this.db = await this.context.CreateDbContextAsync();
+        await base.OnInitializedAsync();
 
         this.numEvent = await this.db.Events
             .Select(x => x.Histories.OrderByDescending(e => e.Created).FirstOrDefault())

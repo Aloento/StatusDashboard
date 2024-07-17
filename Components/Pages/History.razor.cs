@@ -7,9 +7,6 @@ using JB = JetBrains.Annotations;
 
 [JB.PublicAPI]
 public partial class History {
-    [NotNull]
-    private StatusContext? db { get; set; }
-
     private bool isBottom { get; set; }
 
     private bool isEnd { get; set; }
@@ -41,7 +38,7 @@ public partial class History {
     }
 
     protected override async Task OnInitializedAsync() {
-        this.db = await this.context.CreateDbContextAsync();
+        await base.OnInitializedAsync();
 
         this.dbEvents = this.db.Events
             .OrderByDescending(x => x.Start)
@@ -52,8 +49,8 @@ public partial class History {
         this.items.Add(new(null, this.dbEvents.Current));
     }
 
-    public async ValueTask DisposeAsync() {
+    public override async ValueTask DisposeAsync() {
         await this.dbEvents.DisposeAsync();
-        await this.db.DisposeAsync();
+        await base.DisposeAsync();
     }
 }

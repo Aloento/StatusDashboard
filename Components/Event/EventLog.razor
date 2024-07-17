@@ -1,8 +1,6 @@
 ﻿@using System.Globalization
-@using Microsoft.EntityFrameworkCore
-@using StatusDashboard.Services
-@implements IAsyncDisposable
-@inject IDbContextFactory<StatusContext> context;
+@using StatusDashboard.Helpers
+@inherits ComponentBaseWithDb
 
 <scale-table class="rounded-md bg-white p-6 shadow-md">
   <table>

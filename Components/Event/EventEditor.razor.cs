@@ -20,11 +20,6 @@ public partial class EventEditor {
     [SupplyParameterFromForm]
     private EventForm? form { get; set; }
 
-    [NotNull]
-    private StatusContext? db { get; set; }
-
-    public async ValueTask DisposeAsync() => await this.db.DisposeAsync();
-
     private async Task submit() {
         var user = await this.auth.GetAuthenticationStateAsync();
         var str = JsonSerializer.Serialize(this.form);
@@ -50,7 +45,7 @@ public partial class EventEditor {
         await this.JS.InvokeVoidAsync(nameof(this.closeModal));
 
     protected override async Task OnInitializedAsync() {
-        this.db = await this.context.CreateDbContextAsync();
+        await base.OnInitializedAsync();
 
         this.form = new() {
             Title = this.Event.Title,

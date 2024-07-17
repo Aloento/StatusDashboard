@@ -1,7 +1,5 @@
-﻿@using Microsoft.EntityFrameworkCore
-@using StatusDashboard.Services
-@implements IAsyncDisposable
-@inject IDbContextFactory<StatusContext> context;
+﻿@using StatusDashboard.Helpers
+@inherits ComponentBaseWithDb
 
 @{
   var queryable = items.AsQueryable();

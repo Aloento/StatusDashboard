@@ -7,9 +7,6 @@ using Services;
 
 public partial class StatusCard {
     [NotNull]
-    private StatusContext? db { get; set; }
-
-    [NotNull]
     [Parameter]
     [EditorRequired]
     public Category? Category { get; set; }
@@ -20,10 +17,6 @@ public partial class StatusCard {
 
     [NotNull]
     private RegionService[]? services { get; set; }
-
-    public async ValueTask DisposeAsync() => await this.db.DisposeAsync();
-
-    protected override async Task OnInitializedAsync() => this.db = await this.context.CreateDbContextAsync();
 
     protected override async Task OnParametersSetAsync() =>
         this.services = await this.db.RegionService

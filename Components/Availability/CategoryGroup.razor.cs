@@ -16,19 +16,14 @@ public partial class CategoryGroup {
     public Region? Region { get; set; }
 
     [NotNull]
-    private StatusContext? db { get; set; }
-
-    [NotNull]
     private RegionService[]? services { get; set; }
 
     private List<List<double>> slas { get; set; } = [];
 
-    public async ValueTask DisposeAsync() {
-        await this.db.DisposeAsync();
+    public override async ValueTask DisposeAsync() {
+        await base.DisposeAsync();
         await this.sla.DisposeAsync();
     }
-
-    protected override async Task OnInitializedAsync() => this.db = await this.context.CreateDbContextAsync();
 
     protected override async Task OnParametersSetAsync() {
         this.services = await this.db.RegionService
@@ -44,7 +39,7 @@ public partial class CategoryGroup {
         }
     }
 
-    private string getColor(double val) {
+    private static string getColor(double val) {
         var color = val switch {
             >= 99.95 => "emerald",
             >= 99 => "amber",

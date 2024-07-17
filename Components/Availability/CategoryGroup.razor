@@ -1,7 +1,6 @@
-﻿@using Microsoft.EntityFrameworkCore
-@using StatusDashboard.Services
-@implements IAsyncDisposable
-@inject IDbContextFactory<StatusContext> context;
+﻿@using StatusDashboard.Services
+@using StatusDashboard.Helpers
+@inherits ComponentBaseWithDb
 @inject SlaService sla;
 
 <tr>

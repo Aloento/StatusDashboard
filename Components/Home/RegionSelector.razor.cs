@@ -18,16 +18,13 @@ public partial class RegionSelector {
     public Action<Region>? OnClick { get; set; }
 
     [NotNull]
-    private StatusContext? db { get; set; }
-
-    [NotNull]
     private ICollection<Region>? regions { get; set; }
 
     [NotNull]
     private DotNetObjectReference<RegionSelector>? objRef { get; set; }
 
     protected override async Task OnInitializedAsync() {
-        this.db = await this.context.CreateDbContextAsync();
+        await base.OnInitializedAsync();
         this.regions = await this.db.Regions.ToArrayAsync();
         this.objRef = DotNetObjectReference.Create(this);
     }
@@ -43,8 +40,8 @@ public partial class RegionSelector {
         this.OnClick(res);
     }
 
-    public async ValueTask DisposeAsync() {
-        await this.db.DisposeAsync();
+    public override async ValueTask DisposeAsync() {
+        await base.DisposeAsync();
         this.objRef.Dispose();
     }
 }

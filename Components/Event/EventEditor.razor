@@ -1,8 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Components.Authorization
-@using Microsoft.EntityFrameworkCore
-@using StatusDashboard.Services
-@implements IAsyncDisposable
-@inject IDbContextFactory<StatusContext> context;
+@using StatusDashboard.Helpers
+@inherits ComponentBaseWithDb
 @inject AuthenticationStateProvider auth;
 @inject ILogger<EventEditor> logger;
 @inject IJSRuntime JS

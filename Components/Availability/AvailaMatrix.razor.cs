@@ -12,12 +12,9 @@ public partial class AvailaMatrix {
     public Region? Region { get; set; }
 
     [NotNull]
-    private StatusContext? db { get; set; }
-
-    [NotNull]
     private Category[]? categories { get; set; }
 
-    private List<string> get6Months() {
+    private static List<string> get6Months() {
         var months = new List<string>();
         var date = DateTime.UtcNow;
 
@@ -29,10 +26,6 @@ public partial class AvailaMatrix {
 
         return months;
     }
-
-    public async ValueTask DisposeAsync() => await this.db.DisposeAsync();
-
-    protected override async Task OnInitializedAsync() => this.db = await this.context.CreateDbContextAsync();
 
     protected override async Task OnParametersSetAsync() =>
         this.categories = await this.db.RegionService
