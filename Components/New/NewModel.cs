@@ -15,9 +15,6 @@ public class NewModel {
     [StringLength(maximumLength: 200, MinimumLength = 10)]
     public string? Description { get; set; }
 
-    [MinLength(1)]
-    public List<ServiceItem>? Services { get; set; }
-
     [Required]
     [DateTimeBind(nameof(End), true)]
     public DateTime? Start { get; set; } = DateTime.Now;

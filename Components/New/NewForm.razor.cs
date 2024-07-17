@@ -28,7 +28,17 @@ public partial class NewForm {
             .ToArrayAsync();
     }
 
-    private void submit() {
-        Console.WriteLine(this.model.Title);
+    private async void submit() {
+        var regions = this.items
+            .SelectMany(x => x.Regions, (service, region) => new { service.Id, region })
+            .Where(x => x.region.Selected)
+            .ToArray();
+
+        var targets = await this.db.RegionService
+            .Where(rs => regions
+                .Any(sr => 
+                    sr.Id == rs.ServiceId &&
+                    sr.region.Id == rs.RegionId))
+            .ToArrayAsync();
     }
 }
