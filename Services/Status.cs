@@ -24,7 +24,7 @@ internal class StatusService : IHostedService {
         var list = this.http.GetStatus(cancellationToken);
 
         await foreach (var item in list) {
-            if (item is null) continue;
+            if (item is null || item.Attributes.Length < 3) continue;
 
             var targetCate = item.Attributes.Single(x => x.Name == NameEnum.Category).Value;
 
