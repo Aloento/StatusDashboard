@@ -36,6 +36,15 @@ public partial class EventEditor {
             Status = this.form.Status
         });
 
+        if (this.form.Status is
+            EventStatus.Cancelled or
+            EventStatus.Completed or
+            EventStatus.Resolved)
+            this.Event.End = DateTime.UtcNow;
+        else
+            this.Event.End = this.form.Type is EventType.Maintenance
+                ? this.form.End : null;
+
         await this.db.SaveChangesAsync();
         this.closeModal();
         this.OnSubmit.Publish();
@@ -49,7 +58,8 @@ public partial class EventEditor {
 
         this.form = new() {
             Title = this.Event.Title,
-            Type = this.Event.Type
+            Type = this.Event.Type,
+            End = this.Event.End
         };
     }
 }

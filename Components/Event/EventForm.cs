@@ -2,6 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
+using Helpers;
 
 public class EventForm {
     [NotNull]
@@ -19,4 +20,9 @@ public class EventForm {
 
     [Required]
     public EventStatus Status { get; set; }
+
+    public DateTime Now => DateTime.Now;
+
+    [DateTimeBind(nameof(Now))]
+    public DateTime? End { get; set; }
 }

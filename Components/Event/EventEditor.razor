@@ -52,6 +52,24 @@
         TOption="EventStatus" />
     </div>
 
+    @if (form.Type is EventType.Maintenance)
+    {
+      <div>
+        <FluentDatePicker
+          @bind-Value="form.End"
+          Label="@($"Plan {nameof(form.End)} CET")"
+          Required="true" />
+
+        <FluentTimePicker
+          @bind-Value="form.End"
+          Required="true" />
+
+        <ValidationMessage
+          class="text-red-600"
+          For="@(() => form.End)" />
+      </div>
+    }
+
     <div>
       <FluentTextArea
         @bind-Value="form.UpdateMsg"
