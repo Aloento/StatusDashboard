@@ -111,7 +111,12 @@ internal class StatusService : IHostedService {
                             StatusEnum.InProgress => EventStatus.Performing,
                             StatusEnum.Completed => EventStatus.Completed,
 
-                            _ => throw new NotImplementedException(),
+                            StatusEnum.Reopened => EventStatus.Fixing,
+                            StatusEnum.Changed => EventStatus.Resolved,
+                            StatusEnum.Modified => EventStatus.Scheduled,
+
+                            StatusEnum.System => throw new NotImplementedException(),
+                            _ => throw new NotImplementedException()
                         };
                     }
                 }
