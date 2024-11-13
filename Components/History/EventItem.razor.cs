@@ -28,8 +28,6 @@ public partial class EventItem {
         }
     }
 
-    private EventStatus status { get; set; }
-
     [NotNull]
     private Service[]? services { get; set; }
 
@@ -47,12 +45,6 @@ public partial class EventItem {
 
     protected override async Task OnInitializedAsync() {
         await base.OnInitializedAsync();
-
-        this.status = await this.db.Histories
-            .Where(x => x.Event == this.curr)
-            .OrderByDescending(x => x.Created)
-            .Select(x => x.Status)
-            .FirstOrDefaultAsync();
 
         this.services = await this.db.RegionService
             .Where(x => x.Events.Contains(this.curr))
@@ -78,7 +70,7 @@ public partial class EventItem {
             ? string.Join(", ", this.regions.Take(2)) + $" (+{this.regions.Length - 2})"
             : string.Join(", ", this.regions);
 
-        this.color = this.status switch {
+        this.color = this.curr.Status switch {
             EventStatus.Investigating or EventStatus.Fixing or EventStatus.Monitoring => "yellow",
             EventStatus.Scheduled or EventStatus.Performing => "violet",
             EventStatus.Resolved or EventStatus.Completed => "green",
