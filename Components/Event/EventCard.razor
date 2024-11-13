@@ -34,7 +34,10 @@
       </label>
 
       <label class="text-xl font-medium text-slate-600">
-        (Plan) End At:
+        @(theEvent.Type == EventType.Maintenance &&
+          theEvent.Status != EventStatus.Completed
+          ? "(Plan) "
+          : "") End At:
       </label>
     </div>
 
@@ -44,7 +47,7 @@
       </label>
 
       <label class="text-xl font-medium text-slate-700">
-        @status
+        @theEvent.Status
       </label>
 
       <label class="text-xl font-medium text-slate-700">
