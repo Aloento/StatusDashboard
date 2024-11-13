@@ -128,10 +128,16 @@ internal class StatusService : IHostedService {
                             dbEvent.End = null;
                     }
 
-                    var status = dbEvent.Histories.MaxBy(x => x.Created)?.Status;
+                    var status = dbEvent.Histories?.MaxBy(x => x.Created);
+                    
+                    if (status is not null) 
+                        dbEvent.Status = status.Status;
+                }
 
-                    if (status.HasValue) 
-                        dbEvent.Status = status.Value;
+                if (dbEvent is { End: not null, Type: EventType.Maintenance } &&
+                    dbEvent.Status != EventStatus.Cancelled &&
+                    dbEvent.End.Value < DateTime.UtcNow) {
+                    dbEvent.Status = EventStatus.Completed;
                 }
 
                 regionService.Events.Add(dbEvent);
