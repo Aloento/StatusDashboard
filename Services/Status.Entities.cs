@@ -93,7 +93,8 @@ internal enum StatusEnum {
     Observing,
     Reopened,
     Changed,
-    Modified
+    Modified,
+    ImpactChanged
 }
 
 internal class StatusEnumConverter : JsonConverter<StatusEnum> {
@@ -114,7 +115,7 @@ internal class StatusEnumConverter : JsonConverter<StatusEnum> {
                 "reopened" => StatusEnum.Reopened,
                 "changed" => StatusEnum.Changed,
                 "modified" => StatusEnum.Modified,
-                "impact changed" => StatusEnum.Changed,
+                "impact changed" => StatusEnum.ImpactChanged,
                 _ => throw new JsonException($"Unknown status value: {value}")
             };
         } catch (Exception e) {

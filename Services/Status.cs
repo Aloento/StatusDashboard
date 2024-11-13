@@ -88,6 +88,10 @@ internal class StatusService : IHostedService {
                         _ => EventType.Outage
                     };
 
+                    dbEvent.Status = dbEvent.Type == EventType.Maintenance
+                        ? EventStatus.Scheduled
+                        : EventStatus.Investigating;
+
                     foreach (var update in incident.Updates.OrderBy(x => x.Timestamp)) {
                         var history = this.db.Histories.Add(new() {
                             Created = (DateTime)update.Timestamp!,
@@ -113,12 +117,21 @@ internal class StatusService : IHostedService {
 
                             StatusEnum.Reopened => EventStatus.Fixing,
                             StatusEnum.Changed => EventStatus.Resolved,
+                            StatusEnum.ImpactChanged => EventStatus.Resolved,
                             StatusEnum.Modified => EventStatus.Scheduled,
 
-                            StatusEnum.System => throw new NotImplementedException(),
+                            StatusEnum.System => EventStatus.Cancelled,
                             _ => throw new NotImplementedException()
                         };
+
+                        if (update.Status is StatusEnum.Reopened)
+                            dbEvent.End = null;
                     }
+
+                    var status = dbEvent.Histories.MaxBy(x => x.Created)?.Status;
+
+                    if (status.HasValue) 
+                        dbEvent.Status = status.Value;
                 }
 
                 regionService.Events.Add(dbEvent);

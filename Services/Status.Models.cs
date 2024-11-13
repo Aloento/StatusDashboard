@@ -66,6 +66,8 @@ public class Event {
 
     public DateTime? End { get; set; }
 
+    public EventStatus Status { get; set; }
+
     public ICollection<RegionService> RegionServices { get; set; }
 
     public ICollection<History> Histories { get; set; }
