@@ -1,6 +1,7 @@
 ﻿namespace StatusDashboard.Components.Pages;
 
 using System.Diagnostics.CodeAnalysis;
+using Components.Event;
 using Microsoft.EntityFrameworkCore;
 using Services;
 using JB = JetBrains.Annotations;
@@ -26,6 +27,11 @@ public partial class Home {
 
         this.abnormalCount = await this.db.Events
             .Where(x => x.End == null)
+            .Where(x => x.Type != EventType.Maintenance)
+            .Where(e => 
+                e.Status != EventStatus.Completed &&
+                e.Status != EventStatus.Resolved &&
+                e.Status != EventStatus.Cancelled)
             .SelectMany(x => x.RegionServices)
             .Select(x => x.Service)
             .Distinct()

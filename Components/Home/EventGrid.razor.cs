@@ -56,16 +56,19 @@ public partial class EventGrid {
 
         var events = await this.db.Events
             .Select(x => new {
-                x.Id, x.Type,
-                x.Start, x.End,
+                x.Id,
+                x.Type,
+                x.Start,
+                x.End,
+                x.Status,
                 Services = x.RegionServices.Select(s => s.Service.Name).ToArray(),
-                Regions = x.RegionServices.Select(r => r.Region.Name).ToArray(),
-                Latest = x.Histories.OrderByDescending(e => e.Created).FirstOrDefault()
+                Regions = x.RegionServices.Select(r => r.Region.Name).ToArray()
             })
-            .Where(x => 
-                x.Latest!.Status != EventStatus.Completed && 
-                x.Latest.Status != EventStatus.Resolved &&
-                x.Latest.Status != EventStatus.Cancelled)
+            .Where(x =>
+                (x.Type == EventType.Maintenance || x.End == null) &&
+                x.Status != EventStatus.Completed &&
+                x.Status != EventStatus.Resolved &&
+                x.Status != EventStatus.Cancelled)
             .OrderByDescending(x => x.Start)
             .ToArrayAsync();
 
@@ -101,7 +104,7 @@ public partial class EventGrid {
                 x.Start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm 'UTC'", CultureInfo.InvariantCulture),
                 x.End.HasValue
                     ? x.End.Value.ToUniversalTime().ToString("MM-dd HH:mm", CultureInfo.InvariantCulture)
-                    : (x.Latest?.Status ?? default).ToString(),
+                    : x.Status.ToString(),
                 regions.Length > 1
                     ? $"{regions[0]} +{regions.Length - 1}"
                     : regions[0],
