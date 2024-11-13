@@ -1,11 +1,119 @@
+*, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
 
 *:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)),
-::before:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)),
-::after:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)) {
+:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *))::before,
+:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *))::after {
   box-sizing: border-box;
   /* 1 */
   border-width: 0;
@@ -16,8 +124,8 @@
   /* 2 */
 }
 
-::before:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)),
-::after:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)) {
+:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *))::before,
+:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *))::after {
   --tw-content: '';
 }
 
@@ -271,8 +379,8 @@ progress:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[c
 Correct the cursor style of increment and decrement buttons in Safari.
 */
 
-::-webkit-inner-spin-button:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)),
-::-webkit-outer-spin-button:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)) {
+:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)) ::-webkit-inner-spin-button,
+:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)) ::-webkit-outer-spin-button {
   height: auto;
 }
 
@@ -292,7 +400,7 @@ Correct the cursor style of increment and decrement buttons in Safari.
 Remove the inner padding in Chrome and Safari on macOS.
 */
 
-::-webkit-search-decoration:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)) {
+:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)) ::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
@@ -301,7 +409,7 @@ Remove the inner padding in Chrome and Safari on macOS.
 2. Change font properties to `inherit` in Safari.
 */
 
-::-webkit-file-upload-button:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)) {
+:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)) ::-webkit-file-upload-button {
   -webkit-appearance: button;
   /* 1 */
   font: inherit;
@@ -374,15 +482,15 @@ textarea:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[c
 2. Set the default placeholder color to the user's configured gray 400 color.
 */
 
-input::-moz-placeholder:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)), textarea::-moz-placeholder:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)) {
+:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)) input::-moz-placeholder, :where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)) textarea::-moz-placeholder {
   opacity: 1;
   /* 1 */
   color: #9ca3af;
   /* 2 */
 }
 
-input::placeholder:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)),
-textarea::placeholder:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)) {
+:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)) input::placeholder,
+:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)) textarea::placeholder {
   opacity: 1;
   /* 1 */
   color: #9ca3af;
@@ -438,116 +546,8 @@ video:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[clas
 
 /* Make elements with the HTML hidden attribute stay hidden by default */
 
-[hidden]:where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)) {
+[hidden]:where(:not([hidden="until-found"])):where(:not([class^="fluent-"],[class^="fluent-"] *,[class^="scale-"],[class^="scale-"] *)) {
   display: none;
-}
-
-*, ::before, ::after {
-  --tw-border-spacing-x: 0;
-  --tw-border-spacing-y: 0;
-  --tw-translate-x: 0;
-  --tw-translate-y: 0;
-  --tw-rotate: 0;
-  --tw-skew-x: 0;
-  --tw-skew-y: 0;
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
-  --tw-pan-x:  ;
-  --tw-pan-y:  ;
-  --tw-pinch-zoom:  ;
-  --tw-scroll-snap-strictness: proximity;
-  --tw-gradient-from-position:  ;
-  --tw-gradient-via-position:  ;
-  --tw-gradient-to-position:  ;
-  --tw-ordinal:  ;
-  --tw-slashed-zero:  ;
-  --tw-numeric-figure:  ;
-  --tw-numeric-spacing:  ;
-  --tw-numeric-fraction:  ;
-  --tw-ring-inset:  ;
-  --tw-ring-offset-width: 0px;
-  --tw-ring-offset-color: #fff;
-  --tw-ring-color: rgb(59 130 246 / 0.5);
-  --tw-ring-offset-shadow: 0 0 #0000;
-  --tw-ring-shadow: 0 0 #0000;
-  --tw-shadow: 0 0 #0000;
-  --tw-shadow-colored: 0 0 #0000;
-  --tw-blur:  ;
-  --tw-brightness:  ;
-  --tw-contrast:  ;
-  --tw-grayscale:  ;
-  --tw-hue-rotate:  ;
-  --tw-invert:  ;
-  --tw-saturate:  ;
-  --tw-sepia:  ;
-  --tw-drop-shadow:  ;
-  --tw-backdrop-blur:  ;
-  --tw-backdrop-brightness:  ;
-  --tw-backdrop-contrast:  ;
-  --tw-backdrop-grayscale:  ;
-  --tw-backdrop-hue-rotate:  ;
-  --tw-backdrop-invert:  ;
-  --tw-backdrop-opacity:  ;
-  --tw-backdrop-saturate:  ;
-  --tw-backdrop-sepia:  ;
-  --tw-contain-size:  ;
-  --tw-contain-layout:  ;
-  --tw-contain-paint:  ;
-  --tw-contain-style:  ;
-}
-
-::backdrop {
-  --tw-border-spacing-x: 0;
-  --tw-border-spacing-y: 0;
-  --tw-translate-x: 0;
-  --tw-translate-y: 0;
-  --tw-rotate: 0;
-  --tw-skew-x: 0;
-  --tw-skew-y: 0;
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
-  --tw-pan-x:  ;
-  --tw-pan-y:  ;
-  --tw-pinch-zoom:  ;
-  --tw-scroll-snap-strictness: proximity;
-  --tw-gradient-from-position:  ;
-  --tw-gradient-via-position:  ;
-  --tw-gradient-to-position:  ;
-  --tw-ordinal:  ;
-  --tw-slashed-zero:  ;
-  --tw-numeric-figure:  ;
-  --tw-numeric-spacing:  ;
-  --tw-numeric-fraction:  ;
-  --tw-ring-inset:  ;
-  --tw-ring-offset-width: 0px;
-  --tw-ring-offset-color: #fff;
-  --tw-ring-color: rgb(59 130 246 / 0.5);
-  --tw-ring-offset-shadow: 0 0 #0000;
-  --tw-ring-shadow: 0 0 #0000;
-  --tw-shadow: 0 0 #0000;
-  --tw-shadow-colored: 0 0 #0000;
-  --tw-blur:  ;
-  --tw-brightness:  ;
-  --tw-contrast:  ;
-  --tw-grayscale:  ;
-  --tw-hue-rotate:  ;
-  --tw-invert:  ;
-  --tw-saturate:  ;
-  --tw-sepia:  ;
-  --tw-drop-shadow:  ;
-  --tw-backdrop-blur:  ;
-  --tw-backdrop-brightness:  ;
-  --tw-backdrop-contrast:  ;
-  --tw-backdrop-grayscale:  ;
-  --tw-backdrop-hue-rotate:  ;
-  --tw-backdrop-invert:  ;
-  --tw-backdrop-opacity:  ;
-  --tw-backdrop-saturate:  ;
-  --tw-backdrop-sepia:  ;
-  --tw-contain-size:  ;
-  --tw-contain-layout:  ;
-  --tw-contain-paint:  ;
-  --tw-contain-style:  ;
 }
 
 .static {
