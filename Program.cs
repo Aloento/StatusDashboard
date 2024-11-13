@@ -23,6 +23,9 @@ builder.Services
     .AddKeycloakWebApp(
         builder.Configuration.GetSection(KeycloakAuthenticationOptions.Section),
         configureOpenIdConnectOptions: x => {
+            if (!builder.Environment.IsDevelopment()) 
+                x.ClientSecret = Environment.GetEnvironmentVariable("SD_CS");
+
             x.SaveTokens = true;
             x.ResponseType = OpenIdConnectResponseType.Code;
             x.Events = new() {

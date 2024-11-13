@@ -99,21 +99,28 @@ internal enum StatusEnum {
 internal class StatusEnumConverter : JsonConverter<StatusEnum> {
     public override StatusEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) {
         var value = reader.GetString()?.ToLower();
-        return value switch {
-            "system" => StatusEnum.System,
-            "analyzing" => StatusEnum.Analyzing,
-            "completed" => StatusEnum.Completed,
-            "description" => StatusEnum.Description,
-            "in progress" => StatusEnum.InProgress,
-            "resolved" => StatusEnum.Resolved,
-            "scheduled" => StatusEnum.Scheduled,
-            "fixing" => StatusEnum.Fixing,
-            "observing" => StatusEnum.Observing,
-            "reopened" => StatusEnum.Reopened,
-            "changed" => StatusEnum.Changed,
-            "modified" => StatusEnum.Modified,
-            _ => throw new JsonException($"Unknown status value: {value}")
-        };
+
+        try {
+            return value switch {
+                "system" => StatusEnum.System,
+                "analyzing" => StatusEnum.Analyzing,
+                "completed" => StatusEnum.Completed,
+                "description" => StatusEnum.Description,
+                "in progress" => StatusEnum.InProgress,
+                "resolved" => StatusEnum.Resolved,
+                "scheduled" => StatusEnum.Scheduled,
+                "fixing" => StatusEnum.Fixing,
+                "observing" => StatusEnum.Observing,
+                "reopened" => StatusEnum.Reopened,
+                "changed" => StatusEnum.Changed,
+                "modified" => StatusEnum.Modified,
+                "impact changed" => StatusEnum.Changed,
+                _ => throw new JsonException($"Unknown status value: {value}")
+            };
+        } catch (Exception e) {
+            Console.Error.WriteLine(e.Message);
+            return StatusEnum.System;
+        }
     }
 
     public override void Write(Utf8JsonWriter writer, StatusEnum value, JsonSerializerOptions options) => throw new NotImplementedException();
